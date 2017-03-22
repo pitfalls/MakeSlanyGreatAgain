@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +70,16 @@ public class HobIT_Main extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        else  if (id == R.id.action_edit_profile) {
+
+            Toast msg = Toast.makeText(getBaseContext(), "We blast the egg!", Toast.LENGTH_LONG);
+            msg.show();
+            //TextView t; // = new TextView(this);
+            //t =  (TextView)findViewById(R.id.textView);
+            //t.setText("Blast the EGGGGGGGG! --> now!");
+
             return true;
         }
 
