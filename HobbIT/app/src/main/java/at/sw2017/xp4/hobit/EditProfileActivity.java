@@ -1,10 +1,12 @@
 package at.sw2017.xp4.hobit;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class EditProfileActivity extends AppCompatActivity {
@@ -107,6 +109,16 @@ public class EditProfileActivity extends AppCompatActivity {
                         editTextDescription.setText("Short description of person");
                     }
                 }
+            }
+        });
+
+        final Button interestsButton = (Button) findViewById(R.id.buttonEditInterests);
+        interestsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // This Perform action on click
+                Intent intent = new Intent(view.getContext(), EditProfileHobbiesActivity.class);
+                startActivity(intent);
             }
         });
     }
