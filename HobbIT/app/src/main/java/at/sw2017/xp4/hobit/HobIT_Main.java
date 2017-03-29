@@ -1,5 +1,9 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +16,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.io.IOException;
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,82 @@ public class HobIT_Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        DataBaseHelper dbHelper = new DataBaseHelper(this);
+
+
+        try {
+
+            dbHelper.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+
+
+        try {
+
+            dbHelper.openDataBase();
+
+        }catch(SQLException sqle){
+
+            throw sqle;
+
+        }
+
+        db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("_id", 1);
+        values.put("NickName", "test");
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert("Users", null, values);
+
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+
+        String[] columns = {
+                "NickName"
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = "_id" + " = ?";
+        String[] selectionArgs = { "1" };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                "NickName" + " DESC";
+
+
+        Cursor cursor = db.query(
+                "Users",                                  // The table to query
+                columns,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+
+        String nickname = "";
+
+        while(cursor.moveToNext()) {
+            nickname = cursor.getString(cursor.getColumnIndexOrThrow("NickName"));
+
+        }
+        cursor.close();
+
+        TextView helloWorld = (TextView)findViewById(R.id.HelloWorld);
+
+        helloWorld.setText(nickname);
+
+
     }
 
     @Override
