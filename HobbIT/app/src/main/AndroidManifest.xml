@@ -19,9 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".GroupCreation"
-            android:label="@string/groubCreation"></activity>
+        <activity
+            android:name=".GroupCreation"
+            android:label="@string/groubCreation" />
+        <activity
+            android:name=".ListHobbyGroups"
+            android:label="@string/list_hobby_groups" />
+        <activity android:name=".GroupOverview"></activity>
     </application>
 
 </manifest>

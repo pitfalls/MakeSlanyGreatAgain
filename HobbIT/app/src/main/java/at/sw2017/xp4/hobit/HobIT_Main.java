@@ -18,13 +18,38 @@ import android.widget.Button;
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public void init()
+    public void initGroupCreation()
     {
-        Button ButtonClick = (Button) findViewById(R.id.button_click);
+        Button ButtonClick = (Button) findViewById(R.id.button_creation);
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void initListGroups()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_list);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    public void initGroupOverview()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_overview);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +62,15 @@ public class HobIT_Main extends AppCompatActivity
         setContentView(R.layout.activity_hob_it__main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        init();
+
+        /**--------------------------INIT BUTTON------------------**/
+        initGroupCreation();
+        initListGroups();
+        initGroupOverview();
+        /**--------------------END INIT BUTTON--------------------**/
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

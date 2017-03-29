@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">HobIT Homepage</string>
-    <string name="groubCreation">HobIT GroupCreation</string>
+    <string name="app_name">HobbIT</string>
+    <string name="groubCreation">Group Creation</string>
+    <string name="list_hobby_groups">Hobby Groups</string>
+
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
