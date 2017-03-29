@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".GroupCreation"
             android:label="@string/groubCreation" />
@@ -26,6 +27,10 @@
             android:name=".ListHobbyGroups"
             android:label="@string/list_hobby_groups" />
         <activity android:name=".GroupOverview"></activity>
+
+        <activity android:name=".EditProfileActivity"
+            android:label="@string/activity_edit_profile_name"></activity>
+
     </application>
 
 </manifest>
