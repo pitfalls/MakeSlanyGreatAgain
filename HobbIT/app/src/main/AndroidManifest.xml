@@ -20,10 +20,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Profile_set_hobbies"
-            android:label="@string/Profile_set_hobbies_name">
-
-        </activity>
+            android:name=".EditProfileActivity"
+            android:label="@string/activity_edit_profile_name" />
+        <activity
+            android:name=".EditProfileHobbiesActivity"
+            android:label="@string/activity_edit_profile_hobbies_name"></activity>
     </application>
 
 </manifest>

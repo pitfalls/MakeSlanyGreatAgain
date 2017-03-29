@@ -20,16 +20,16 @@ public class Profile_set_hobbies extends AppCompatActivity {
     public static final String HOBBY6 = "Solve quiz";
     public static final String HOBBY7 = "Ride a bicycle";
     public static final String HOBBY8 = "Puzzle";
-    public static final String HOBBY9 = "Poker";
-    public static final String HOBBY10 = "Yoyo playing";
-    public static final String HOBBY11 = "Needle";
-    public static final String HOBBY12 = "Model making";
-    public static final String HOBBY13 = "13";
-    public static final String HOBBY14 = "14";
-    public static final String HOBBY15 = "15";
-    public static final String HOBBY16 = "16";
-    public static final String HOBBY17 = "17";
-    public static final String HOBBY18 = "18";
+    public static final String HOBBY9 = "Needle";
+    public static final String HOBBY10 = "Model making";
+    public static final String HOBBY11 = "Yoyo playing";
+    public static final String HOBBY12 = "Dancing";
+    public static final String HOBBY13 = "Climbing";
+    public static final String HOBBY14 = "Astronomy";
+    public static final String HOBBY15 = "Collecting";
+    public static final String HOBBY16 = "Cooking";
+    public static final String HOBBY17 = "Football";
+    public static final String HOBBY18 = "Music";
     public static final String HOBBY19 = "others";
 
     Button Continue_button;

@@ -13,12 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    Button Set_Hobbies_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +25,6 @@ public class HobIT_Main extends AppCompatActivity
         setContentView(R.layout.activity_hob_it__main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Set_Hobbies_button = (Button) findViewById(R.id.set_hobbies_button);
-        Set_Hobbies_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // This Perform action on click
-                Intent intent = new Intent(view.getContext(), Profile_set_hobbies.class);
-                startActivity(intent);
-            }
-        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +44,6 @@ public class HobIT_Main extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -81,8 +69,15 @@ public class HobIT_Main extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //getSupportActionBar().
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        else  if (id == R.id.action_edit_profile) {
+            Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+            startActivity(editProfileIntent);
             return true;
         }
 
@@ -113,5 +108,4 @@ public class HobIT_Main extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

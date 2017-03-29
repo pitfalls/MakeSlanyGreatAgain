@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="123dp"
-        android:text="Poker"
+        android:text="Dancing"
         app:layout_constraintBottom_toTopOf="@+id/checkBox13"
         app:layout_constraintLeft_toRightOf="@+id/checkBox2" />
 
@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="74dp"
-        android:text="13"
+        android:text="Climbing"
         app:layout_constraintBottom_toTopOf="@+id/checkBox14"
         app:layout_constraintLeft_toRightOf="@+id/checkBox3" />
 
@@ -143,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="78dp"
-        android:text="14"
+        android:text="Astronomy"
         app:layout_constraintBottom_toTopOf="@+id/checkBox15"
         app:layout_constraintLeft_toRightOf="@+id/checkBox4" />
 
@@ -153,7 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="51dp"
-        android:text="15"
+        android:text="Collecting"
         app:layout_constraintBottom_toTopOf="@+id/checkBox16"
         app:layout_constraintLeft_toRightOf="@+id/checkBox5" />
 
@@ -163,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="97dp"
-        android:text="16"
+        android:text="Cooking"
         app:layout_constraintBottom_toTopOf="@+id/checkBox17"
         app:layout_constraintLeft_toRightOf="@+id/checkBox6" />
 
@@ -173,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="76dp"
-        android:text="17"
+        android:text="Football"
         app:layout_constraintBottom_toTopOf="@+id/checkBox18"
         app:layout_constraintLeft_toRightOf="@+id/checkBox7" />
 
@@ -183,7 +183,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="120dp"
-        android:text="18"
+        android:text="Music"
         app:layout_constraintBottom_toTopOf="@+id/checkBox19"
         app:layout_constraintLeft_toRightOf="@+id/checkBox8" />
 
