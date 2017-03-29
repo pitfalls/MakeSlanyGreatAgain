@@ -1,18 +1,19 @@
 package at.sw2017.xp4.hobit;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import static android.content.Context.*;
 
 /**
  * Created by Gerd on 29.03.2017.
@@ -21,7 +22,7 @@ import static android.content.Context.*;
 public class DataBaseHelper extends SQLiteOpenHelper{
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/at.sw2017.xp4.hobit/databases/";
+    private String DB_PATH = "/data/data/at.sw2017.xp4.hobit/databases/";
 
     private static String DB_NAME = "HobbIT_Data";
 
@@ -35,7 +36,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
      * @param context
      */
     public DataBaseHelper(Context context) {
-
         super(context, DB_NAME, null, 1);
         this.myContext = context;
     }
@@ -47,9 +47,11 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         boolean dbExist = checkDataBase();
 
+        // DEBUG
+        dbExist = false;
         if(dbExist){
             //do nothing - database already exist
-        }else{
+        } else {
 
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
@@ -65,7 +67,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
             }
         }
-
     }
 
     /**
@@ -78,7 +79,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
         try{
             String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 
         }catch(SQLiteException e){
 
@@ -103,7 +104,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     private void copyDataBase() throws IOException{
 
         //Open your local db as the input stream
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
+
+        InputStream myInput = myContext.getAssets().open(DB_NAME + ".db");
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
@@ -122,14 +124,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         myOutput.flush();
         myOutput.close();
         myInput.close();
-
     }
 
     public void openDataBase() throws SQLException{
 
         //Open the database
         String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 
     }
 

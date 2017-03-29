@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,8 +23,6 @@ import java.io.IOException;
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,30 +52,20 @@ public class HobIT_Main extends AppCompatActivity
 
         DataBaseHelper dbHelper = new DataBaseHelper(this);
 
-
         try {
-
             dbHelper.createDataBase();
-
         } catch (IOException ioe) {
-
             throw new Error("Unable to create database");
-
         }
-
-
 
         try {
-
             dbHelper.openDataBase();
-
-        }catch(SQLException sqle){
-
+        } catch (SQLException sqle){
             throw sqle;
-
         }
+        dbHelper.close();
 
-        db = dbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put("_id", 1);
@@ -101,15 +90,20 @@ public class HobIT_Main extends AppCompatActivity
         String sortOrder =
                 "NickName" + " DESC";
 
+        if (db == null) {
+            return;
+        }
 
-        Cursor cursor = db.query(
+        Cursor cursor = db.rawQuery("select * from Users", null);
+
+        Cursor cursor = readDB.query(
                 "Users",                                  // The table to query
-                columns,                               // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
+                columns,                                  // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
-                null                                 // The sort order
+                sortOrder                                 // The sort order
         );
 
         String nickname = "";
@@ -123,7 +117,6 @@ public class HobIT_Main extends AppCompatActivity
         TextView helloWorld = (TextView)findViewById(R.id.HelloWorld);
 
         helloWorld.setText(nickname);
-
 
     }
 
