@@ -2,8 +2,25 @@
     <string name="app_name">HobIT Homepage</string>
     <string name="groubCreation">HobIT GroupCreation</string>
 
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <string-array name="hobbies_array">
+        <item>Football</item>
+        <item>Tennis</item>
+        <item>Cycling</item>
+    </string-array>
+
+
+    <string-array name="locations_array">
+        <item>Graz</item>
+        <item>Wien</item>
+        <item>Salzburg</item>
+        <item>Innsbruck</item>
+    </string-array>
+
 </resources>
