@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -78,6 +79,10 @@ public class HobIT_Main extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        } else if (id == R.id.action_login) {
+            Intent fbLogin = new Intent(this, FacebookLogin.class);
+            startActivity(fbLogin);
             return true;
         }
 

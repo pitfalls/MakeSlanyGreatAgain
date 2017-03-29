@@ -3,6 +3,7 @@ package at.sw2017.xp4.hobit;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -16,7 +17,7 @@ import com.facebook.login.widget.LoginButton;
  * Created by Gerd on 29.03.2017.
  */
 
-public class FacebookLogin extends Activity {
+public class FacebookLogin extends AppCompatActivity {
     String userId = "";
 
     private TextView info;
@@ -38,29 +39,6 @@ public class FacebookLogin extends Activity {
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
-                );
-                userId = loginResult.getAccessToken().getUserId();
-            }
-
-            @Override
-            public void onCancel() {
-                info.setText("Login attempt canceled.");
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                info.setText("Login attempt failed.");
-            }
-        });
     }
 
     @Override
