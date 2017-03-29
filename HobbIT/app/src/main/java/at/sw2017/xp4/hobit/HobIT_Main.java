@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -75,13 +76,8 @@ public class HobIT_Main extends AppCompatActivity
             return true;
         }
         else  if (id == R.id.action_edit_profile) {
-
-            Toast msg = Toast.makeText(getBaseContext(), "We blast the egg!", Toast.LENGTH_LONG);
-            msg.show();
-            //TextView t; // = new TextView(this);
-            //t =  (TextView)findViewById(R.id.textView);
-            //t.setText("Blast the EGGGGGGGG! --> now!");
-
+            Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+            startActivity(editProfileIntent);
             return true;
         }
 
