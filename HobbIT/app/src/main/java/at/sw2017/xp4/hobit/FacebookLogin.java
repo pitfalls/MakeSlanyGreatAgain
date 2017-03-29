@@ -34,11 +34,39 @@ public class FacebookLogin extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
-        setContentView(R.layout.activity_hob_it__main);
+        setContentView(R.layout.activity_facebook_login);
 
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                info.setText(
+                        "User ID: "
+                                + loginResult.getAccessToken().getUserId()
+                                + "\n" +
+                                "Auth Token: "
+                                + loginResult.getAccessToken().getToken()
+                );
+                userId = loginResult.getAccessToken().getUserId();
+
+                Intent intent = new Intent();
+                intent.putExtra("userId", userId);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                info.setText("Login attempt canceled.");
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                info.setText("Login attempt failed.");
+            }
+        });
     }
 
     @Override

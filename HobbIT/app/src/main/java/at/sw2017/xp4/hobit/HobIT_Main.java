@@ -13,11 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FacebookLogin fbLogin;
+    private String userID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +75,23 @@ public class HobIT_Main extends AppCompatActivity
             return true;
         } else if (id == R.id.action_facebook_login) {
             Intent fbLogin = new Intent(this, FacebookLogin.class);
-            startActivity(fbLogin);
+            startActivityForResult(fbLogin, 1);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            userID = data.getStringExtra("userId");
+
+            TextView hello = (TextView)findViewById(R.id.hello);
+
+            hello.setText(userID);
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
