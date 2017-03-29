@@ -94,7 +94,7 @@ public class HobIT_Main extends AppCompatActivity
             return;
         }
 
-        Cursor cursor = readDB.query(
+        Cursor cursor = db.query(
                 "Users",                                  // The table to query
                 columns,                                  // The columns to return
                 selection,                                // The columns for the WHERE clause
