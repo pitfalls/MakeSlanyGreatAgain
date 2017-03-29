@@ -43,14 +43,6 @@ public class HobIT_Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        fbLogin = new FacebookLogin();
-
-/*
-        if (fbLogin.userId.equals("")) {
-            setContentView(R.layout.activity_facebook_login);
-        }
-        */
     }
 
     @Override
@@ -80,7 +72,7 @@ public class HobIT_Main extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_login) {
+        } else if (id == R.id.action_facebook_login) {
             Intent fbLogin = new Intent(this, FacebookLogin.class);
             startActivity(fbLogin);
             return true;

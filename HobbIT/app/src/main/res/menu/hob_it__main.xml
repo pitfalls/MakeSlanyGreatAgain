@@ -7,8 +7,8 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_login"
+        android:id="@+id/action_facebook_login"
         android:orderInCategory="100"
-        android:title="Login"
+        android:title="Facebook Login"
         app:showAsAction="never" />
 </menu>
