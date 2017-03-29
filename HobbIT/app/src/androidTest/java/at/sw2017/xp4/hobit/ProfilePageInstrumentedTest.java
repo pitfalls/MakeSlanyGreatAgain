@@ -64,7 +64,7 @@ public class ProfilePageInstrumentedTest {
         testOpenEditProfileView();
 
         onView( withId(R.id.editTextProfileSurename)).perform(click());
-        Espresso.
+
         onView( withId(R.id.imageViewProfilePicture)).perform(click());
 
         onView( withId(R.id.editTextProfileForename)).perform(click());
@@ -82,7 +82,7 @@ public class ProfilePageInstrumentedTest {
     }
 
     @Test
-    public void testEditTextFieldsWithDefaultValues() throws Exception {
+    public void testEditTextFieldsWithTestValues() throws Exception {
 
         EditText et;
         testOpenEditProfileView();
