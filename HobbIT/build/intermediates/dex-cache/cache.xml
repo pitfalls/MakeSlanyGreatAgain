@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\Skola\GIT\SWT\MakeSlanyGreatAgain\HobbIT\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a7bc81091710447b249f18769135a47f481e1c40">
+        <dex dex="D:\Skola\GIT\SWT\MakeSlanyGreatAgain\HobbIT\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d1a94be38846d22996862ea934ce348e40e05d0c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Skola\GIT\SWT\MakeSlanyGreatAgain\HobbIT\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="D:\Skola\GIT\SWT\MakeSlanyGreatAgain\HobbIT\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_17cd852869ef95fcdc221c6e72b1113247fba069\classes.dex" />
+    </item>
+
+</items>

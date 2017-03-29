@@ -19,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Profile_set_hobbies"
+            android:label="@string/Profile_set_hobbies_name">
+
+        </activity>
     </application>
 
 </manifest>
