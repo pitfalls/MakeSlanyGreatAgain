@@ -31,6 +31,8 @@
         <activity android:name=".EditProfileActivity"
             android:label="@string/activity_edit_profile_name"></activity>
 
+        <activity android:name=".EditProfileHobbiesActivity"></activity>
+
     </application>
 
 </manifest>
