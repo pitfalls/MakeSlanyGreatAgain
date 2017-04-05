@@ -1,0 +1,146 @@
+package at.sw2017.xp4.hobit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.List;
+
+import static java.sql.Types.NULL;
+import static junit.framework.Assert.assertEquals;
+
+/**
+ * Created by feldh on 05.04.2017.
+ */
+
+
+public class DataBaseTest {
+    /*
+    *
+    * User anlegen, löschen, updaten, hobbies und group, join group
+    *
+    * */
+
+   /* @Before
+    public void setUp() throws Exception {
+        getTargetContext().deleteDatabase(DatabaseHelper.DB_NAME);
+        database = new DatabaseHelper(getTargetContext());
+    }*/
+
+
+    @Before
+    public setupDataBase() throws Exception{
+        DataBaseConnection dbConnection = new DataBaseConnection();
+        dbConnection.open();
+    }
+
+   public void setUpNewUser(String id, String nick, String forname, String surename, String location)
+   {
+       //User testUser = new User("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+       User testUser = new User(id, nick, forname, surename, location);
+       dbConnection.creatUser(testUser);
+   }
+
+    public int UpDateNewUser(String id, String nick, String forname, String surename, String location)
+    {
+        try {
+            User newUser = dbConnection.getUser(id);
+            newUser.setNickName(nick);
+            newUser.setFirstName(forname);
+            newUser.setSurname(surename);
+            newUser.setLocation(location);
+
+            dbConnection.updateUser(newUser);
+
+            return 0;
+        }
+        catch (NullPointerException nullex)
+        {
+            return -1;
+        }
+    }
+
+    public int deleteUser(String id)
+    {
+        try {
+            User newUser = dbConnection.getUser(id);
+
+            dbConnection.deleteUser(id);
+            return 0;
+        }
+        catch (NullPointerException nullex)
+        {
+            return -1;
+        }
+    }
+
+   @Test
+   public void databaseConnectionCreateUserTest() throws Exception
+   {
+       setUser("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+
+       User newUser = dbConnection.getUser("testUserId");
+
+       assertEquals(newUser, testUser);
+       assertEquals(newUser.getId(), "testUserId");
+       assertEquals(newUser.getNickName(), "Nick");
+       assertEquals(newUser.getFirstName(), "Nicolai");
+       assertEquals(newUser.getSurname(), "Schefe");
+       assertEquals(newUser.getLocation(), "8010 Graz");
+
+   }
+
+    @Test
+    public void databaseConnectionUpdateUser() throws Exception
+    {
+        setUpNewUser("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+
+        User newUser = dbConnection.getUser("testUserId");
+
+        //assertEquals(newUser, testUser);
+        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getNickName(), "Nick");
+        assertEquals(newUser.getFirstName(), "Nicolai");
+        assertEquals(newUser.getSurname(), "Schefe");
+        assertEquals(newUser.getLocation(), "8010 Graz");
+
+        UpDateNewUser(newUser.getId(), "Alli", "Alan", "Walker", "DJ Gasse 3000");
+
+        newUser = dbConnection.getUser("testUserId");
+
+        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getNickName(), "Alli");
+        assertEquals(newUser.getFirstName(), "Alan");
+        assertEquals(newUser.getSurname(), "Walker");
+        assertEquals(newUser.getLocation(), "DJ Gasse 3000");
+
+    }
+
+
+    @Test
+    public void databaseDeleteUser() throws Exception {
+
+        setUpNewUser("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+
+        User newUser = dbConnection.getUser("testUserId");
+
+        assertEquals(deleteUser("testUserId") , -1);
+
+        newUser = dbConnection.getUser("testUserId");
+
+        assertEquals(newUser.getId() , -1);
+
+
+    }
+
+
+
+    @After
+    public void tearDown() throws Exception {
+        database.close();
+    }
+
+}
+
+
