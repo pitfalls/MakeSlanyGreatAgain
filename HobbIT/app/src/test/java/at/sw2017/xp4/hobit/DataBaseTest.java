@@ -8,6 +8,8 @@ import java.util.List;
 
 import static java.sql.Types.NULL;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 
 /**
  * Created by feldh on 05.04.2017.
@@ -33,7 +35,7 @@ public class DataBaseTest {
     @Before
     public void setupDataBase() throws Exception{
         HobIT_Main tmp = new HobIT_Main();
-        dbConnection = DataBaseConnection.getInstance(tmp.getContext());
+        dbConnection = DataBaseConnection.getInstance(tmp);
     }
 
    public void setUpNewUser(String id, String nick, String forname, String surename, String location)
@@ -81,12 +83,13 @@ public class DataBaseTest {
     {
         User newUser = dbConnection.getUser("testUserId");
 
+        assertNotNull(newUser);
+
         assertEquals(newUser.getId(), "testUserId");
         assertEquals(newUser.getNickName(), "Nick");
         assertEquals(newUser.getFirstName(), "Nicolai");
         assertEquals(newUser.getSurName(), "Schefe");
         assertEquals(newUser.getLocation(), "8010 Graz");
-
     }
 
     @Test
@@ -96,8 +99,7 @@ public class DataBaseTest {
 
         User newUser = dbConnection.getUser("testUserId");
 
-        //assertEquals(newUser, testUser);
-        assertEquals(newUser.getId(), "testUserId");
+        assertNotNull(newUser);
         assertEquals(newUser.getId(), "testUserId");
         assertEquals(newUser.getNickName(), "Nick");
         assertEquals(newUser.getFirstName(), "Nicolai");
@@ -107,6 +109,8 @@ public class DataBaseTest {
         updateUser(newUser.getId(), "Alli", "Alan", "Walker", "DJ Gasse 3000");
 
         newUser = dbConnection.getUser("testUserId");
+
+        assertNotNull(newUser);
 
         assertEquals(newUser.getId(), "testUserId");
         assertEquals(newUser.getNickName(), "Alli");
@@ -122,11 +126,13 @@ public class DataBaseTest {
 
         User newUser = dbConnection.getUser("testUserId");
 
-        assertEquals(deleteUser("testUserId") , -1);
+        assertNotNull(newUser);
+
+        assertEquals(deleteUser("testUserId") , true);
 
         newUser = dbConnection.getUser("testUserId");
 
-        assertEquals(newUser.getId() , -1);
+        assertNull(newUser);
     }
 }
 

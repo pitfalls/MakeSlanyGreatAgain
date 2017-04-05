@@ -9,7 +9,7 @@ import org.junit.Test;
 public class GroupTest {
 
     // Create Group with constructor
-    @Test
+    /*@Test
     public void groupCreate1Test() throws Exception {
         Group testGroup =
                 new Group("MyTestGroup", "just for testing");
@@ -28,5 +28,5 @@ public class GroupTest {
 
         assertEquals(testGroup.getName(),        "MyTestGroup");
         assertEquals(testGroup.getDescription(), "just for testing");
-    }
+    }*/
 }

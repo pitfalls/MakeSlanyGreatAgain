@@ -7,7 +7,7 @@ package at.sw2017.xp4.hobit;
 import org.junit.Test;
 
 public class HobbyTest {
-    // Create Hobby with Constructor
+   /* // Create Hobby with Constructor
     @Test
     public void hobbyCreate1Test() throws Exception {
         Hobby testHobby =
@@ -30,5 +30,5 @@ public class HobbyTest {
         assertEquals(testHobby.getName(),        "AFancyHobby");
         assertEquals(testHobby.getDescription(), "where you do fancy stuff");
         assertEquals(testHobby.getLocation(),    "8010 Graz");
-    }
+    }*/
 }

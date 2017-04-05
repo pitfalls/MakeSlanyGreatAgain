@@ -43,7 +43,7 @@ public class DataBaseConnection {
     }
 
     public static DataBaseConnection getInstance(Context context) {
-        if (instance.equals(null)) {
+        if (DataBaseConnection.instance == null) {
             instance = new DataBaseConnection(context);
         }
 
