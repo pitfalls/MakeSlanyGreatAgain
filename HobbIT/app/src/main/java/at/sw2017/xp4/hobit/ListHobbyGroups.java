@@ -18,7 +18,7 @@ public class ListHobbyGroups extends AppCompatActivity {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 CharSequence text = "Searching...";
-                int duration = Toast.LENGTH_LONG;
+                int duration = Toast.LENGTH_SHORT;
                 Toast save_toast = Toast.makeText(context, text, duration);
                 save_toast.show();
                 //Write to database

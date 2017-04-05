@@ -78,7 +78,6 @@ public class GroupCreationInstrumentedTest {
         onView( withId(R.id.editText_groupname)).perform(typeText("OhHappyDay"));
         onView( withId(R.id.editText_groupname)).check(matches(withText("OhHappyDay")));
 
-
         Espresso.closeSoftKeyboard();
 
         onView( withId(R.id.spinner_hobby)).perform(click());

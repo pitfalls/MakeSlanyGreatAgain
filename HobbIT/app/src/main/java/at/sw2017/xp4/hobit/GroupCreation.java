@@ -39,7 +39,7 @@ public class GroupCreation extends AppCompatActivity {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 CharSequence text = "Group Saved";
-                int duration = Toast.LENGTH_LONG;
+                int duration = Toast.LENGTH_SHORT;
                 Toast save_toast = Toast.makeText(context, text, duration);
                 save_toast.show();
                 //Write to database
@@ -59,7 +59,7 @@ public class GroupCreation extends AppCompatActivity {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 CharSequence text = "Group Canceled";
-                int duration = Toast.LENGTH_LONG;
+                int duration = Toast.LENGTH_SHORT;
                 Toast save_toast = Toast.makeText(context, text, duration);
                 save_toast.show();
                 Intent intent = new Intent(GroupCreation.this, HobIT_Main.class);
