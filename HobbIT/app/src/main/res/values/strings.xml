@@ -1,8 +1,35 @@
 <resources>
-    <string name="app_name">HobIT</string>
+    <string name="app_name">HobbIT</string>
+
+    <string name="groubCreation">Group Creation</string>
+    <string name="list_hobby_groups">Hobby Groups</string>
+
+
+
+    <string name="activity_edit_profile_name">HobbIT - Edit Profile</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="facebook_app_id">1723407201283005</string>
+
+    <string-array name="hobbies_array">
+        <item>Football</item>
+        <item>Tennis</item>
+        <item>Cycling</item>
+    </string-array>
+
+
+    <string-array name="locations_array">
+        <item>Graz</item>
+        <item>Wien</item>
+        <item>Salzburg</item>
+        <item>Innsbruck</item>
+    </string-array>
+
+    <string name="action_edit_profile">Edit Profile</string>
+>
 </resources>

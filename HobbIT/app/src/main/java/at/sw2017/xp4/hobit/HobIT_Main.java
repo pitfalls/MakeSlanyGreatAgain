@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,8 +23,54 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import android.widget.Button;
+
+import android.widget.TextView;
+
+import android.widget.Toast;
+
+
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String userID = "";
+
+    public void initGroupCreation()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_creation);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void initListGroups()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_list);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    public void initGroupOverview()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_overview);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +78,14 @@ public class HobIT_Main extends AppCompatActivity
         setContentView(R.layout.activity_hob_it__main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /**--------------------------INIT BUTTON------------------**/
+        initGroupCreation();
+        initListGroups();
+        initGroupOverview();
+        /**--------------------END INIT BUTTON--------------------**/
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +104,7 @@ public class HobIT_Main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        setTitle("HobbiT Homepage");
     }
 
     @Override
@@ -75,12 +131,35 @@ public class HobIT_Main extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //getSupportActionBar().
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        } else if (id == R.id.action_facebook_login) {
+            Intent fbLogin = new Intent(this, FacebookLogin.class);
+            startActivityForResult(fbLogin, 1);
+            return true;
+        }
+        else  if (id == R.id.action_edit_profile) {
+            Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+            startActivity(editProfileIntent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            userID = data.getStringExtra("userId");
+
+            TextView hello = (TextView)findViewById(R.id.hello);
+
+            hello.setText(userID);
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
