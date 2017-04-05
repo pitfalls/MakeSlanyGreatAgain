@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -66,8 +69,15 @@ public class HobIT_Main extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //getSupportActionBar().
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        else  if (id == R.id.action_edit_profile) {
+            Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
+            startActivity(editProfileIntent);
             return true;
         }
 
