@@ -107,8 +107,4 @@ public class HobIT_Main extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    public Context getContext() {
-        return this;
-    }
 }
