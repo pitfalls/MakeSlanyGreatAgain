@@ -49,11 +49,11 @@ public class DataBaseConnection {
     }
     public boolean createUser(User user) {
         ContentValues values = new ContentValues();
-        values.put("_id", user.id);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME, user.nickName);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_FIRSTNAME, user.firstName);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_SURNAME, user.surName);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_LOCATION, user.location);
+        values.put("_id", user.getId);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME, user.getNickName);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_FIRSTNAME, user.getFirstName);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_SURNAME, user.getSurName);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_LOCATION, user.getLocation);
 
         // Insert the new row, returning the primary key value of the new row
         if (db.insert(DataBaseContract.UsersEntry.TABLE_NAME, null, values) != -1) {
@@ -65,13 +65,13 @@ public class DataBaseConnection {
 
     public boolean updateUser(User user) {
         ContentValues values = new ContentValues();
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME, user.nickName);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_FIRSTNAME, user.firstName);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_SURNAME, user.surName);
-        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_LOCATION, user.location);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME, user.getNickName);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_FIRSTNAME, user.getFirstName);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_SURNAME, user.getSurName);
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_LOCATION, user.getLocation);
 
         String selection = "_id LIKE ?";
-        String[] selectionArgs = { user.id };
+        String[] selectionArgs = { user.getId };
 
         int count = db.update(DataBaseContract.UsersEntry.TABLE_NAME,
                 values,
@@ -85,13 +85,18 @@ public class DataBaseConnection {
         return false;
     }
 
-
     public boolean deleteUser(User user) {
-        // Define 'where' part of query.
+        return delUser(user.getId);
+    }
+
+    public boolean deleteUser(String id) {
+        return delUser(id);
+    }
+
+    private boolean delUser(String id) {
         String selection = "_id LIKE ?";
-        // Specify arguments in placeholder order.
-        String[] selectionArgs = { "MyTitle" };
-        // Issue SQL statement.
+
+        String[] selectionArgs = { id };
 
         int count = db.delete(DataBaseContract.UsersEntry.TABLE_NAME, selection, selectionArgs);
 
