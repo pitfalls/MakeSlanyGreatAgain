@@ -14,9 +14,10 @@ public class UserTest {
     @Test
     public void userCreate1Test() throws Exception {
         User testUser =
-                new User("Franzl", "Gandalf", "Franzbrand", "8010 Graz");
+                new User("testUserID", "Franzl", "Gandalf", "Franzbrand", "8010 Graz");
 
 
+        assertEquals(testUser.id, "testUserID");
         assertEquals(testUser.nickName, "Franzl");
         assertEquals(testUser.firstkName, "Gandalf");
         assertEquals(testUser.surName, "Franzbrand");
@@ -28,11 +29,13 @@ public class UserTest {
     public void userCreate2Test() throws Exception {
         User testUser = new User();
 
+        testUser.setId("testUserID");
         testUser.setNickName("Franzl");
         testUser.setFirstName("Gandalf");
         testUser.setSurName("Franzbrand");
         testUser.setLocation("8010 Graz");
 
+        assertEquals(testUser.id, "testUserID");
         assertEquals(testUser.nickName, "Franzl");
         assertEquals(testUser.firstkName, "Gandalf");
         assertEquals(testUser.surName, "Franzbrand");
