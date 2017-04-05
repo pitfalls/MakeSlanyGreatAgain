@@ -39,9 +39,9 @@ public class DataBaseTest {
 
    public void setUpNewUser(String id, String nick, String forname, String surename, String location)
    {
-       //User testUser = new User("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
-       User testUser = new User(id, nick, forname, surename, location);
-       dbConnection.createUser(testUser);
+       //User currentUser = new User("currentUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+       User currentUser = new User(id, nick, forname, surename, location);
+       dbConnection.createUser(currentUser);
    }
 
     public int updateUser(String id, String nick, String forname, String surename, String location)
@@ -80,11 +80,11 @@ public class DataBaseTest {
     @Test
     public void databaseConnectionCreateUserTest() throws Exception
     {
-        User newUser = dbConnection.getUser("testUserId");
+        User newUser = dbConnection.getUser("currentUserId");
 
         assertNotNull(newUser);
 
-        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getId(), "currentUserId");
         assertEquals(newUser.getNickName(), "Nick");
         assertEquals(newUser.getFirstName(), "Nicolai");
         assertEquals(newUser.getSurName(), "Schefe");
@@ -94,12 +94,12 @@ public class DataBaseTest {
     @Test
     public void databaseConnectionUpdateUser() throws Exception
     {
-        setUpNewUser("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+        setUpNewUser("currentUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
 
-        User newUser = dbConnection.getUser("testUserId");
+        User newUser = dbConnection.getUser("currentUserId");
 
         assertNotNull(newUser);
-        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getId(), "currentUserId");
         assertEquals(newUser.getNickName(), "Nick");
         assertEquals(newUser.getFirstName(), "Nicolai");
         assertEquals(newUser.getSurName(), "Schefe");
@@ -107,11 +107,11 @@ public class DataBaseTest {
 
         updateUser(newUser.getId(), "Alli", "Alan", "Walker", "DJ Gasse 3000");
 
-        newUser = dbConnection.getUser("testUserId");
+        newUser = dbConnection.getUser("currentUserId");
 
         assertNotNull(newUser);
 
-        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getId(), "currentUserId");
         assertEquals(newUser.getNickName(), "Alli");
         assertEquals(newUser.getFirstName(), "Alan");
         assertEquals(newUser.getSurName(), "Walker");
@@ -121,15 +121,15 @@ public class DataBaseTest {
     @Test
     public void databaseDeleteUser() throws Exception {
 
-        setUpNewUser("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+        setUpNewUser("currentUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
 
-        User newUser = dbConnection.getUser("testUserId");
+        User newUser = dbConnection.getUser("currentUserId");
 
         assertNotNull(newUser);
 
-        assertEquals(deleteUser("testUserId") , true);
+        assertEquals(deleteUser("currentUserId") , true);
 
-        newUser = dbConnection.getUser("testUserId");
+        newUser = dbConnection.getUser("currentUserId");
 
         assertNull(newUser);
     }

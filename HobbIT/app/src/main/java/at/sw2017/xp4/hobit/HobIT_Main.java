@@ -2,6 +2,7 @@ package at.sw2017.xp4.hobit;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import android.widget.Toast;
+
+import static android.app.PendingIntent.getActivity;
 
 
 public class HobIT_Main extends AppCompatActivity
@@ -156,9 +159,19 @@ public class HobIT_Main extends AppCompatActivity
         if (requestCode == 1) {
             userID = data.getStringExtra("userId");
 
-            TextView hello = (TextView)findViewById(R.id.hello);
+            DataBaseConnection dbConnection = DataBaseConnection.getInstance(this);
 
-            hello.setText(userID);
+            User currentUser = dbConnection.getUser(userID);
+
+            if (currentUser == null) {
+                currentUser = new User("userID");
+                dbConnection.createUser(currentUser);
+            }
+
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.current_user), userID);
+            editor.commit();
         }
     }
 

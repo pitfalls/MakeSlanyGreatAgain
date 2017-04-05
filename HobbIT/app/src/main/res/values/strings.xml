@@ -31,5 +31,7 @@
     </string-array>
 
     <string name="action_edit_profile">Edit Profile</string>
+
+    <string name="current_user">CurrentUser</string>
 >
 </resources>
