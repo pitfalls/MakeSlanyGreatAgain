@@ -14,8 +14,8 @@ public class GroupTest {
         Group testGroup =
                 new Group("MyTestGroup", "just for testing");
 
-        assertEquals(testGroup.name, "MyTestGroup");
-        assertEquals(testGroup.description, "just for testing");
+        assertEquals(testGroup.getName, "MyTestGroup");
+        assertEquals(testGroup.getDescription, "just for testing");
     }
 
     // Create Group with empty constructor an set properties
@@ -26,7 +26,7 @@ public class GroupTest {
         testGroup.setName("MyTestGroup");
         testGroup.setDescription("just for testing");
 
-        assertEquals(testGroup.name, "MyTestGroup");
-        assertEquals(testGroup.description, "just for testing");
+        assertEquals(testGroup.getName, "MyTestGroup");
+        assertEquals(testGroup.getDescription, "just for testing");
     }
 }

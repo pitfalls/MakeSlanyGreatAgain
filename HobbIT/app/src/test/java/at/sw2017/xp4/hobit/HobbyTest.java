@@ -13,10 +13,9 @@ public class HobbyTest {
         User testHobby =
                 new User("AFancyHobby", "where you do fancy stuff", "8010 Graz");
 
-
-        assertEquals(testHobby.name, "AFancyHobby");
-        assertEquals(testHobby.description, "where you do fancy stuff");
-        assertEquals(testHobby.location, "8010 Graz");
+        assertEquals(testHobby.getName, "AFancyHobby");
+        assertEquals(testHobby.getDescription, "where you do fancy stuff");
+        assertEquals(testHobby.getLocation, "8010 Graz");
     }
 
     // Create User with empty constructor an set properties
@@ -28,8 +27,8 @@ public class HobbyTest {
         testHobby.setDescription("where you do fancy stuff");
         testHobby.setLocation("8010 Graz");
 
-        assertEquals(testHobby.name, "AFancyHobby");
-        assertEquals(testHobby.description, "where you do fancy stuff");
-        assertEquals(testHobby.location, "8010 Graz");
+        assertEquals(testHobby.getName, "AFancyHobby");
+        assertEquals(testHobby.getDescription, "where you do fancy stuff");
+        assertEquals(testHobby.getLocation, "8010 Graz");
     }
 }
