@@ -69,7 +69,7 @@ public class HobIT_Main extends AppCompatActivity
 
         ContentValues values = new ContentValues();
         values.put("_id", 1);
-        values.put("NickName", "test");
+        values.put(DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME, "test");
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert("Users", null, values);
@@ -79,7 +79,7 @@ public class HobIT_Main extends AppCompatActivity
         // you will actually use after this query.
 
         String[] columns = {
-                "NickName"
+                DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME
         };
 
         // Filter results WHERE "title" = 'My Title'
@@ -88,14 +88,14 @@ public class HobIT_Main extends AppCompatActivity
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                "NickName" + " DESC";
+                DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME + " DESC";
 
         if (db == null) {
             return;
         }
 
         Cursor cursor = db.query(
-                "Users",                                  // The table to query
+                DataBaseContract.UsersEntry.TABLE_NAME,                                  // The table to query
                 columns,                                  // The columns to return
                 selection,                                // The columns for the WHERE clause
                 selectionArgs,                            // The values for the WHERE clause
