@@ -10,25 +10,25 @@ public class HobbyTest {
     // Create Hobby with Constructor
     @Test
     public void hobbyCreate1Test() throws Exception {
-        User testHobby =
-                new User("AFancyHobby", "where you do fancy stuff", "8010 Graz");
+        Hobby testHobby =
+                new Hobby("AFancyHobby", "where you do fancy stuff", "8010 Graz");
 
-        assertEquals(testHobby.getName, "AFancyHobby");
-        assertEquals(testHobby.getDescription, "where you do fancy stuff");
-        assertEquals(testHobby.getLocation, "8010 Graz");
+        assertEquals(testHobby.getName(),        "AFancyHobby");
+        assertEquals(testHobby.getDescription(), "where you do fancy stuff");
+        assertEquals(testHobby.getLocation(),    "8010 Graz");
     }
 
     // Create User with empty constructor an set properties
     @Test
     public void hobbyCreate2Test() throws Exception {
-        User testHobby = new User();
+        Hobby testHobby = new Hobby();
 
         testHobby.setName("AFancyHobby");
         testHobby.setDescription("where you do fancy stuff");
         testHobby.setLocation("8010 Graz");
 
-        assertEquals(testHobby.getName, "AFancyHobby");
-        assertEquals(testHobby.getDescription, "where you do fancy stuff");
-        assertEquals(testHobby.getLocation, "8010 Graz");
+        assertEquals(testHobby.getName(),        "AFancyHobby");
+        assertEquals(testHobby.getDescription(), "where you do fancy stuff");
+        assertEquals(testHobby.getLocation(),    "8010 Graz");
     }
 }

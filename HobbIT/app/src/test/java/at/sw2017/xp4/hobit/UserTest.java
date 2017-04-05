@@ -16,11 +16,11 @@ public class UserTest {
         User testUser =
                 new User("testUserID", "Franzl", "Gandalf", "Franzbrand", "8010 Graz");
 
-        assertEquals(testUser.getId, "testUserID");
-        assertEquals(testUser.getNickName, "Franzl");
-        assertEquals(testUser.getFirstkName, "Gandalf");
-        assertEquals(testUser.getSurName, "Franzbrand");
-        assertEquals(testUser.getLocation, "8010 Graz");
+        assertEquals(testUser.getId(),        "testUserID");
+        assertEquals(testUser.getNickName(),  "Franzl");
+        assertEquals(testUser.getFirstName(), "Gandalf");
+        assertEquals(testUser.getSurName(),   "Franzbrand");
+        assertEquals(testUser.getLocation(),  "8010 Graz");
     }
 
     // Create User with empty constructor an set properties
@@ -33,10 +33,10 @@ public class UserTest {
         testUser.setSurName("Franzbrand");
         testUser.setLocation("8010 Graz");
 
-        assertEquals(testUser.getId, "testUserID");
-        assertEquals(testUser.getNickName, "Franzl");
-        assertEquals(testUser.getFirstkName, "Gandalf");
-        assertEquals(testUser.getSurName, "Franzbrand");
-        assertEquals(testUser.getLocation, "8010 Graz");
+        assertEquals(testUser.getId(),        "testUserID");
+        assertEquals(testUser.getNickName(),  "Franzl");
+        assertEquals(testUser.getFirstName(), "Gandalf");
+        assertEquals(testUser.getSurName(),   "Franzbrand");
+        assertEquals(testUser.getLocation(),  "8010 Graz");
     }
 }
