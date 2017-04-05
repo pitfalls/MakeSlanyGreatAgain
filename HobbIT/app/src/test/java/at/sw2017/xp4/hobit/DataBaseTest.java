@@ -34,8 +34,7 @@ public class DataBaseTest {
 
     @Before
     public void setupDataBase() throws Exception{
-        HobIT_Main tmp = new HobIT_Main();
-        dbConnection = DataBaseConnection.getInstance(tmp);
+        dbConnection = DataBaseConnection.getInstance();
     }
 
    public void setUpNewUser(String id, String nick, String forname, String surename, String location)
