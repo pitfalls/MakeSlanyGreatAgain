@@ -24,12 +24,12 @@ public class HobbyTest {
     public void hobbyCreate2Test() throws Exception {
         User testHobby = new User();
 
-        testHobby.setNickName("AFancyHobby");
-        testHobby.setFirstName("where you do fancy stuff");
+        testHobby.setName("AFancyHobby");
+        testHobby.setDescription("where you do fancy stuff");
         testHobby.setLocation("8010 Graz");
 
-        assertEquals(testHobby.nickName, "Franzl");
-        assertEquals(testHobby.firstkName, "Gandalf");
+        assertEquals(testHobby.name, "AFancyHobby");
+        assertEquals(testHobby.description, "where you do fancy stuff");
         assertEquals(testHobby.location, "8010 Graz");
     }
 }
