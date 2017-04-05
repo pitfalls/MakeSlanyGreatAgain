@@ -4,7 +4,7 @@ package at.sw2017.xp4.hobit;
  * Created by feldh on 05.04.2017.
  */
 
-private class User {
+public class User {
     private String id_        = "";
     private String nickName_  = "";
     private String firstName_ = "";

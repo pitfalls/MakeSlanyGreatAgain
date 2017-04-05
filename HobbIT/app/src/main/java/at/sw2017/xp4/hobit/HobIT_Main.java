@@ -1,6 +1,7 @@
 package at.sw2017.xp4.hobit;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -105,5 +106,9 @@ public class HobIT_Main extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public Context getContext() {
+        return this;
     }
 }

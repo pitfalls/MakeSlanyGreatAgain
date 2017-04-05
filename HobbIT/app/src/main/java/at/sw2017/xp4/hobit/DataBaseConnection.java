@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Gerd on 05.04.2017.
@@ -16,7 +18,7 @@ public class DataBaseConnection {
     private DataBaseHelper dbHelper;
     private SQLiteDatabase db;
 
-    private DataBaseConnection connection = null;
+    private static DataBaseConnection instance;
 
     /**
      * private Constructor because this class should be a singleton
@@ -40,13 +42,59 @@ public class DataBaseConnection {
         db = dbHelper.getWritableDatabase();
     }
 
-    public DataBaseConnection getConnection(Context context) {
-        if (connection.equals(null)) {
-            connection = new DataBaseConnection(context);
+    public static DataBaseConnection getInstance(Context context) {
+        if (instance.equals(null)) {
+            instance = new DataBaseConnection(context);
         }
 
-        return connection;
+        return instance;
     }
+
+    public User getUser(String id) {
+        String[] projection = {
+                "_id",
+                DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME,
+                DataBaseContract.UsersEntry.COLUMN_NAME_FIRSTNAME,
+                DataBaseContract.UsersEntry.COLUMN_NAME_SURNAME,
+                DataBaseContract.UsersEntry.COLUMN_NAME_LOCATION
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = "_id = ?";
+        String[] selectionArgs = { id };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME + " DESC";
+
+        Cursor cursor = db.query(
+                DataBaseContract.UsersEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        ArrayList<User> users = new ArrayList<User>();
+        while(cursor.moveToNext()) {
+            users.add(new User(id,
+                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContract.UsersEntry.COLUMN_NAME_NICKNAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContract.UsersEntry.COLUMN_NAME_FIRSTNAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContract.UsersEntry.COLUMN_NAME_SURNAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContract.UsersEntry.COLUMN_NAME_LOCATION))
+                    ));
+        }
+        cursor.close();
+
+        if (users.isEmpty()) {
+            return null;
+        }
+
+        return users.get(0);
+    }
+
     public boolean createUser(User user) {
         ContentValues values = new ContentValues();
         values.put("_id", user.getId());

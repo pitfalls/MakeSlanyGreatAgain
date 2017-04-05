@@ -27,27 +27,29 @@ public class DataBaseTest {
         database = new DatabaseHelper(getTargetContext());
     }*/
 
+   DataBaseConnection dbConnection;
+
 
     @Before
-    public setupDataBase() throws Exception{
-        DataBaseConnection dbConnection = new DataBaseConnection();
-        dbConnection.open();
+    public void setupDataBase() throws Exception{
+        HobIT_Main tmp = new HobIT_Main();
+        dbConnection = DataBaseConnection.getInstance(tmp.getContext());
     }
 
    public void setUpNewUser(String id, String nick, String forname, String surename, String location)
    {
        //User testUser = new User("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
        User testUser = new User(id, nick, forname, surename, location);
-       dbConnection.creatUser(testUser);
+       dbConnection.createUser(testUser);
    }
 
-    public int UpDateNewUser(String id, String nick, String forname, String surename, String location)
+    public int updateUser(String id, String nick, String forname, String surename, String location)
     {
         try {
             User newUser = dbConnection.getUser(id);
             newUser.setNickName(nick);
             newUser.setFirstName(forname);
-            newUser.setSurname(surename);
+            newUser.setSurName(surename);
             newUser.setLocation(location);
 
             dbConnection.updateUser(newUser);
@@ -74,21 +76,18 @@ public class DataBaseTest {
         }
     }
 
-   @Test
-   public void databaseConnectionCreateUserTest() throws Exception
-   {
-       setUser("testUserId", "Nick", "Nicolai", "Schefe", "8010 Graz");
+    @Test
+    public void databaseConnectionCreateUserTest() throws Exception
+    {
+        User newUser = dbConnection.getUser("testUserId");
 
-       User newUser = dbConnection.getUser("testUserId");
+        assertEquals(newUser.getId(), "testUserId");
+        assertEquals(newUser.getNickName(), "Nick");
+        assertEquals(newUser.getFirstName(), "Nicolai");
+        assertEquals(newUser.getSurName(), "Schefe");
+        assertEquals(newUser.getLocation(), "8010 Graz");
 
-       assertEquals(newUser, testUser);
-       assertEquals(newUser.getId(), "testUserId");
-       assertEquals(newUser.getNickName(), "Nick");
-       assertEquals(newUser.getFirstName(), "Nicolai");
-       assertEquals(newUser.getSurname(), "Schefe");
-       assertEquals(newUser.getLocation(), "8010 Graz");
-
-   }
+    }
 
     @Test
     public void databaseConnectionUpdateUser() throws Exception
@@ -102,21 +101,19 @@ public class DataBaseTest {
         assertEquals(newUser.getId(), "testUserId");
         assertEquals(newUser.getNickName(), "Nick");
         assertEquals(newUser.getFirstName(), "Nicolai");
-        assertEquals(newUser.getSurname(), "Schefe");
+        assertEquals(newUser.getSurName(), "Schefe");
         assertEquals(newUser.getLocation(), "8010 Graz");
 
-        UpDateNewUser(newUser.getId(), "Alli", "Alan", "Walker", "DJ Gasse 3000");
+        updateUser(newUser.getId(), "Alli", "Alan", "Walker", "DJ Gasse 3000");
 
         newUser = dbConnection.getUser("testUserId");
 
         assertEquals(newUser.getId(), "testUserId");
         assertEquals(newUser.getNickName(), "Alli");
         assertEquals(newUser.getFirstName(), "Alan");
-        assertEquals(newUser.getSurname(), "Walker");
+        assertEquals(newUser.getSurName(), "Walker");
         assertEquals(newUser.getLocation(), "DJ Gasse 3000");
-
     }
-
 
     @Test
     public void databaseDeleteUser() throws Exception {
@@ -130,17 +127,7 @@ public class DataBaseTest {
         newUser = dbConnection.getUser("testUserId");
 
         assertEquals(newUser.getId() , -1);
-
-
     }
-
-
-
-    @After
-    public void tearDown() throws Exception {
-        database.close();
-    }
-
 }
 
 
