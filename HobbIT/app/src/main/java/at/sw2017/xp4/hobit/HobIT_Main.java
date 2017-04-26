@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,11 +14,56 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.widget.Button;
+
 import android.widget.TextView;
+
 import android.widget.Toast;
+
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String userID = "";
+    private NavigationView sideBarNavigationView;
+
+    public void initGroupCreation()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_creation);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void initListGroups()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_list);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    public void initGroupOverview()
+    {
+        Button ButtonClick = (Button) findViewById(R.id.button_overview);
+        ButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +72,19 @@ public class HobIT_Main extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /**--------------------------INIT BUTTON------------------**/
+        initGroupCreation();
+        initListGroups();
+        initGroupOverview();
+        /**--------------------END INIT BUTTON--------------------**/
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your shit action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -41,8 +95,10 @@ public class HobIT_Main extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        sideBarNavigationView.setNavigationItemSelectedListener(this);
+
+        setTitle("HobbiT Homepage");
     }
 
     @Override
@@ -74,6 +130,10 @@ public class HobIT_Main extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_facebook_login) {
+            Intent fbLogin = new Intent(this, FacebookLogin.class);
+            startActivityForResult(fbLogin, 1);
+            return true;
         }
         else  if (id == R.id.action_edit_profile) {
             Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
@@ -84,14 +144,40 @@ public class HobIT_Main extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            userID = data.getStringExtra("userId");
+
+            TextView hello = (TextView)findViewById(R.id.hello);
+
+            hello.setText(userID);
+        }
+    }
+
+    public void printDebugToast (CharSequence text )
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        printDebugToast("nav item selected");
+
+        if (id == R.id.join_group_sidebar_action) {
             // Handle the camera action
+
+
+            Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

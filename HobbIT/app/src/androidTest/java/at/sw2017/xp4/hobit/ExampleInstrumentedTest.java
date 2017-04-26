@@ -2,8 +2,10 @@ package at.sw2017.xp4.hobit;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -16,6 +18,10 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
+    @Rule
+    public ActivityTestRule<EditProfileHobbiesActivity> mActivityRule = new ActivityTestRule<>(EditProfileHobbiesActivity.class);
+
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.

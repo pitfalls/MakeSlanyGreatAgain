@@ -40,8 +40,8 @@ import static org.junit.Assert.*;
 public class ProfilePageInstrumentedTest {
 
     @Rule
-    public ActivityTestRule< HobIT_Main > mActivityRule = new
-            ActivityTestRule<>( HobIT_Main.class );
+    public ActivityTestRule< HobIT_Main > mActivityRule = new ActivityTestRule<>( HobIT_Main.class );
+
 
     @Test
     public void useAppContext() throws Exception {
@@ -103,4 +103,5 @@ public class ProfilePageInstrumentedTest {
         onView( withId(R.id.editTextProfileDescription)).perform(typeText("I'm the devil in disguise"));
         onView(withId(R.id.editTextProfileDescription)).check(matches(withText("I'm the devil in disguise")));
     }
+
 }

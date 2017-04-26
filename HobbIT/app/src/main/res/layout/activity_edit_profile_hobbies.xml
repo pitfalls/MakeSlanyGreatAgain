@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="at.sw2017.xp4.hobit.EditProfileHobbiesActivity">
+
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="16dp"
+        android:text="Swimming"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Hiking"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox3"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Fitness studio"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox4"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Playing cards"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox5"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Computer Games"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox6"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Solve quiz"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox7"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Ride a bicycle"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox8"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Puzzle"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox9"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Needle"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox10"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="16dp"
+        android:text="Model making"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="94dp"
+        android:text="Yoyo playing"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox12"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox1" />
+
+    <CheckBox
+        android:id="@+id/checkBox12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="121dp"
+        android:text="Dancing"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox13"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox2" />
+
+    <CheckBox
+        android:id="@+id/checkBox13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="74dp"
+        android:text="Climbing"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox14"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox3" />
+
+    <CheckBox
+        android:id="@+id/checkBox14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="78dp"
+        android:text="Astronomy"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox15"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox4" />
+
+    <CheckBox
+        android:id="@+id/checkBox15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="51dp"
+        android:text="Collecting"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox16"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox5" />
+
+    <CheckBox
+        android:id="@+id/checkBox16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="97dp"
+        android:text="Cooking"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox17"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox6" />
+
+    <CheckBox
+        android:id="@+id/checkBox17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="76dp"
+        android:text="Football"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox18"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox7" />
+
+    <CheckBox
+        android:id="@+id/checkBox18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="120dp"
+        android:text="Music"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox19"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox8" />
+
+    <CheckBox
+        android:id="@+id/checkBox19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="117dp"
+        android:text="others"
+        app:layout_constraintBottom_toTopOf="@+id/cont_button"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox9" />
+
+    <Button
+        android:id="@+id/cont_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="74dp"
+        android:text="Continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox10" />
+
+
+</android.support.constraint.ConstraintLayout>
