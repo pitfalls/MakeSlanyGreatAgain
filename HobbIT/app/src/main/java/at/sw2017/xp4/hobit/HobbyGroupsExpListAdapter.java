@@ -37,22 +37,25 @@ public class HobbyGroupsExpListAdapter implements ExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return 0;
+        return listDataHeader.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 0;
+        Object obj = listDataHeader.get(groupPosition);
+        return listDataChild.get(obj).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return null;
+        Object obj = listDataHeader.get(groupPosition);
+        return listDataChild.get(obj);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return null;
+        Object obj = listDataHeader.get(groupPosition);
+        return listDataChild.get(obj).get(childPosition);
     }
 
     @Override

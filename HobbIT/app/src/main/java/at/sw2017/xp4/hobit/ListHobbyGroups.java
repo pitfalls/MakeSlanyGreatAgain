@@ -35,5 +35,6 @@ public class ListHobbyGroups extends AppCompatActivity {
                 new HobbyGroupsExpListAdapter(
                         this, listDataHeader, listDataChild);
 
+        //lv.setAdapter(listAdapter);
     }
 }
