@@ -16,7 +16,8 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/button_overview"
         tools:layout_constraintBaseline_creator="1"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="0dp" />
 
     <Button
         android:id="@+id/button_overview"
@@ -26,8 +27,12 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="87dp"
-        app:layout_constraintLeft_toRightOf="@+id/button_list" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/button_list"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_creation"
@@ -41,50 +46,50 @@
         app:layout_constraintLeft_toRightOf="@+id/button_overview"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.25" />
 
     <TextView
         android:id="@+id/newsTextView"
         android:layout_width="89dp"
         android:layout_height="26dp"
-        android:text="NEWS"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:text="NEWS"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        tools:layout_editor_absoluteY="14dp" />
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="362dp"
-        android:layout_height="328dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="364dp"
+        android:layout_height="383dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_overview"
-        app:layout_constraintHorizontal_bias="0.526"
+        android:layout_marginTop="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newsTextView"
-        app:layout_constraintVertical_bias="0.509"
         app:srcCompat="@mipmap/startscreen"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="15dp" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.2" />
 
     <TextView
         android:id="@+id/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HELLO"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/button_list"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="HELLO THIS IS THE HOBBIE APP"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_list"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

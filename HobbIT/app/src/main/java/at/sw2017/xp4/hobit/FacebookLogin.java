@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -67,10 +69,28 @@ public class FacebookLogin extends AppCompatActivity {
                 info.setText("Login attempt failed.");
             }
         });
+
+        setOnClickListeners();
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void setOnClickListeners() {
+
+        final Button backButton = (Button) findViewById(R.id.BackFacebookLogin);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // This Perform action on click
+                Intent intent = new Intent(view.getContext(), HobIT_Main.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
+
