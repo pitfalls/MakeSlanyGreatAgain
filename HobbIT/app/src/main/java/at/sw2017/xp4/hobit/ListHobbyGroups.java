@@ -26,14 +26,21 @@ public class ListHobbyGroups extends AppCompatActivity {
         ArrayList<String>listDataHeader = new ArrayList<String>();
         HashMap<String, List<String>> listDataChild = new HashMap<String, List<String>>();
 
-        listDataHeader.add("testGroup");
+        listDataHeader.add("Category_test");
+        listDataHeader.add("Boobs");
         List<String> child = new ArrayList<String>();
-        child.add("testChild");
+        child.add("Group_X");
+        child.add("Group_Y");
+        child.add("Group_Z");
         listDataChild.put(listDataHeader.get(0),child);
+        List<String> boobs = new ArrayList<String>();
+        boobs.add("Pamela Anderson");
+        boobs.add("Megan Fox");
+        listDataChild.put(listDataHeader.get(1),boobs);
 
         ExpandableListAdapter listAdapter =
             //    new HobbyGroupsExpListAdapter(
-                new ExampleExpandableListAdapter(
+                new HobbyGroupsExpListAdapter(
                         this, listDataHeader, listDataChild);
 
         lv.setAdapter(listAdapter);
