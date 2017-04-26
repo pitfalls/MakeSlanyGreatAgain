@@ -12,6 +12,12 @@ public final class DataBaseContract {
     private DataBaseContract() {}
 
     /* Inner class that defines the table contents */
+
+    public static class CurrentUserEntry implements BaseColumns {
+        public static final String TABLE_NAME = "CurrentUser";
+        public static final String COLUMN_NAME_USERID = "UserId";
+    }
+
     public static class GroupEntry implements BaseColumns {
         public static final String TABLE_NAME = "Groups";
         public static final String COLUMN_NAME_NAME = "Name";

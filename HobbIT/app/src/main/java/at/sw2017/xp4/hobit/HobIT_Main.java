@@ -168,10 +168,7 @@ public class HobIT_Main extends AppCompatActivity
                 dbConnection.createUser(currentUser);
             }
 
-            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(getString(R.string.current_user), userID);
-            editor.commit();
+            dbConnection.setCurrentUser(currentUser);
         }
     }
 

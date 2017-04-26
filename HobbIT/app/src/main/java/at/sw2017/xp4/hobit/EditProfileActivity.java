@@ -33,14 +33,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         dbConnection = DataBaseConnection.getInstance(this);
 
-        currentUser = dbConnection.getUser(userID);
+        currentUser = dbConnection.getCurrentUser();
 
         final EditText editTextNickname = (EditText) findViewById(R.id.editTextProfileNickname);
         editTextNickname.setText(currentUser.getNickName());
         final EditText editTextForename = (EditText) findViewById(R.id.editTextProfileForename);
         editTextForename.setText(currentUser.getFirstName());
-        final EditText editTextSurename = (EditText) findViewById(R.id.editTextProfileSurename);
-        editTextSurename.setText(currentUser.getSurName());
+        final EditText editTextSurname = (EditText) findViewById(R.id.editTextProfileSurename);
+        editTextSurname.setText(currentUser.getSurName());
     }
 
 /*

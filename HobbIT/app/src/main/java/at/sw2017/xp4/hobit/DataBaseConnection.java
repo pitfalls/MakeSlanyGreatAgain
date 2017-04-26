@@ -50,6 +50,46 @@ public class DataBaseConnection {
         return instance;
     }
 
+    public User getCurrentUser() {
+        String[] projection = {
+                "_id",
+                DataBaseContract.CurrentUserEntry.COLUMN_NAME_USERID,
+        };
+
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DataBaseContract.CurrentUserEntry.COLUMN_NAME_USERID + " DESC";
+
+        Cursor cursor = db.query(
+                DataBaseContract.CurrentUserEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        String id = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContract.CurrentUserEntry.COLUMN_NAME_USERID));
+
+        return getUser(id);
+    }
+
+    public boolean setCurrentUser(User user) {
+        db.delete(DataBaseContract.CurrentUserEntry.TABLE_NAME, null, null);
+
+        ContentValues values = new ContentValues();
+        values.put("_id", user.getId());
+        values.put(DataBaseContract.CurrentUserEntry.COLUMN_NAME_USERID,  user.getId());
+
+        // Insert the new row, returning the primary key value of the new row
+        if (db.insert(DataBaseContract.UsersEntry.TABLE_NAME, null, values) != -1) {
+            return true;
+        }
+        return false;
+    }
+
     public User getUser(String id) {
         String[] projection = {
                 "_id",
