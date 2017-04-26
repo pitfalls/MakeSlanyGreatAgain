@@ -81,7 +81,7 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
                 }
                 //finish parsing and sending to database when database is online
 
-                Intent intent = new Intent(view.getContext(), EditProfileActivity.class);
+                Intent intent = new Intent(view.getContext(), HobIT_Main.class);
                 startActivity(intent);
             }
         });

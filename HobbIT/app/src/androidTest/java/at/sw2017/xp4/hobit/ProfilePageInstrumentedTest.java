@@ -40,8 +40,12 @@ import static org.junit.Assert.*;
 public class ProfilePageInstrumentedTest {
 
     @Rule
-    public ActivityTestRule< HobIT_Main > mActivityRule = new
-            ActivityTestRule<>( HobIT_Main.class );
+    public ActivityTestRule< HobIT_Main > mActivityRule = new ActivityTestRule<>( HobIT_Main.class );
+
+    @Rule
+    public ActivityTestRule<EditProfileHobbiesActivity> mActivityRule2 = new ActivityTestRule<>(EditProfileHobbiesActivity.class);
+
+
 
     @Test
     public void useAppContext() throws Exception {
@@ -102,5 +106,37 @@ public class ProfilePageInstrumentedTest {
         Espresso.pressBack();
         onView( withId(R.id.editTextProfileDescription)).perform(typeText("I'm the devil in disguise"));
         onView(withId(R.id.editTextProfileDescription)).check(matches(withText("I'm the devil in disguise")));
+    }
+
+    @Test
+    public void testContentExistence() throws Exception {
+
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        openActionBarOverflowOrOptionsMenu(appContext);
+
+        onView( withText("Edit Profile")).perform(click());
+        onView( withText("Edit Interests")).perform(click());
+
+        onView(withText("Swimming")).perform(click());
+        onView(withText("Hiking")).perform(click());
+        onView(withText("Fitness studio")).perform(click());
+        onView(withText("Playing cards")).perform(click());
+        onView(withText("Computer Games")).perform(click());
+        onView(withText("Solve quiz")).perform(click());
+        onView(withText("Ride a bicycle")).perform(click());
+        onView(withText("Puzzle")).perform(click());
+        onView(withText("Needle")).perform(click());
+        onView(withText("Model making")).perform(click());
+        onView(withText("Yoyo playing")).perform(click());
+        onView(withText("Dancing")).perform(click());
+        onView(withText("Climbing")).perform(click());
+        onView(withText("Astronomy")).perform(click());
+        onView(withText("Collecting")).perform(click());
+        onView(withText("Cooking")).perform(click());
+        onView(withText("Football")).perform(click());
+        onView(withText("Music")).perform(click());
+        onView(withText("others")).perform(click());
+
+        onView(withText("Continue")).perform(click());
     }
 }
