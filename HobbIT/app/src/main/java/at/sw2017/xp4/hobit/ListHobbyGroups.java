@@ -32,9 +32,10 @@ public class ListHobbyGroups extends AppCompatActivity {
         listDataChild.put(listDataHeader.get(0),child);
 
         ExpandableListAdapter listAdapter =
-                new HobbyGroupsExpListAdapter(
+            //    new HobbyGroupsExpListAdapter(
+                new ExampleExpandableListAdapter(
                         this, listDataHeader, listDataChild);
 
-        //lv.setAdapter(listAdapter);
+        lv.setAdapter(listAdapter);
     }
 }
