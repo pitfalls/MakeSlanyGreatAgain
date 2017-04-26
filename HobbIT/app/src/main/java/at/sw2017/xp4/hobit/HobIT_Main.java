@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String userID = "";
+    private NavigationView sideBarNavigationView;
 
     public void initGroupCreation()
     {
@@ -93,8 +95,9 @@ public class HobIT_Main extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        sideBarNavigationView.setNavigationItemSelectedListener(this);
+
         setTitle("HobbiT Homepage");
     }
 
@@ -153,14 +156,28 @@ public class HobIT_Main extends AppCompatActivity
         }
     }
 
+    public void printDebugToast (CharSequence text )
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        printDebugToast("nav item selected");
+
+        if (id == R.id.join_group_sidebar_action) {
             // Handle the camera action
+
+
+            Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
