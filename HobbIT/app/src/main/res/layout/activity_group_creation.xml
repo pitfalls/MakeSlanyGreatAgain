@@ -21,7 +21,7 @@
         android:layout_marginTop="30dp" />
 
     <EditText
-        android:id="@+id/EditText_description"
+        android:id="@+id/editText_Description"
         android:layout_width="320dp"
         android:layout_height="150dp"
         android:layout_below="@+id/textview_description"
@@ -29,7 +29,9 @@
         android:layout_marginTop="30dp"
         android:gravity="top"
         android:hint="Description of the Hobby"
-        android:inputType="text|textMultiLine"
+        android:inputType="text"
+        android:maxLength="300"
+        android:singleLine="true"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textColorHighlight="@android:color/black"
@@ -37,19 +39,22 @@
         android:textColorLink="@android:color/black" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText_Groupname"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_alignStart="@+id/spinner_hobby"
         android:layout_alignTop="@+id/txtView_group_name"
         android:gravity="top"
         android:hint="GroupName"
-        android:inputType="text|textMultiLine"
+        android:inputType="text"
+        android:maxLength="20"
+        android:singleLine="true"
         android:textAlignment="textStart"
         android:textColor="@android:color/black"
         android:textColorHighlight="@android:color/black"
         android:textColorHint="@android:color/black"
-        android:textColorLink="@android:color/black" />
+        android:textColorLink="@android:color/black"
+        tools:inputType="text" />
 
     <Spinner
         android:id="@+id/spinner_location"
@@ -106,7 +111,7 @@
         android:text="Cancel"
         android:layout_alignBaseline="@+id/btn_save"
         android:layout_alignBottom="@+id/btn_save"
-        android:layout_alignEnd="@+id/EditText_description" />
+        android:layout_alignEnd="@+id/editText_Description" />
 
     <Button
         android:id="@+id/btn_save"
