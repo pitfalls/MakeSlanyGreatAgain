@@ -8,17 +8,17 @@
 
 
     <CheckBox
-        android:id="@+id/Swimming"
+        android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="16dp"
         android:text="Swimming"
-        app:layout_constraintBottom_toTopOf="@+id/Hiking"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <CheckBox
-        android:id="@+id/Hiking"
+        android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -108,24 +108,24 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <CheckBox
-        android:id="@+id/Yoyo"
+        android:id="@+id/checkBox11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="94dp"
         android:text="Yoyo playing"
-        app:layout_constraintBottom_toTopOf="@+id/Dancing"
-        app:layout_constraintLeft_toRightOf="@+id/Swimming" />
+        app:layout_constraintBottom_toTopOf="@+id/checkBox12"
+        app:layout_constraintLeft_toRightOf="@+id/checkBox1" />
 
     <CheckBox
-        android:id="@+id/Dancing"
+        android:id="@+id/checkBox12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="121dp"
         android:text="Dancing"
         app:layout_constraintBottom_toTopOf="@+id/checkBox13"
-        app:layout_constraintLeft_toRightOf="@+id/Hiking" />
+        app:layout_constraintLeft_toRightOf="@+id/checkBox2" />
 
     <CheckBox
         android:id="@+id/checkBox13"

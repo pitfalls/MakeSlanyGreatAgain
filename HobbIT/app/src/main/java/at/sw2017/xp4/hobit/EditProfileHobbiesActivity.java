@@ -63,27 +63,35 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
         hobbies.add(HOBBY18);
         hobbies.add(HOBBY19);
 
-        for(int i = 1; i<=19; i++){
+        for (int i = 1; i <= 19; i++) {
             String checkBoxName = "checkBox" + i;
             int id = getResources().getIdentifier(checkBoxName, "id", R.class.getPackage().getName());
             CheckBox checkBox = (CheckBox) findViewById(id);
             checkBoxes.add(checkBox);
         }
 
-        Continue_button = (Button) findViewById(R.id.cont_button);
-        Continue_button.setOnClickListener(new View.OnClickListener() {
+        setOnClickListeners();
+    }
+
+        private void setOnClickListeners() {
+
+        final Button contButton = (Button) findViewById(R.id.cont_button);
+        contButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Hobbies = "";
-                for(int i = 0; i<=18; i++){
-                    if(checkBoxes.get(i).isChecked()==true)
-                        Hobbies = Hobbies + hobbies.get(i) + "; ";
-                }
-                //finish parsing and sending to database when database is online
+                // This Perform action on click
+
+//                String Hobbies = "";
+//                for(int i = 0; i<=18; i++){
+//                    if(checkBoxes.get(i).isChecked())
+//                        Hobbies = Hobbies + hobbies.get(i) + "; ";
+//                }
+//                //finish parsing and sending to database when database is online
 
                 Intent intent = new Intent(view.getContext(), HobIT_Main.class);
                 startActivity(intent);
             }
         });
+
     }
 }
