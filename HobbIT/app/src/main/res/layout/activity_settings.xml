@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/private_settings_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="26dp"
+        android:text="Private Settings:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/settings_info_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/private_settings_textView"
+        android:layout_below="@+id/private_settings_textView"
+        android:text="Checked boxes will be visible for other users"
+        android:textAllCaps="false"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/location_checkbox"
+        android:layout_alignStart="@+id/settings_info_textView" />
+
+    <CheckBox
+        android:id="@+id/real_name_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView10"
+        android:layout_below="@+id/settings_info_textView"
+        android:layout_marginTop="15dp"
+        android:text="Real Name" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/real_name_checkBox"
+        android:layout_below="@+id/real_name_checkBox"
+        android:text="Nick Name"
+        android:id="@+id/checkBox" />
+
+    <CheckBox
+        android:id="@+id/location_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox" />
+
+    <CheckBox
+        android:id="@+id/checkBox27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="deactivate notifications from the App"
+        android:layout_below="@+id/textView10"
+        android:layout_alignStart="@+id/location_checkbox"
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go Inactive"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/checkBox27"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_marginTop="27dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="When you´re going inactive, your account will be hidden for everyone and you can´ get Messages anymore"
+        android:layout_below="@+id/textView12"
+        android:layout_alignStart="@+id/textView12" />
+
+    <CheckBox
+        android:id="@+id/checkBox29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="activate inactivity"
+        android:layout_below="@+id/textView13"
+        android:layout_alignStart="@+id/checkBox27"
+        android:layout_marginTop="17dp" />
+
+</RelativeLayout>
