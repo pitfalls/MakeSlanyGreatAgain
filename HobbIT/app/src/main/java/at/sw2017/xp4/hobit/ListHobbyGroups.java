@@ -1,14 +1,19 @@
 package at.sw2017.xp4.hobit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ListHobbyGroups extends AppCompatActivity {
 
@@ -42,10 +47,23 @@ public class ListHobbyGroups extends AppCompatActivity {
 
     void setCurrentExpandableListAdapter()
     {
+        View.OnClickListener clickListen = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int duration = Toast.LENGTH_SHORT;
+                String text = "test on click output ";
+                Toast save_toast = Toast.makeText(getApplicationContext(), text, duration);
+                save_toast.show();
+
+                Intent intent = new Intent(ListHobbyGroups.this, GroupOverview.class);
+                startActivity(intent);
+            }
+        };
+
         ExpandableListAdapter listAdapter =
                 //    new HobbyGroupsExpListAdapter(
                 new HobbyGroupsExpListAdapter(
-                        this, categoryList, categoryMapGroups, getApplicationContext());
+                        this, categoryList, categoryMapGroups, clickListen); //getApplicationContext());
 /*
         for ( int categoryIdx = 0; categoryIdx < categoryList.size(); categoryIdx++ )
         {
