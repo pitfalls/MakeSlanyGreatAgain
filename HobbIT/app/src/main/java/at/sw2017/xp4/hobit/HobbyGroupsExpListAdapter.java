@@ -54,35 +54,7 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.hobbygroup_child_item, null);
         }
 
-        TextView item = (TextView) convertView.findViewById(R.id.laptop);
-/*
-        ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
-        delete.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Do you want to remove?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                List<String> child =
-                                        laptopCollections.get(laptops.get(groupPosition));
-                                child.remove(childPosition);
-                                notifyDataSetChanged();
-                            }
-                        });
-                builder.setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            }
-        });
-        */
+        TextView item = (TextView) convertView.findViewById(R.id.hg_child_item);
 
         item.setText(laptop);
         return convertView;
@@ -113,7 +85,7 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.hobbygroup_group_item,
                     null);
         }
-        TextView item = (TextView) convertView.findViewById(R.id.laptop);
+        TextView item = (TextView) convertView.findViewById(R.id.hg_group_item);
         item.setTypeface(null, Typeface.BOLD);
         item.setText(laptopName);
         return convertView;
@@ -126,4 +98,7 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+
+    private void
 }
