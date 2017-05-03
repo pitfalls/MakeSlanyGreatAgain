@@ -99,6 +99,4 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-
-    private void
 }

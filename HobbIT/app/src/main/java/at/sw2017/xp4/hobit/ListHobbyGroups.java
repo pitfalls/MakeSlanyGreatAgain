@@ -24,29 +24,36 @@ public class ListHobbyGroups extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_hobby_groups);
 
-        ExpandableListView lv = (ExpandableListView) findViewById(R.id.expandableListViewHobbyGroups);
-
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        addCategory("Category_test");
-        addCategory("Boobs");
-        List<String> child = new ArrayList<String>();
-        child.add("Group_X");
-        child.add("Group_Y");
-        child.add("Group_Z");
-        listDataChild.put(listDataHeader.get(0),child);
-        List<String> boobs = new ArrayList<String>();
-        boobs.add("Pamela Anderson");
-        boobs.add("Megan Fox");
-        listDataChild.put(listDataHeader.get(1),boobs);
+        setDefaultData();
 
+        setCurrentExpandableListAdapter();
+    }
+
+    void setDefaultData()
+    {
+        String firstCat = "Category_test";
+        addGroup(firstCat, "Group_X");
+        addGroup(firstCat, "Group_Y");
+        addGroup(firstCat, "Group_Z");
+
+        String catBoobs = "Boobs";
+        addGroup(catBoobs, "Pamela Anderson");
+        addGroup(catBoobs, "Megan Fox");
+    }
+
+    void setCurrentExpandableListAdapter()
+    {
         ExpandableListAdapter listAdapter =
-            //    new HobbyGroupsExpListAdapter(
+                //    new HobbyGroupsExpListAdapter(
                 new HobbyGroupsExpListAdapter(
                         this, listDataHeader, listDataChild);
 
+        ExpandableListView lv = (ExpandableListView) findViewById(R.id.expandableListViewHobbyGroups);
         lv.setAdapter(listAdapter);
+       // return listAdapter;
     }
 
     boolean categoryExists (String category)
@@ -63,18 +70,31 @@ public class ListHobbyGroups extends AppCompatActivity {
      */
     void addCategory(String category)
     {
-        if ( categoryExists(category)) {
+        if ( !categoryExists(category)) {
             listDataHeader.add(category);
             List<String> categoryGroupList = new ArrayList<String>();
             listDataChild.put(category, categoryGroupList);
         }
     }
 
+    /**
+     * @param category
+     * @return
+     */
     List<String> getGroupList(String category)
     {
         List<String> groupList = null;
         groupList = listDataChild.get(category);
         return groupList;
+    }
+
+    /**
+     *
+     * @return
+     */
+    List<String> getCategoryList()
+    {
+        return listDataHeader;
     }
 
 
@@ -83,8 +103,11 @@ public class ListHobbyGroups extends AppCompatActivity {
      */
     void addGroup(String category, String group)
     {
-        if ( categoryExists(category) ) {
-            listDataHeader.add(category);
+        if ( !categoryExists(category) ) {
+            addCategory(category);
         }
+
+        List<String> groupList = listDataChild.get(category);
+        groupList.add(group);
     }
 }
