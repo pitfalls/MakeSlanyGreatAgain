@@ -16,21 +16,21 @@ import java.util.List;
 
 public class ListHobbyGroups extends AppCompatActivity {
 
+    private ArrayList<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_hobby_groups);
-        //setTitle("Individual");
 
         ExpandableListView lv = (ExpandableListView) findViewById(R.id.expandableListViewHobbyGroups);
 
-        //ExpandableListAdapter data = lv.getExpandableListAdapter();
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
 
-        ArrayList<String>listDataHeader = new ArrayList<String>();
-        HashMap<String, List<String>> listDataChild = new HashMap<String, List<String>>();
-
-        listDataHeader.add("Category_test");
-        listDataHeader.add("Boobs");
+        addCategory("Category_test");
+        addCategory("Boobs");
         List<String> child = new ArrayList<String>();
         child.add("Group_X");
         child.add("Group_Y");
@@ -47,5 +47,44 @@ public class ListHobbyGroups extends AppCompatActivity {
                         this, listDataHeader, listDataChild);
 
         lv.setAdapter(listAdapter);
+    }
+
+    boolean categoryExists (String category)
+    {
+        boolean retVal = false;
+        int categoryIndex = listDataHeader.indexOf(category);
+        if ( categoryIndex != -1 ) {
+            retVal = true;
+        }
+        return retVal;
+    }
+    /** adds a new category to the datastrucutre
+     * @param category
+     */
+    void addCategory(String category)
+    {
+        if ( categoryExists(category)) {
+            listDataHeader.add(category);
+            List<String> categoryGroupList = new ArrayList<String>();
+            listDataChild.put(category, categoryGroupList);
+        }
+    }
+
+    List<String> getGroupList(String category)
+    {
+        List<String> groupList = null;
+        groupList = listDataChild.get(category);
+        return groupList;
+    }
+
+
+    /** adds a new group to the category group datastrucutre
+     * @param category
+     */
+    void addGroup(String category, String group)
+    {
+        if ( categoryExists(category) ) {
+            listDataHeader.add(category);
+        }
     }
 }
