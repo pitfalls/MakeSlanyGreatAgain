@@ -42,38 +42,76 @@ public class GroupListViewInternalTests {
     public ActivityTestRule<ListHobbyGroups> mActivityRule = new ActivityTestRule<>(ListHobbyGroups.class);
 
     @Test
-    public void openHobbyListViewViaSidebar() throws Exception {
+    public void joinButtonTest() throws Exception {
         Thread.sleep(1000);
-        // Context of the app under test.
+
         onView(withText("Category_test")).perform(click());
         onView(withText("Group_X")).perform(click());
 
         onView(withId(R.id. btn_join)).perform(click());
-
-
-        /*onView(withId(R.id.activity_group_overview))
-                .check(matches(isClosed(Gravity.LEFT))) // Left Drawer should be closed.
-                .perform(open()); // Open Drawer
-*/
-        //onData().inAdapterView(withId(R.id.laptop)).perform(click());
-
-
-        // Check that you Activity was opened.
-/*        String expectedNoStatisticsText = InstrumentationRegistry.getTargetContext()
-                .getString(R.string.no_item_available);
-        onView(withId(R.id.no_statistics)).check(matches(withText(expectedNoStatisticsText)));
-*/
-        // onView(withId(R.id.acti))
-
-//        Context appContext = InstrumentationRegistry.getTargetContext();
-//        String s = appContext.getApplicationContext().getApplicationInfo().toString();
-//        System.out.println(s);
-
-
-
-        //intended(hasComponent(ExpectedActivity.class.getName()));
         Thread.sleep(1000);
     }
+
+    @Test
+    public void backButtonTest() throws Exception {
+        Thread.sleep(1000);
+
+        onView(withText("Boobs")).perform(click());
+        onView(withText("Pamela Anderson")).perform(click());
+
+        onView(withId(R.id. btn_back)).perform(click());
+        Thread.sleep(1000);
+    }
+
+    @Test
+    public void multipleJoinsAndBacks() throws Exception {
+        Thread.sleep(1000);
+
+        onView(withText("Boobs")).perform(click());
+        onView(withText("Pamela Anderson")).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Category_test")).perform(click());
+        onView(withText("Group_X")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Category_test")).perform(click());
+        onView(withText("Group_Y")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Boobs")).perform(click());
+        onView(withText("Megan Fox")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Boobs")).perform(click());
+        onView(withText("Megan Fox")).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        /*onView(withText("Category_test")).perform(click());
+        onView(withText("Group_Y")).perform(click());
+        onView(withId(R.id. btn_leave)).perform(click());
+
+        Thread.sleep(1000);*/
+
+        for(int counter = 0; counter < 10; counter++)
+        {
+            onView(withText("Boobs")).perform(click());
+            //onView(withText("Pamela Anderson")).perform(click());
+        }
+        Thread.sleep(1000);
+
+    }
+
 
 
 

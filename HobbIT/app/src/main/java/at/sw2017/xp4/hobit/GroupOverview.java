@@ -26,8 +26,7 @@ public class GroupOverview extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // This Perform action on click
-                Intent intent = new Intent(view.getContext(), HobIT_Main.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
