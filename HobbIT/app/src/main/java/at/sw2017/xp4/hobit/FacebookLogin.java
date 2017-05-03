@@ -2,6 +2,7 @@ package at.sw2017.xp4.hobit;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,10 +54,19 @@ public class FacebookLogin extends AppCompatActivity {
                 );
                 userId = loginResult.getAccessToken().getUserId();
 
+                SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("CurrentUser", userId);
+
+                // Commit the edits!
+                editor.commit();
+
+                /*
                 Intent intent = new Intent();
                 intent.putExtra("userId", userId);
                 setResult(RESULT_OK, intent);
                 finish();
+                */
             }
 
             @Override

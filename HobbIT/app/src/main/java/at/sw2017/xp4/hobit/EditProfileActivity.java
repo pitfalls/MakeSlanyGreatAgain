@@ -2,6 +2,7 @@ package at.sw2017.xp4.hobit;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

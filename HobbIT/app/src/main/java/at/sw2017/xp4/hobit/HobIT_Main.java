@@ -2,6 +2,7 @@ package at.sw2017.xp4.hobit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -99,6 +100,9 @@ public class HobIT_Main extends AppCompatActivity
         sideBarNavigationView.setNavigationItemSelectedListener(this);
 
         setTitle("HobbiT Homepage");
+
+        SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
+        String currentUser = settings.getString("CurrentUser", "");
     }
 
     @Override
