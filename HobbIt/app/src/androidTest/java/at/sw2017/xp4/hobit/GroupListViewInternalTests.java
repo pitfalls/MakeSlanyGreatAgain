@@ -76,43 +76,25 @@ public class GroupListViewInternalTests {
         onView(withText("Category_test")).perform(click());
         onView(withText("Group_X")).perform(click());
         onView(withId(R.id. btn_join)).perform(click());
-
-        Thread.sleep(1000);
-
-        onView(withText("Category_test")).perform(click());
-        onView(withText("Group_Y")).perform(click());
-        onView(withId(R.id. btn_join)).perform(click());
-
-        Thread.sleep(1000);
-
-        onView(withText("Boobs")).perform(click());
-        onView(withText("Megan Fox")).perform(click());
-        onView(withId(R.id. btn_join)).perform(click());
-
-        Thread.sleep(1000);
-
-        onView(withText("Boobs")).perform(click());
-        onView(withText("Megan Fox")).perform(click());
         onView(withId(R.id. btn_back)).perform(click());
 
         Thread.sleep(1000);
 
-        /*onView(withText("Category_test")).perform(click());
         onView(withText("Group_Y")).perform(click());
-        onView(withId(R.id. btn_leave)).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
 
-        Thread.sleep(1000);*/
-
-        for(int counter = 0; counter < 10; counter++)
-        {
-            onView(withText("Boobs")).perform(click());
-            //onView(withText("Pamela Anderson")).perform(click());
-        }
         Thread.sleep(1000);
 
+        onView(withText("Megan Fox")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Megan Fox")).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
     }
-
-
-
-
 }
