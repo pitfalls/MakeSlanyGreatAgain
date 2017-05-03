@@ -54,23 +54,10 @@ public class ListHobbyGroups extends AppCompatActivity {
 
     void setCurrentExpandableListAdapter()
     {
-        View.OnClickListener clickListen = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int duration = Toast.LENGTH_SHORT;
-                String text = "test on click output ";
-                Toast save_toast = Toast.makeText(getApplicationContext(), text, duration);
-                save_toast.show();
-
-                Intent intent = new Intent(ListHobbyGroups.this, GroupOverview.class);
-                startActivity(intent);
-            }
-        };
-
         ExpandableListAdapter listAdapter =
                 //    new HobbyGroupsExpListAdapter(
                 new HobbyGroupsExpListAdapter(
-                        this, categoryList, categoryMapGroups, clickListen); //getApplicationContext());
+                        this, categoryList, categoryMapGroups, getApplicationContext(), ListHobbyGroups.this);
 /*
         for ( int categoryIdx = 0; categoryIdx < categoryList.size(); categoryIdx++ )
         {

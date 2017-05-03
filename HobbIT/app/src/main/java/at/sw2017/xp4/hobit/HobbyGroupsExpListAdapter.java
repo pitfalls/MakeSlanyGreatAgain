@@ -1,6 +1,8 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.widget.ExpandableListAdapter;
 
 import java.security.AccessControlContext;
@@ -22,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.support.v4.content.ContextCompat.startActivity;
 import static java.security.AccessController.getContext;
 
 /**
@@ -35,15 +36,17 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
     private Map<String, List<GroupData>> groups;
     private List<String> categories;
 
-    View.OnClickListener clickListenerer;
+    private Context appContext;
+    private Context packageContext;
 
     public HobbyGroupsExpListAdapter(Activity context, List<String> hobbyCategories,
-                                        Map<String, List<GroupData>> hobbyGroups, View.OnClickListener clickListen) {
+                                        Map<String, List<GroupData>> hobbyGroups, Context appContext, Context packageContext) {
         this.context = context;
         this.groups = hobbyGroups;
         this.categories = hobbyCategories;
 
-        clickListenerer = clickListen;
+        this.appContext = appContext;
+        this.packageContext = packageContext;
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -67,7 +70,20 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
         TextView item = (TextView) convertView.findViewById(R.id.hg_child_item);
 
         item.setText(group.getName());
-        item.setOnClickListener( clickListenerer );
+
+        View.OnClickListener clickListen = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int duration = Toast.LENGTH_SHORT;
+                String text = "test on click output Name:" + group.getName() + " ID:" + group.getId();
+                Toast save_toast = Toast.makeText(appContext, text, duration);
+                save_toast.show();
+
+                Intent intent = new Intent(packageContext, GroupOverview.class);
+                packageContext.startActivity(intent);
+            }
+        };
+        item.setOnClickListener( clickListen );
         return convertView;
     }
 
