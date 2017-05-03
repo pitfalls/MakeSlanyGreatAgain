@@ -15,9 +15,10 @@ public class RegistrationRequest extends StringRequest{
         private static final String REGISTER_REQUEST_URL = "https://waterproofed-school.000webhostapp.com/Registration.php";
         private Map<String, String> params;
 
-        public RegistrationRequest(String NickName, String FirstName, String SurName, String Location, String Email, String Password, Response.Listener<String> listener, Response.ErrorListener errorListener){
+        public RegistrationRequest(String UserID, String NickName, String FirstName, String SurName, String Location, String Email, String Password, Response.Listener<String> listener, Response.ErrorListener errorListener){
             super(Request.Method.POST, REGISTER_REQUEST_URL, listener, errorListener);
             params = new HashMap<>();
+            params.put("UserID", UserID);
             params.put("NickName", NickName);
             params.put("FirstName", FirstName);
             params.put("SurName", SurName);
