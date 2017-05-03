@@ -1,14 +1,10 @@
 package at.sw2017.xp4.hobit;
 
-import android.content.Intent;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,16 +12,16 @@ import java.util.List;
 
 public class ListHobbyGroups extends AppCompatActivity {
 
-    private ArrayList<String> listDataHeader;
-    private HashMap<String, List<String>> listDataChild;
+    private ArrayList<String> categoryList;
+    private HashMap<String, List<String>> categoryMapGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_hobby_groups);
 
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        categoryList = new ArrayList<String>();
+        categoryMapGroups = new HashMap<String, List<String>>();
 
         setDefaultData();
 
@@ -49,7 +45,21 @@ public class ListHobbyGroups extends AppCompatActivity {
         ExpandableListAdapter listAdapter =
                 //    new HobbyGroupsExpListAdapter(
                 new HobbyGroupsExpListAdapter(
-                        this, listDataHeader, listDataChild);
+                        this, categoryList, categoryMapGroups, getApplicationContext());
+/*
+        for ( int categoryIdx = 0; categoryIdx < categoryList.size(); categoryIdx++ )
+        {
+            List<String> group = categoryMapGroups.get(categoryList.get(categoryIdx));
+
+            for ( int groupIdx = 0; groupIdx < group.size(); groupIdx++ ) {
+                boolean lastChild = false;
+                if ( (group.size() - 1) == groupIdx )
+                    lastChild = true;
+
+                listAdapter.getChildView(categoryIdx, groupIdx, lastChild);
+            }
+        }
+        */
 
         ExpandableListView lv = (ExpandableListView) findViewById(R.id.expandableListViewHobbyGroups);
         lv.setAdapter(listAdapter);
@@ -59,7 +69,7 @@ public class ListHobbyGroups extends AppCompatActivity {
     boolean categoryExists (String category)
     {
         boolean retVal = false;
-        int categoryIndex = listDataHeader.indexOf(category);
+        int categoryIndex = categoryList.indexOf(category);
         if ( categoryIndex != -1 ) {
             retVal = true;
         }
@@ -71,9 +81,9 @@ public class ListHobbyGroups extends AppCompatActivity {
     void addCategory(String category)
     {
         if ( !categoryExists(category)) {
-            listDataHeader.add(category);
+            categoryList.add(category);
             List<String> categoryGroupList = new ArrayList<String>();
-            listDataChild.put(category, categoryGroupList);
+            categoryMapGroups.put(category, categoryGroupList);
         }
     }
 
@@ -84,7 +94,7 @@ public class ListHobbyGroups extends AppCompatActivity {
     List<String> getGroupList(String category)
     {
         List<String> groupList = null;
-        groupList = listDataChild.get(category);
+        groupList = categoryMapGroups.get(category);
         return groupList;
     }
 
@@ -94,7 +104,7 @@ public class ListHobbyGroups extends AppCompatActivity {
      */
     List<String> getCategoryList()
     {
-        return listDataHeader;
+        return categoryList;
     }
 
 
@@ -107,7 +117,7 @@ public class ListHobbyGroups extends AppCompatActivity {
             addCategory(category);
         }
 
-        List<String> groupList = listDataChild.get(category);
+        List<String> groupList = categoryMapGroups.get(category);
         groupList.add(group);
     }
 }
