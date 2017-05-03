@@ -62,7 +62,7 @@ public class FacebookLogin extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                userId = loginResult.getAccessToken().getUserId();
+                userId = "fb" + loginResult.getAccessToken().getUserId();
 
                 Response.Listener<String> getUserResponseListener = new Response.Listener<String>() {
                     @Override
@@ -114,8 +114,6 @@ public class FacebookLogin extends AppCompatActivity {
 
         setOnClickListeners();
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
