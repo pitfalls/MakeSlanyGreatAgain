@@ -6,7 +6,8 @@ package at.sw2017.xp4.hobit;
 
 public class Globals {
     private static Globals instance;
-    private static String UserID;
+    private static String UserID = "";
+    private static String TempID = "";
 
     public static String getUserID() {
         return UserID;
@@ -14,6 +15,14 @@ public class Globals {
 
     public static void setUserID(String userID) {
         UserID = userID;
+    }
+
+    public static String getTempID() {
+        return TempID;
+    }
+
+    public static void setTempID(String tempID) {
+        TempID = tempID;
     }
 
     public static synchronized Globals getInstance(){

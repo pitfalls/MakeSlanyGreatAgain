@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,11 +23,11 @@ import android.widget.TextView;
 
 import android.widget.Toast;
 
+//TODO: Change login to logout if logged in
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String userID = "";
     private NavigationView sideBarNavigationView;
 
     public void initGroupCreation()
@@ -35,6 +36,14 @@ public class HobIT_Main extends AppCompatActivity
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Globals.getInstance().getUserID().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                    builder.setMessage("Please login first")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
                 startActivity(intent);
             }
@@ -47,6 +56,14 @@ public class HobIT_Main extends AppCompatActivity
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Globals.getInstance().getUserID().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                    builder.setMessage("Please login first")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
                 startActivity(intent);
             }
@@ -60,6 +77,14 @@ public class HobIT_Main extends AppCompatActivity
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Globals.getInstance().getUserID().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                    builder.setMessage("Please login first")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
                 startActivity(intent);
             }
@@ -150,14 +175,6 @@ public class HobIT_Main extends AppCompatActivity
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            userID = data.getStringExtra("userId");
-
-            TextView hello = (TextView)findViewById(R.id.hello);
-
-            hello.setText(userID);
-        }
     }
 
     public void printDebugToast (CharSequence text )
