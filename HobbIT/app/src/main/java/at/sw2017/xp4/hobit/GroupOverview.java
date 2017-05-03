@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -22,12 +23,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import at.sw2017.xp4.hobit.requests.GetHobbiesDestinationRequest;
 import at.sw2017.xp4.hobit.requests.GroupCreationRequest;
 
 public class GroupOverview extends AppCompatActivity {
 
     private String GroupHobby = "";
+
+
+    private void fillSpinnerArray()
+    {
+        for (int i_ = 0; i_ < iter; i_++)
+        {
+            spinnerArray[i_] = (filteredHobbies[i_]);
+        }
+      adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+    }
 
     public void printDebugToast (CharSequence text )
     {
@@ -37,6 +51,11 @@ public class GroupOverview extends AppCompatActivity {
         save_toast.show();
     }
 
+    String[] arr, filteredHobbies;
+    int iter = 0;
+    String[] spinnerArray;
+    ArrayAdapter<String> adapter;
+
 
 
     @Override
@@ -45,6 +64,7 @@ public class GroupOverview extends AppCompatActivity {
         setContentView(R.layout.activity_group_overview);
         //String string = getString(R.id.textview_description);
         //name_of_group.getStr
+
         setTitle("<GroupName>");
         setOnClickListeners();
         CreateHobbySpinner();
@@ -64,6 +84,7 @@ public class GroupOverview extends AppCompatActivity {
         }
         return arr;
     }
+
 
 
     public void CreateHobbySpinner() {
@@ -142,21 +163,16 @@ public class GroupOverview extends AppCompatActivity {
 
                   //  printDebugToast("hallo");
 
-                    if(success)
-                    {
-
-                    }
-
                    //**********************************************************************************
                     final EditText hobby_input = (EditText) findViewById(R.id.txtview_hobby_input);
 
                     //editTextSurename
-                    hobby_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                /*    hobby_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                         @Override
                         public void onFocusChange(View v, boolean bl) {
                             hobby_input.setText("sfdasfasdfff");
                         }
-                    });
+                    });*/
 
                     //final EditText hobby_input = (EditText) findViewById(R.id.txtview_description_input);
 
@@ -174,10 +190,9 @@ public class GroupOverview extends AppCompatActivity {
                         printDebugToast(allHobbies.getJSONObject(i).toString());
                     }
 */
-                   String[] arr = toStringArray(allHobbies);
-                    String[] filteredHobbies = new String[100];
+                    arr = toStringArray(allHobbies);
+                    filteredHobbies = new String[arr.length];
                     filteredHobbies[0] = arr[0];
-                    int iter = 0;
 
                     for (int i = 0; i < allHobbies.length(); i++) {
 
@@ -190,6 +205,23 @@ public class GroupOverview extends AppCompatActivity {
                      }
                     }
 
+                    printDebugToast("Hier seien nun ich!!");
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////
+                    // spinner füllen
+
+                    spinnerArray = new String[arr.length];
+                    fillSpinnerArray();
+                    Spinner s = (Spinner) findViewById(R.id.spinnerHobbies);
+
+                    TextView textView = (TextView) findViewById(R.id.txtview_description_input);
+                    textView.setText(Arrays.toString(spinnerArray));
+
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    s.setAdapter(adapter);
+
+                    printDebugToast("Juuunge fertisch!");
+
                     //----------------------------------------------------------------------------------
                     //----------------------------------------------------------------------------------
 
@@ -197,6 +229,10 @@ public class GroupOverview extends AppCompatActivity {
                     printDebugToast("ALLES SCHEIẞE");
                     e.printStackTrace();
                 }
+
+                //-------------------------------------------------------------
+
+
             }
         };
 
@@ -229,5 +265,7 @@ public class GroupOverview extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }
