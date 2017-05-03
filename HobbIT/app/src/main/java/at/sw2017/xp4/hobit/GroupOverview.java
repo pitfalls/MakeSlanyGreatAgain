@@ -175,9 +175,19 @@ public class GroupOverview extends AppCompatActivity {
                     }
 */
                    String[] arr = toStringArray(allHobbies);
+                    String[] filteredHobbies = new String[100];
+                    filteredHobbies[0] = arr[0];
+                    int iter = 0;
 
                     for (int i = 0; i < allHobbies.length(); i++) {
-                        printDebugToast(arr[i]);
+
+                        //printDebugToast(arr[i]);
+                     if(!filteredHobbies[iter].contains(arr[i]))
+                     {
+                         iter++;
+                         filteredHobbies[iter] = arr[i];
+                         printDebugToast(arr[i]);
+                     }
                     }
 
                     //----------------------------------------------------------------------------------
