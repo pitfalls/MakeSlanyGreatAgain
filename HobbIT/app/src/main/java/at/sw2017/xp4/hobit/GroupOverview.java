@@ -31,9 +31,6 @@ import at.sw2017.xp4.hobit.requests.GroupCreationRequest;
 
 public class GroupOverview extends AppCompatActivity {
 
-    private String GroupHobby = "";
-
-
     private void fillSpinnerArray()
     {
         for (int i_ = 0; i_ < iter; i_++)
@@ -56,14 +53,10 @@ public class GroupOverview extends AppCompatActivity {
     String[] spinnerArray;
     ArrayAdapter<String> adapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_overview);
-        //String string = getString(R.id.textview_description);
-        //name_of_group.getStr
 
         setTitle("<GroupName>");
         setOnClickListeners();
@@ -71,7 +64,6 @@ public class GroupOverview extends AppCompatActivity {
         CreateHobbyLocation();
 
     }
-
 
 // Source : http://stackoverflow.com/questions/15871309/convert-jsonarray-to-string-array
     public static String[] toStringArray(JSONArray array) {
@@ -84,8 +76,6 @@ public class GroupOverview extends AppCompatActivity {
         }
         return arr;
     }
-
-
 
     public void CreateHobbySpinner() {
         Spinner spinner = (Spinner) findViewById(R.id.spinnerHobbies);
@@ -134,7 +124,7 @@ public class GroupOverview extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
-
+/*
         final EditText hobby_input = (EditText) findViewById(R.id.txtview_hobby_input);
 
         //editTextSurename
@@ -145,7 +135,7 @@ public class GroupOverview extends AppCompatActivity {
             }
         });
     //    printDebugToast("hallosssAS");
-
+*/
         //##########################################################################################
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -161,35 +151,6 @@ public class GroupOverview extends AppCompatActivity {
                     //---------------------------------------------------------------------------------- CODE
                     //----------------------------------------------------------------------------------
 
-                  //  printDebugToast("hallo");
-
-                   //**********************************************************************************
-                    final EditText hobby_input = (EditText) findViewById(R.id.txtview_hobby_input);
-
-                    //editTextSurename
-                /*    hobby_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View v, boolean bl) {
-                            hobby_input.setText("sfdasfasdfff");
-                        }
-                    });*/
-
-                    //final EditText hobby_input = (EditText) findViewById(R.id.txtview_description_input);
-
-                    //editTextSurename
-                    // hobby_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    //      @Override
-                    //    public void onFocusChange(View v, boolean bl) {
-                    //           hobby_input.setText(text.toString().);
-                    //      }
-                    // });
-
-                    //**********************************************************************************
-
-                /*    for (int i = 0; i < allHobbies.length(); i++) {
-                        printDebugToast(allHobbies.getJSONObject(i).toString());
-                    }
-*/
                     arr = toStringArray(allHobbies);
                     filteredHobbies = new String[arr.length];
                     filteredHobbies[0] = arr[0];
@@ -208,7 +169,7 @@ public class GroupOverview extends AppCompatActivity {
                     printDebugToast("Hier seien nun ich!!");
 
                     ////////////////////////////////////////////////////////////////////////////////////////////
-                    // spinner füllen
+                    // Spinner füllen
 
                     spinnerArray = new String[arr.length];
                     fillSpinnerArray();
