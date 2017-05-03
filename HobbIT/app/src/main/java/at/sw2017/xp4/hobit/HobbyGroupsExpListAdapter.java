@@ -32,13 +32,13 @@ import static java.security.AccessController.getContext;
 public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
 
     private Activity context;
-    private Map<String, List<String>> groups;
+    private Map<String, List<GroupData>> groups;
     private List<String> categories;
 
     View.OnClickListener clickListenerer;
 
     public HobbyGroupsExpListAdapter(Activity context, List<String> hobbyCategories,
-                                        Map<String, List<String>> hobbyGroups, View.OnClickListener clickListen) {
+                                        Map<String, List<GroupData>> hobbyGroups, View.OnClickListener clickListen) {
         this.context = context;
         this.groups = hobbyGroups;
         this.categories = hobbyCategories;
@@ -57,7 +57,7 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
 
     public View getChildView(final int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final String group = (String) getChild(groupPosition, childPosition);
+        final GroupData group = (GroupData) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
@@ -66,7 +66,7 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
 
         TextView item = (TextView) convertView.findViewById(R.id.hg_child_item);
 
-        item.setText(group);
+        item.setText(group.getName());
         item.setOnClickListener( clickListenerer );
         return convertView;
     }

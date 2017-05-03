@@ -18,7 +18,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
 public class ListHobbyGroups extends AppCompatActivity {
 
     private ArrayList<String> categoryList;
-    private HashMap<String, List<String>> categoryMapGroups;
+    private HashMap<String, List<GroupData>> categoryMapGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ListHobbyGroups extends AppCompatActivity {
         setContentView(R.layout.activity_list_hobby_groups);
 
         categoryList = new ArrayList<String>();
-        categoryMapGroups = new HashMap<String, List<String>>();
+        categoryMapGroups = new HashMap<String, List<GroupData>>();
 
         setDefaultData();
 
@@ -36,13 +36,20 @@ public class ListHobbyGroups extends AppCompatActivity {
     void setDefaultData()
     {
         String firstCat = "Category_test";
-        addGroup(firstCat, "Group_X");
-        addGroup(firstCat, "Group_Y");
-        addGroup(firstCat, "Group_Z");
+        GroupData group;
+
+        group = new GroupData("Group_X", 1);
+        addGroup(firstCat, group);
+        group = new GroupData("Group_Y", 2);
+        addGroup(firstCat, group);
+        group = new GroupData("Group_Z", 3);
+        addGroup(firstCat, group);
 
         String catBoobs = "Boobs";
-        addGroup(catBoobs, "Pamela Anderson");
-        addGroup(catBoobs, "Megan Fox");
+        group = new GroupData("Pamela Anderson", 4);
+        addGroup(catBoobs, group);
+        group = new GroupData("Megan Fox", 5);
+        addGroup(catBoobs, group);
     }
 
     void setCurrentExpandableListAdapter()
@@ -100,7 +107,7 @@ public class ListHobbyGroups extends AppCompatActivity {
     {
         if ( !categoryExists(category)) {
             categoryList.add(category);
-            List<String> categoryGroupList = new ArrayList<String>();
+            List<GroupData> categoryGroupList = new ArrayList<GroupData>();
             categoryMapGroups.put(category, categoryGroupList);
         }
     }
@@ -109,9 +116,9 @@ public class ListHobbyGroups extends AppCompatActivity {
      * @param category
      * @return
      */
-    List<String> getGroupList(String category)
+    List<GroupData> getGroupList(String category)
     {
-        List<String> groupList = null;
+        List<GroupData> groupList = null;
         groupList = categoryMapGroups.get(category);
         return groupList;
     }
@@ -129,13 +136,13 @@ public class ListHobbyGroups extends AppCompatActivity {
     /** adds a new group to the category group datastrucutre
      * @param category
      */
-    void addGroup(String category, String group)
+    void addGroup(String category, GroupData group)
     {
         if ( !categoryExists(category) ) {
             addCategory(category);
         }
 
-        List<String> groupList = categoryMapGroups.get(category);
+        List<GroupData> groupList = categoryMapGroups.get(category);
         groupList.add(group);
     }
 }
