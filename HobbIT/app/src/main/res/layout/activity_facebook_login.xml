@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="at.sw2017.xp4.hobit.FacebookLogin">
+    tools:context="at.sw2017.xp4.hobit.FacebookLogin"
+    android:weightSum="1">
 
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="364dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.02"
+        android:hint="e-mail"
+        android:inputType="textEmailAddress"
+        android:maxLength="254"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="363dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:textSize="18sp"
+        android:layout_weight="0.02" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="365dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Login"/>
+
+    <Button
+        android:id="@+id/Register"
+        android:layout_width="363dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Register"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        android:layout_width="117dp"
+        android:layout_width="362dp"
         android:layout_height="54dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.059"
-        app:layout_constraintVertical_bias="0.005" />
+        android:layout_marginTop="8dp" />
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="68dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/login_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/login_button"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteX="195dp" />
-
-    <Button
-        android:id="@+id/BackFacebookLogin"
-        android:layout_width="158dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
