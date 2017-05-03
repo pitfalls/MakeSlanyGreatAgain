@@ -64,7 +64,7 @@
         android:layout_alignStart="@+id/nick_name_checkBox" />
 
     <CheckBox
-        android:id="@+id/deactivate_notifications_checkBox"
+        android:id="@+id/notifications_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="deactivate notifications from the App"
@@ -80,7 +80,7 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_below="@+id/deactivate_notifications_checkBox"
+        android:layout_below="@+id/notifications_checkBox"
         android:layout_alignStart="@+id/notifications_textView"
         android:layout_marginTop="27dp" />
 
@@ -93,12 +93,21 @@
         android:layout_alignStart="@+id/go_inactive_textView" />
 
     <CheckBox
-        android:id="@+id/activate_inactivity_checkBox"
+        android:id="@+id/inactivity_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/deactivate_notifications_checkBox"
+        android:layout_alignStart="@+id/notifications_checkBox"
         android:layout_below="@+id/info_inactivity_textView"
         android:layout_marginTop="17dp"
         android:text="activate inactivity" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/inactivity_checkBox"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
