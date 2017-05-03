@@ -68,24 +68,11 @@
         android:inputType="textPersonName"
         android:singleLine="true"
         android:text="Location"
-        app:layout_constraintBottom_toTopOf="@+id/editTextProfileDescription"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEditInterests"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextProfileDescription"
-        android:layout_width="350dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Short description of person"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEditInterests"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewProfilePicture"
