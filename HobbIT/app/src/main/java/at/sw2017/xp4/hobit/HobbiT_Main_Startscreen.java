@@ -28,17 +28,15 @@ public class HobbiT_Main_Startscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hobbit_startscreen);
 
-        /*final Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Do something after 5s = 5000ms
+                Intent login2 = new Intent(HobbiT_Main_Startscreen.this, FacebookLogin.class);
+                startActivityForResult(login2, 1);
+                finish();
             }
-        }, 5000000);
-           */
-        Intent login = new Intent(this, FacebookLogin.class);
-        startActivityForResult(login, 1);
-
-        finish();
+        }, 5000);
+        //finish();
     }
 }
