@@ -12,11 +12,11 @@ import java.util.Map;
  */
 
 public class GroupCreationRequest extends StringRequest{
-    private static final String REGISTER_REQUEST_URL = "https://waterproofed-school.000webhostapp.com/GroupCreation.php";
+    private static final String GROUPCREATION_REQUEST_URL = "https://waterproofed-school.000webhostapp.com/GroupCreation.php";
     private Map<String, String> params;
 
     public GroupCreationRequest(String name, String description, String hobby, String location, Response.Listener<String> listener, Response.ErrorListener errorListener){
-        super(Request.Method.POST, REGISTER_REQUEST_URL, listener, errorListener);
+        super(Request.Method.POST, GROUPCREATION_REQUEST_URL, listener, errorListener);
         params = new HashMap<>();
         params.put("name", name);
         params.put("description", description);
