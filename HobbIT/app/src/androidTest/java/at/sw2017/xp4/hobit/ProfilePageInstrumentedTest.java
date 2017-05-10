@@ -49,6 +49,13 @@ public class ProfilePageInstrumentedTest {
     public ActivityTestRule<EditProfileActivity> mActivityRule =
             new ActivityTestRule<>(EditProfileActivity.class);
 
+    @Test
+    public void useAppContext() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        assertEquals("at.sw2017.xp4.hobit", appContext.getPackageName());
+    }
 
     @Test
     public void changeProperties() throws Exception {
@@ -89,5 +96,18 @@ public class ProfilePageInstrumentedTest {
         onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Graz"));
 
         onView(withId(R.id.ButtonSave)).perform(click());
+    }
+
+
+    @Test
+    public void failedDatabaseTest() throws Exception {
+        Globals.getInstance().setUserID("test00FAIL");
+        mActivityRule.getActivity().update();
+        Thread.sleep(1000);
+
+        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("")));
+        onView(withId(R.id.editTextProfileForename)).check(matches(withText("")));
+        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("")));
+        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("")));
     }
 }
