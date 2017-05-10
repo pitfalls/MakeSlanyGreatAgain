@@ -124,7 +124,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        final Button backButton = (Button) findViewById(R.id.BackEditProfile);
+        final Button backButton = (Button) findViewById(R.id.ButtonSave);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

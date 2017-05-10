@@ -44,7 +44,8 @@
         <activity android:name=".GroupOverview" />
         <activity
             android:name=".EditProfileActivity"
-            android:label="@string/activity_edit_profile_name" />
+            android:label="@string/activity_edit_profile_name"
+            android:parentActivityName=".HobIT_Main" />
         <activity android:name=".EditProfileHobbiesActivity" />
 
         <activity
