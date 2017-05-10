@@ -40,6 +40,10 @@ public class EditProfileActivity extends AppCompatActivity {
         fillData();
     }
 
+    public void update() {
+        fillData();
+    }
+
     private void setOnClickListeners() {
        editTextSurename = (EditText) findViewById(R.id.editTextProfileSurename);
 
@@ -128,9 +132,11 @@ public class EditProfileActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 // This Perform action on click
                 Intent intent = new Intent(view.getContext(), HobIT_Main.class);
                 startActivity(intent);
+                */
             }
         });
     }

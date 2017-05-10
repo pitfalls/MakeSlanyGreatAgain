@@ -82,17 +82,22 @@ public class ProfilePageInstrumentedTest {
 
         onView(withId(R.id.ButtonSave)).perform(click());
 
-        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("Il Dottore")));
-        onView(withId(R.id.editTextProfileForename)).check(matches(withText("Valentino")));
-        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("Rossi")));
-        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("Italy")));
+        Globals.getInstance().setUserID("fb1296393277116865");
+
+        mActivityRule.getActivity().update();
 
         Thread.sleep(3000);
-    }
 
-    @Test
-    public void readPropertiesAfterChange() throws Exception {
-        mActivityRule.launchActivity(intent);
+        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("bert")));
+        onView(withId(R.id.editTextProfileForename)).check(matches(withText("gerd")));
+        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("berger")));
+        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("graz")));
+
+        Globals.getInstance().setUserID("test0000");
+
+        mActivityRule.getActivity().update();
+
+        Thread.sleep(3000);
 
         onView(withId(R.id.editTextProfileNickname)).check(matches(withText("Il Dottore")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("Valentino")));
