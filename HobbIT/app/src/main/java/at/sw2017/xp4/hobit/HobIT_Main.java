@@ -94,6 +94,14 @@ public class HobIT_Main extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(Globals.getInstance().getStartStatus() == 0){
+            Intent startscreen = new Intent(this, HobbiT_Main_Startscreen.class);
+            startActivity(startscreen);
+            Globals.getInstance().setStartStatus(1);
+            finish();
+        }
+
         setContentView(R.layout.activity_hob_it__main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

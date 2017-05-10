@@ -38,6 +38,11 @@
         <activity
             android:name=".GroupCreation"
             android:label="@string/groubCreation" />
+
+        <activity
+            android:name=".HobbiT_Main_Startscreen"
+            android:label="Startscreen" />
+
         <activity
             android:name=".ListHobbyGroups"
             android:label="@string/list_hobby_groups" />
