@@ -17,11 +17,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 //TODO: Change login to logout if logged in
 
@@ -70,6 +78,30 @@ public class HobIT_Main extends AppCompatActivity
         });
     }
 
+    public void initListViewGroups()
+    {
+       ListView listView = (ListView) findViewById(R.id.ListViewGroups);
+
+        ArrayList<String>dataList = new ArrayList<String>();
+
+        dataList.add("Ich");
+        dataList.add("bin");
+        dataList.add("echt");
+        dataList.add("super");
+
+        /*ArrayAdapter<String> listAdapter =
+                new ArrayAdapter<>(
+                        this, // Die aktuelle Umgebung (diese Activity)
+                        R.layout.content_hob_it__main, // ID der XML-Layout Datei
+                        R.id.ListViewGroups, // ID des TextViews
+                        dataList); // Beispieldaten in einer ArrayList
+*/
+        //listView.setAdapter(listAdapter);
+
+    }
+
+
+
 
     public void initGroupOverview()
     {
@@ -110,6 +142,7 @@ public class HobIT_Main extends AppCompatActivity
         initGroupCreation();
         initListGroups();
         initGroupOverview();
+        initListViewGroups();
         /**--------------------END INIT BUTTON--------------------**/
 
 
