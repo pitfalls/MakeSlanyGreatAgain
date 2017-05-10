@@ -479,15 +479,6 @@ public class GroupOverview extends AppCompatActivity {
         //##########################################################################################
 
 
-        final Button backButton = (Button) findViewById(R.id.btn_back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // This Perform action on click
-                Intent intent = new Intent(view.getContext(), HobIT_Main.class);
-                startActivity(intent);
-            }
-        });
 
 
     }
