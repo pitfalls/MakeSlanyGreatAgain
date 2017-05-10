@@ -105,5 +105,13 @@ public class ProfilePageInstrumentedTest {
         onView(withId(R.id.editTextProfileLocation)).check(matches(withText("Italy")));
 
         Thread.sleep(3000);
+
+        onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Johnny"));
+        onView(withId(R.id.editTextProfileForename)).perform(replaceText("John"));
+        onView(withId(R.id.editTextProfileSurename)).perform(replaceText("Doe"));
+        onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Graz"));
+
+        onView(withId(R.id.ButtonSave)).perform(click());
+
     }
 }
