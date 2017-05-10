@@ -45,35 +45,16 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ProfilePageInstrumentedTest {
 
-    Intent intent;
-
     @Rule
-    public ActivityTestRule<EditProfileActivity> mActivityRule = new ActivityTestRule<>(
-            EditProfileActivity.class,
-            true,
-            false); // Activity is not launched immediately
+    public ActivityTestRule<EditProfileActivity> mActivityRule =
+            new ActivityTestRule<>(EditProfileActivity.class);
 
-
-    @Before
-    public void setUp() {
-        Globals.getInstance().setUserID("test0000");
-    }
-
-    @Test
-    public void readProperties() throws Exception {
-        mActivityRule.launchActivity(intent);
-
-        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("Johnny")));
-        onView(withId(R.id.editTextProfileForename)).check(matches(withText("John")));
-        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("Doe")));
-        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("Graz")));
-
-        Thread.sleep(3000);
-    }
 
     @Test
     public void changeProperties() throws Exception {
-        mActivityRule.launchActivity(intent);
+        Globals.getInstance().setUserID("test0000");
+        mActivityRule.getActivity().update();
+        Thread.sleep(1000);
 
         onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Il Dottore"));
         onView(withId(R.id.editTextProfileForename)).perform(replaceText("Valentino"));
@@ -83,10 +64,8 @@ public class ProfilePageInstrumentedTest {
         onView(withId(R.id.ButtonSave)).perform(click());
 
         Globals.getInstance().setUserID("fb1296393277116865");
-
         mActivityRule.getActivity().update();
-
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         onView(withId(R.id.editTextProfileNickname)).check(matches(withText("bert")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("gerd")));
@@ -94,17 +73,15 @@ public class ProfilePageInstrumentedTest {
         onView(withId(R.id.editTextProfileLocation)).check(matches(withText("graz")));
 
         Globals.getInstance().setUserID("test0000");
-
         mActivityRule.getActivity().update();
-
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         onView(withId(R.id.editTextProfileNickname)).check(matches(withText("Il Dottore")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("Valentino")));
         onView(withId(R.id.editTextProfileSurename)).check(matches(withText("Rossi")));
         onView(withId(R.id.editTextProfileLocation)).check(matches(withText("Italy")));
 
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Johnny"));
         onView(withId(R.id.editTextProfileForename)).perform(replaceText("John"));
@@ -112,6 +89,5 @@ public class ProfilePageInstrumentedTest {
         onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Graz"));
 
         onView(withId(R.id.ButtonSave)).perform(click());
-
     }
 }
