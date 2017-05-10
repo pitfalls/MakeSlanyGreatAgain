@@ -3,6 +3,7 @@ package at.sw2017.xp4.hobit;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ExpandableListAdapter;
 
 import java.security.AccessControlContext;
@@ -74,13 +75,19 @@ public class HobbyGroupsExpListAdapter extends BaseExpandableListAdapter {
         View.OnClickListener clickListen = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int duration = Toast.LENGTH_SHORT;
+                /*int duration = Toast.LENGTH_SHORT;
                 String text = "test on click output Name:" + group.getName() + " ID:" + group.getId();
                 Toast save_toast = Toast.makeText(appContext, text, duration);
-                save_toast.show();
+                save_toast.show();*/
 
                 Intent intent = new Intent(packageContext, GroupOverview.class);
+                // pass group data details to next activity
+                de.greenrobot.event.EventBus.getDefault().postSticky(group);
+
+                //context.startActivityForResult(intent,0);
+
                 packageContext.startActivity(intent);
+
             }
         };
         item.setOnClickListener( clickListen );
