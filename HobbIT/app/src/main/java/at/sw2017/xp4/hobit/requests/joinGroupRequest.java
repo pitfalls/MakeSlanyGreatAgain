@@ -16,7 +16,7 @@ public class joinGroupRequest extends StringRequest{
     private static final String JOIN_REQUEST_URL = "https://waterproofed-school.000webhostapp.com/JoinGroup.php";
     private Map<String, String> params;
 
-    public  JoinGroupRequest(String userId, String groupId,Response.Listener<String> listener, Response.ErrorListener errorListener){
+    public joinGroupRequest(String userId, String groupId,Response.Listener<String> listener, Response.ErrorListener errorListener){
         super(Request.Method.POST, JOIN_REQUEST_URL, listener, errorListener);
         params = new HashMap<>();
         params.put("userID", userId);

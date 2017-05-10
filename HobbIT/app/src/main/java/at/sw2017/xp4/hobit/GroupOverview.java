@@ -301,6 +301,34 @@ public class GroupOverview extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
+                try {
+
+
+                    JSONObject jsonResponse = new JSONObject(response);
+
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+                        builder.setMessage("You have successfully joined the group- No one cares")
+                                .setNegativeButton("Ok", null)
+                                .create()
+                                .show();
+                    }
+                    else
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+                        builder.setMessage("You are already member of this group :-)")
+                                .setNegativeButton("Ok", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         };
 
@@ -445,7 +473,7 @@ public class GroupOverview extends AppCompatActivity {
         GetHobbiesDestinationRequest getHobbiesDestinationRequest = new GetHobbiesDestinationRequest(responseListener, errorListener);
         RequestQueue queue = Volley.newRequestQueue(GroupOverview.this);
         queue.add(getHobbiesDestinationRequest);
-
+ //TODO EINFÜGEN WICHTIGE 2 ZEILE
 
 
         //##########################################################################################
