@@ -38,7 +38,7 @@ public class GroupOverview extends AppCompatActivity {
 
         GroupData group = (GroupData) EventBus.getDefault().removeStickyEvent(GroupData.class);
 
-        printDebugToast("Group Data received: " + group.getName() + "ID: " + group.getId());
+        printDebugToast("Group Data received: " + group.getName() + " ID: " + group.getId());
 
         ///@todo place data of group object in the corresponding textfields
     }
