@@ -11,6 +11,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -35,20 +36,16 @@ public class LoginInstrumentedTest {
         assertEquals("test0000", Globals.getInstance().getUserID());
     }
 
-    /*
+
     @Test
     public void fbLoginTest() throws Exception {
-        if (!Globals.getInstance().getUserID().equals("")) {
-            onView(withId(R.id.login_button)).perform(click());
-            Globals.getInstance().setUserID("");
-        }
         onView(withId(R.id.login_button)).perform(click());
 
         Thread.sleep(2000);
 
         assertEquals("fb1296393277116865", Globals.getInstance().getUserID());
     }
-    */
+
 
     @Test
     public void registerTest() throws Exception {
