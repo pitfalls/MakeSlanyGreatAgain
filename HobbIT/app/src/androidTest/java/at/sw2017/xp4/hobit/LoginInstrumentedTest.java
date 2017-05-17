@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
+import com.facebook.login.LoginManager;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -31,17 +33,23 @@ public class LoginInstrumentedTest {
 
         onView(withId(R.id.login)).perform(click());
 
-        Thread.sleep(2000);
+        Thread.sleep(10000);
 
         assertEquals("test0000", Globals.getInstance().getUserID());
+
+        Globals.getInstance().setUserID("");
     }
 
 
     @Test
     public void fbLoginTest() throws Exception {
+        if (!Globals.getInstance().getUserID().equals("")) {
+            LoginManager.getInstance().logOut();
+            Globals.getInstance().setUserID("");
+        }
         onView(withId(R.id.login_button)).perform(click());
 
-        Thread.sleep(2000);
+        Thread.sleep(10000);
 
         assertEquals("fb1296393277116865", Globals.getInstance().getUserID());
     }
