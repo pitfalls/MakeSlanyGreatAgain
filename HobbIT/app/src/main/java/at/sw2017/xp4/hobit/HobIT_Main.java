@@ -1,10 +1,13 @@
 package at.sw2017.xp4.hobit;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,37 +18,91 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
+
+//TODO: Change login to logout if logged in
 
 public class HobIT_Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String userID = "";
     private NavigationView sideBarNavigationView;
 
-    public void initGroupCreation()
-    {
+    public ArrayList<String> User_Hobbys = new ArrayList<String>();
+
+    public void toArrayList(JSONArray array) {
+        if (array == null)
+            return;
+
+        for (int i = 0; i < array.length(); i++) {
+            User_Hobbys.add(array.optString(i));
+        }
+    }
+
+    public void printDebugToast2(CharSequence text) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
+    }
+
+    public void initGroupCreation() {
         Button ButtonClick = (Button) findViewById(R.id.button_creation);
+
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Globals.getInstance().getUserID().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                    builder.setMessage("Please login first")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
                 startActivity(intent);
             }
         });
     }
 
-    public void initListGroups()
-    {
+    public void initListGroups() {
         Button ButtonClick = (Button) findViewById(R.id.button_list);
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Globals.getInstance().getUserID().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                    builder.setMessage("Please login first")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 startListHobbyGroups();
             }
         });
@@ -56,14 +113,84 @@ public class HobIT_Main extends AppCompatActivity
         Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
         startActivity(intent);
     }
-
-
-    public void initGroupOverview()
+    public void initListViewGroups()
     {
+        final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try
+                {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    final JSONArray allHobbies = jsonResponse.getJSONArray("hobby");
+                    toArrayList(allHobbies);
+                }
+                catch (JSONException e)
+                {
+                    printDebugToast("Probleme");
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        final Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                builder.setMessage("you are not good enough to join!! ;-)")
+                        .setNegativeButton("Retry", null)
+                        .create()
+                        .show();
+            }
+        };
+
+
+        GetHobbysRequest getHobbysRequest = new GetHobbysRequest(GroupResponseListener, errorListener);
+        final RequestQueue queue = Volley.newRequestQueue(HobIT_Main.this);
+        queue.add(getHobbysRequest);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, User_Hobbys);
+
+        final ListView ListViews = (ListView) findViewById(R.id.ListViewGroups);
+        ListViews.setAdapter(adapter);
+
+        ListViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // ListView Clicked item index
+                int itemPosition = position;
+
+                // ListView Clicked item value
+                String itemValue = (String) ListViews.getItemAtPosition(position);
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Position :" + itemPosition + "  List Item : " + itemValue, Toast.LENGTH_LONG)
+                        .show();
+
+                Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
+                startActivity(newIntent);
+
+            }
+        });
+
+    }
+
+    public void initGroupOverview() {
         Button ButtonClick = (Button) findViewById(R.id.button_overview);
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Globals.getInstance().getUserID().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                    builder.setMessage("Please login first")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
                 startActivity(intent);
             }
@@ -71,39 +198,53 @@ public class HobIT_Main extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hob_it__main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        /**--------------------------INIT BUTTON------------------**/
-        initGroupCreation();
-        initListGroups();
-        initGroupOverview();
-        /**--------------------END INIT BUTTON--------------------**/
+        if (Globals.getInstance().getStartStatus() == 0) {
+            Intent startscreen = new Intent(this, HobbiT_Main_Startscreen.class);
+            startActivity(startscreen);
+            Globals.getInstance().setStartStatus(1);
+            finish();
+        }
+        else
+        {
+            setContentView(R.layout.activity_hob_it__main);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            /**--------------------------INIT BUTTON------------------**/
+            initGroupCreation();
+            initListGroups();
+            initGroupOverview();
+            initListViewGroups();
+            /**--------------------END INIT BUTTON--------------------**/
 
 
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+            sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
+            sideBarNavigationView.setNavigationItemSelectedListener(this);
 
-        sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
-        sideBarNavigationView.setNavigationItemSelectedListener(this);
+            setTitle("HobbiT Homepage");
 
-        setTitle("HobbiT Homepage");
+            SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
+            String currentUser = settings.getString("CurrentUser", "");
+        }
     }
 
     @Override
@@ -135,9 +276,9 @@ public class HobIT_Main extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_facebook_login) {
-            Intent fbLogin = new Intent(this, FacebookLogin.class);
-            startActivityForResult(fbLogin, 1);
+        } else if (id == R.id.action_login) {
+            Intent login = new Intent(this, FacebookLogin.class);
+            startActivityForResult(login, 1);
             return true;
         }
         else  if (id == R.id.action_edit_profile) {
@@ -151,14 +292,6 @@ public class HobIT_Main extends AppCompatActivity
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            userID = data.getStringExtra("userId");
-
-            TextView hello = (TextView)findViewById(R.id.hello);
-
-            hello.setText(userID);
-        }
     }
 
     public void printDebugToast (CharSequence text )

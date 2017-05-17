@@ -71,7 +71,7 @@ public class GroupCreation extends AppCompatActivity {
 
     public void SaveGroupCreation()
     {
-        final EditText DescText = (EditText) findViewById(R.id.editText_Description);
+        final EditText DescText = (EditText) findViewById(R.id.editText_Description); //TODO /n in description is not allowed
         final EditText NameText = (EditText) findViewById(R.id.editText_Groupname);
 
         Button ButtonSave = (Button) findViewById(R.id.btn_save);

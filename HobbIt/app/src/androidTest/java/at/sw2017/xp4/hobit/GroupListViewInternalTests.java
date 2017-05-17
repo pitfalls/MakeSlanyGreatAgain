@@ -29,7 +29,7 @@ public class GroupListViewInternalTests {
     @Rule
     public ActivityTestRule<HobbyGroupListActivity> mActivityRule = new ActivityTestRule<>(HobbyGroupListActivity.class);
 
-    @Test
+/*    @Test
     public void joinButtonTest() throws Exception {
         Thread.sleep(1000);
 
@@ -47,7 +47,7 @@ public class GroupListViewInternalTests {
         onView(withText("Boobs")).perform(click());
         onView(withText("Pamela Anderson")).perform(click());
 
-        onView(withId(R.id. btn_back)).perform(click());
+        onView(withId(R.id.btn_back)).perform(click());
         Thread.sleep(1000);
     }
 
@@ -57,7 +57,7 @@ public class GroupListViewInternalTests {
 
         onView(withText("Boobs")).perform(click());
         onView(withText("Pamela Anderson")).perform(click());
-        onView(withId(R.id. btn_back)).perform(click());
+        onView(withId(R.id.btn_back)).perform(click());
 
         Thread.sleep(1000);
 
@@ -85,7 +85,7 @@ public class GroupListViewInternalTests {
 
         Thread.sleep(1000);
     }
-
+*/
 
     /*
     This test is for the case a Leave Button gets implemented
