@@ -52,7 +52,7 @@ public class HobIT_Main extends AppCompatActivity
 
     private NavigationView sideBarNavigationView;
 
-    public ArrayList<String> User_Hobbys = Globals.getInstance().getGlobal_array();
+    public ArrayList<String> User_Hobbys;
 
     public void toArrayList(JSONArray array) {
         if (array == null)
@@ -209,6 +209,7 @@ public class HobIT_Main extends AppCompatActivity
         }
         else
         {
+            User_Hobbys = Globals.getInstance().getGlobal_array();
             setContentView(R.layout.activity_hob_it__main);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
