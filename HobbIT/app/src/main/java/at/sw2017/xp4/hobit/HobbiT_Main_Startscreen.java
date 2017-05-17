@@ -37,6 +37,5 @@ public class HobbiT_Main_Startscreen extends AppCompatActivity {
                 finish();
             }
         }, 5000);
-
     }
 }

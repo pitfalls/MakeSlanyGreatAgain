@@ -52,29 +52,25 @@ public class HobIT_Main extends AppCompatActivity
 
     private NavigationView sideBarNavigationView;
 
-    public String[] User_Hobbys;
+    public ArrayList<String> User_Hobbys = new ArrayList<String>();
 
-    public static String[] toStringArray(JSONArray array) {
-        if(array==null)
-            return null;
+    public void toArrayList(JSONArray array) {
+        if (array == null)
+            return;
 
-        String[] arr = new String[array.length()];
-        for(int i=0; i<arr.length; i++) {
-            arr[i]=array.optString(i);
+        for (int i = 0; i < array.length(); i++) {
+            User_Hobbys.add(array.optString(i));
         }
-        return arr;
     }
 
-    public void printDebugToast2 (CharSequence text )
-    {
+    public void printDebugToast2(CharSequence text) {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast save_toast = Toast.makeText(context, text, duration);
         save_toast.show();
     }
 
-    public void initGroupCreation()
-    {
+    public void initGroupCreation() {
         Button ButtonClick = (Button) findViewById(R.id.button_creation);
 
         ButtonClick.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +90,7 @@ public class HobIT_Main extends AppCompatActivity
         });
     }
 
-    public void initListGroups()
-    {
+    public void initListGroups() {
         Button ButtonClick = (Button) findViewById(R.id.button_list);
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,26 +112,17 @@ public class HobIT_Main extends AppCompatActivity
     public void initListViewGroups()
     {
         final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
-
             @Override
-            public void onResponse(String response)
-            {
-                try {
+            public void onResponse(String response) {
+                try
+                {
                     JSONObject jsonResponse = new JSONObject(response);
-                    final JSONArray allHobbies  = jsonResponse.getJSONArray("hobby");
-
-                    User_Hobbys = new String[allHobbies.length()];
-                    User_Hobbys = toStringArray(allHobbies);
-
-                    //---------------------------------------------------------------------------------- CODE
-                    //----------------------------------------------------------------------------------
-                    for(String it:User_Hobbys)
-                    {
-                        printDebugToast2(it);
-                    }
-
-                } catch (JSONException e) {
-                    printDebugToast("ALLES SCHEIẞE");
+                    final JSONArray allHobbies = jsonResponse.getJSONArray("hobby");
+                    toArrayList(allHobbies);
+                }
+                catch (JSONException e)
+                {
+                    printDebugToast("Probleme");
                     e.printStackTrace();
                 }
             }
@@ -146,16 +132,18 @@ public class HobIT_Main extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
-                builder.setMessage("Connection failed..shit happens")
+                builder.setMessage("you are not good enough to join!! ;-)")
                         .setNegativeButton("Retry", null)
                         .create()
                         .show();
             }
         };
 
+
         GetHobbysRequest getHobbysRequest = new GetHobbysRequest(GroupResponseListener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(HobIT_Main.this);
         queue.add(getHobbysRequest);
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, User_Hobbys);
@@ -163,21 +151,19 @@ public class HobIT_Main extends AppCompatActivity
         final ListView ListViews = (ListView) findViewById(R.id.ListViewGroups);
         ListViews.setAdapter(adapter);
 
-        ListViews.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        ListViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id)
-            {
+                                    int position, long id) {
                 // ListView Clicked item index
                 int itemPosition = position;
 
                 // ListView Clicked item value
-                String  itemValue   = (String) ListViews.getItemAtPosition(position);
+                String itemValue = (String) ListViews.getItemAtPosition(position);
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  List Item : " +itemValue , Toast.LENGTH_LONG)
+                        "Position :" + itemPosition + "  List Item : " + itemValue, Toast.LENGTH_LONG)
                         .show();
 
                 Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
@@ -188,8 +174,7 @@ public class HobIT_Main extends AppCompatActivity
 
     }
 
-    public void initGroupOverview()
-    {
+    public void initGroupOverview() {
         Button ButtonClick = (Button) findViewById(R.id.button_overview);
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,51 +194,53 @@ public class HobIT_Main extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
-        if(Globals.getInstance().getStartStatus() == 0){
+        if (Globals.getInstance().getStartStatus() == 0) {
             Intent startscreen = new Intent(this, HobbiT_Main_Startscreen.class);
             startActivity(startscreen);
             Globals.getInstance().setStartStatus(1);
             finish();
         }
+        else
+        {
+            setContentView(R.layout.activity_hob_it__main);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        setContentView(R.layout.activity_hob_it__main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        /**--------------------------INIT BUTTON------------------**/
-        initGroupCreation();
-        initListGroups();
-        initGroupOverview();
-        initListViewGroups();
-        /**--------------------END INIT BUTTON--------------------**/
+            /**--------------------------INIT BUTTON------------------**/
+            initGroupCreation();
+            initListGroups();
+            initGroupOverview();
+            initListViewGroups();
+            /**--------------------END INIT BUTTON--------------------**/
 
 
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+            sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
+            sideBarNavigationView.setNavigationItemSelectedListener(this);
 
-        sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
-        sideBarNavigationView.setNavigationItemSelectedListener(this);
+            setTitle("HobbiT Homepage");
 
-        setTitle("HobbiT Homepage");
-
-        SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
-        String currentUser = settings.getString("CurrentUser", "");
+            SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
+            String currentUser = settings.getString("CurrentUser", "");
+        }
     }
 
     @Override
