@@ -19,7 +19,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     private SearchView search;
     private MyListAdapter listAdapter;
     private ExpandableListView myList;
-    private ArrayList<Continent> continentList = new ArrayList<Continent>();
+    private ArrayList<HobbyData> hobbyList = new ArrayList<HobbyData>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         //get reference to the ExpandableListView
         myList = (ExpandableListView) findViewById(R.id.expandableList);
         //create the adapter by passing your ArrayList data
-        listAdapter = new MyListAdapter(MainActivity.this, continentList);
+        listAdapter = new MyListAdapter(MainActivity.this, hobbyList);
         //attach the adapter to the list
         myList.setAdapter(listAdapter);
 
@@ -73,27 +73,27 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 
     private void loadSomeData() {
 
-        ArrayList<Country> countryList = new ArrayList<Country>();
-        Country country = new Country("BMU","Bermuda",10000000);
-        countryList.add(country);
-        country = new Country("CAN","Canada",20000000);
-        countryList.add(country);
-        country = new Country("USA","United States",50000000);
-        countryList.add(country);
+        ArrayList<GroupData> groupList = new ArrayList<GroupData>();
+        GroupData group = new GroupData("TEST",10000000);
+        groupList.add(group);
+        group = new GroupData("Canada",20000000);
+        groupList.add(group);
+        group = new GroupData("United States",50000000);
+        groupList.add(group);
 
-        Continent continent = new Continent("North America",countryList);
-        continentList.add(continent);
+        HobbyData hobby = new HobbyData("North America",groupList);
+        hobbyList.add(hobby);
 
-        countryList = new ArrayList<Country>();
-        country = new Country("CHN","China",10000100);
-        countryList.add(country);
-        country = new Country("JPN","Japan",20000200);
-        countryList.add(country);
-        country = new Country("THA","Thailand",50000500);
-        countryList.add(country);
+        groupList = new ArrayList<GroupData>();
+        group = new GroupData("China",10000100);
+        groupList.add(group);
+        group = new GroupData("Japan",20000200);
+        groupList.add(group);
+        group = new GroupData("Thailand",50000500);
+        groupList.add(group);
 
-        continent = new Continent("Asia",countryList);
-        continentList.add(continent);
+        hobby = new HobbyData("Asia",groupList);
+        hobbyList.add(hobby);
 
     }
 
