@@ -53,15 +53,5 @@ public class LoginInstrumentedTest {
     @Test
     public void registerTest() throws Exception {
         onView(withId(R.id.register)).perform(click());
-
-        onView(withId(R.id.nickName)).perform(replaceText("test"));
-        onView(withId(R.id.firstName)).perform(replaceText("test"));
-        onView(withId(R.id.lastName)).perform(replaceText("test"));
-        onView(withId(R.id.email)).perform(replaceText("test"));
-        onView(withId(R.id.location)).perform(replaceText("test"));
-        onView(withId(R.id.password)).perform(replaceText("test"));
-        onView(withId(R.id.passwordCheck)).perform(replaceText("test"));
-
-        onView(withId(R.id.register)).perform(click());
     }
 }
