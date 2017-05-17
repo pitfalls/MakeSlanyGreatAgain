@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,19 +18,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
 
 //TODO: Change login to logout if logged in
 
@@ -38,9 +52,31 @@ public class HobIT_Main extends AppCompatActivity
 
     private NavigationView sideBarNavigationView;
 
+    public String[] User_Hobbys;
+
+    public static String[] toStringArray(JSONArray array) {
+        if(array==null)
+            return null;
+
+        String[] arr = new String[array.length()];
+        for(int i=0; i<arr.length; i++) {
+            arr[i]=array.optString(i);
+        }
+        return arr;
+    }
+
+    public void printDebugToast2 (CharSequence text )
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
+    }
+
     public void initGroupCreation()
     {
         Button ButtonClick = (Button) findViewById(R.id.button_creation);
+
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,28 +116,77 @@ public class HobIT_Main extends AppCompatActivity
 
     public void initListViewGroups()
     {
-       ListView listView = (ListView) findViewById(R.id.ListViewGroups);
+        final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
 
-        ArrayList<String>dataList = new ArrayList<String>();
+            @Override
+            public void onResponse(String response)
+            {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    final JSONArray allHobbies  = jsonResponse.getJSONArray("hobby");
 
-        dataList.add("Ich");
-        dataList.add("bin");
-        dataList.add("echt");
-        dataList.add("super");
+                    User_Hobbys = new String[allHobbies.length()];
+                    User_Hobbys = toStringArray(allHobbies);
 
-        /*ArrayAdapter<String> listAdapter =
-                new ArrayAdapter<>(
-                        this, // Die aktuelle Umgebung (diese Activity)
-                        R.layout.content_hob_it__main, // ID der XML-Layout Datei
-                        R.id.ListViewGroups, // ID des TextViews
-                        dataList); // Beispieldaten in einer ArrayList
-*/
-        //listView.setAdapter(listAdapter);
+                    //---------------------------------------------------------------------------------- CODE
+                    //----------------------------------------------------------------------------------
+                    for(String it:User_Hobbys)
+                    {
+                        printDebugToast2(it);
+                    }
+
+                } catch (JSONException e) {
+                    printDebugToast("ALLES SCHEIẞE");
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        final Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
+                builder.setMessage("Connection failed..shit happens")
+                        .setNegativeButton("Retry", null)
+                        .create()
+                        .show();
+            }
+        };
+
+        GetHobbysRequest getHobbysRequest = new GetHobbysRequest(GroupResponseListener, errorListener);
+        final RequestQueue queue = Volley.newRequestQueue(HobIT_Main.this);
+        queue.add(getHobbysRequest);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, User_Hobbys);
+
+        final ListView ListViews = (ListView) findViewById(R.id.ListViewGroups);
+        ListViews.setAdapter(adapter);
+
+        ListViews.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id)
+            {
+                // ListView Clicked item index
+                int itemPosition = position;
+
+                // ListView Clicked item value
+                String  itemValue   = (String) ListViews.getItemAtPosition(position);
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Position :"+itemPosition+"  List Item : " +itemValue , Toast.LENGTH_LONG)
+                        .show();
+
+                Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
+                startActivity(newIntent);
+
+            }
+        });
 
     }
-
-
-
 
     public void initGroupOverview()
     {
