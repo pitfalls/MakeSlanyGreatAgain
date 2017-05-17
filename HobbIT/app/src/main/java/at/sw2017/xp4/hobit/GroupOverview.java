@@ -34,8 +34,9 @@ import at.sw2017.xp4.hobit.requests.joinGroupRequest;
 import static at.sw2017.xp4.hobit.Globals.getInstance;
 import static at.sw2017.xp4.hobit.Globals.getUserID;
 
-public class GroupOverview extends AppCompatActivity {
+// TODO: delete comments and change messages (more friendly ;p)
 
+public class GroupOverview extends AppCompatActivity {
 
     private void setAdapterContent(List<String> content)
     {
