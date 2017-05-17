@@ -157,32 +157,6 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
     }
 
-    private void loadSomeTestData() {
-
-        ArrayList<GroupData> groupList = new ArrayList<GroupData>();
-        GroupData group = new GroupData("TEST",10000000);
-        groupList.add(group);
-        group = new GroupData("Canada",20000000);
-        groupList.add(group);
-        group = new GroupData("United States",50000000);
-        groupList.add(group);
-
-        HobbyData hobby = new HobbyData("North America",groupList);
-        hobbyList.add(hobby);
-
-        groupList = new ArrayList<GroupData>();
-        group = new GroupData("China",10000100);
-        groupList.add(group);
-        group = new GroupData("Japan",20000200);
-        groupList.add(group);
-        group = new GroupData("Thailand",50000500);
-        groupList.add(group);
-
-        hobby = new HobbyData("Asia",groupList);
-        hobbyList.add(hobby);
-
-    }
-
     private void loadDataFromDatabase()
     {
         ArrayList<GroupData> groupList;
