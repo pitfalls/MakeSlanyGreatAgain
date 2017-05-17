@@ -74,7 +74,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
                 builder.setMessage("Connection failed")
-                        .setNegativeButton("Retry", null)
+                        .setNegativeButton("OK", null)
                         .create()
                         .show();
             }
