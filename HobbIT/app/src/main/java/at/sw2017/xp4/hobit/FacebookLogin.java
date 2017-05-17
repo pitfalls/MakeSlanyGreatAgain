@@ -19,6 +19,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -58,6 +59,11 @@ public class FacebookLogin extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
 
         loginButton = (LoginButton)findViewById(R.id.login_button);
+
+        if (Globals.getInstance().getUserID().equals("") &&
+                loginButton.getText().equals("Abmelden")) {
+            LoginManager.getInstance().logOut();
+        }
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

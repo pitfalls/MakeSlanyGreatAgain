@@ -2,15 +2,19 @@ package at.sw2017.xp4.hobit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +23,11 @@ import static android.app.PendingIntent.getActivity;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.DrawerActions.open;
+import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -40,8 +47,8 @@ import static org.junit.Assert.*;
 public class ProfilePageInstrumentedTest {
 
     @Rule
-    public ActivityTestRule< HobIT_Main > mActivityRule = new ActivityTestRule<>( HobIT_Main.class );
-
+    public ActivityTestRule<EditProfileActivity> mActivityRule =
+            new ActivityTestRule<>(EditProfileActivity.class);
 
     @Test
     public void useAppContext() throws Exception {
@@ -50,58 +57,76 @@ public class ProfilePageInstrumentedTest {
 
         assertEquals("at.sw2017.xp4.hobit", appContext.getPackageName());
     }
-
+/*
     @Test
-    public void testOpenEditProfileView() throws Exception {
-        Context appContext = InstrumentationRegistry.getTargetContext();
-        openActionBarOverflowOrOptionsMenu(appContext);
+    public void changeProperties() throws Exception {
+        Globals.getInstance().setUserID("test0000");
+        mActivityRule.getActivity().update();
+        Thread.sleep(2000);
 
-        onView( withText("Edit Profile")).perform(click());
+        onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Il Dottore"));
+        onView(withId(R.id.editTextProfileForename)).perform(replaceText("Valentino"));
+        onView(withId(R.id.editTextProfileSurename)).perform(replaceText("Rossi"));
+        onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Italy"));
+
+        onView(withId(R.id.ButtonSave)).perform(click());
+
+        Thread.sleep(3000);
+
+        Globals.getInstance().setUserID("fb1296393277116865");
+        mActivityRule.getActivity().update();
+        Thread.sleep(3000);
+
+        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("bert")));
+        onView(withId(R.id.editTextProfileForename)).check(matches(withText("gerd")));
+        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("berger")));
+        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("graz")));
+
+        Globals.getInstance().setUserID("test0000");
+        mActivityRule.getActivity().update();
+        Thread.sleep(3000);
+
+        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("Il Dottore")));
+        onView(withId(R.id.editTextProfileForename)).check(matches(withText("Valentino")));
+        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("Rossi")));
+        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("Italy")));
+
+        Thread.sleep(3000);
+
+        onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Johnny"));
+        onView(withId(R.id.editTextProfileForename)).perform(replaceText("John"));
+        onView(withId(R.id.editTextProfileSurename)).perform(replaceText("Doe"));
+        onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Graz"));
+
+        onView(withId(R.id.ButtonSave)).perform(click());
     }
 
     @Test
-    public void testClickTextfieldsAndElements() throws Exception {
-        testOpenEditProfileView();
+    public void failedDatabaseTest() throws Exception {
+        Globals.getInstance().setUserID("test00FAIL");
+        mActivityRule.getActivity().update();
 
-        onView( withId(R.id.editTextProfileSurename)).perform(click());
+        Thread.sleep(3000);
 
-        onView( withId(R.id.imageViewProfilePicture)).perform(click());
-
-        onView( withId(R.id.editTextProfileForename)).perform(click());
-
-        onView( withId(R.id.editTextProfileNickname)).perform(click());
-
-        onView( withId(R.id.editTextProfileLocation)).perform(click());
-        //onView(withContentDescription("Navigate back")).perform(click());
-
-        Espresso.pressBack();
-        onView( withId(R.id.editTextProfileDescription)).perform(click());
-
-        Espresso.closeSoftKeyboard();
-        onView( withId(R.id.buttonEditInterests)).perform(click());
+        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("")));
+        onView(withId(R.id.editTextProfileForename)).check(matches(withText("")));
+        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("")));
+        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("")));
     }
 
     @Test
-    public void testEditTextFieldsWithTestValues() throws Exception {
+    public void wrongUserIdTest() throws Exception {
+        Globals.getInstance().setUserID("not_existing");
+        mActivityRule.getActivity().update();
 
-        EditText et;
-        testOpenEditProfileView();
+        Thread.sleep(3000);
 
-        onView( withId(R.id.editTextProfileSurename)).perform(typeText("Doe"));
-        onView( withId(R.id.editTextProfileSurename)).check(matches(withText("Doe")));
+        onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Il Dottore"));
+        onView(withId(R.id.editTextProfileForename)).perform(replaceText("Valentino"));
+        onView(withId(R.id.editTextProfileSurename)).perform(replaceText("Rossi"));
+        onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Italy"));
 
-        onView( withId(R.id.editTextProfileForename)).perform(typeText("John"));
-        onView( withId(R.id.editTextProfileForename)).check(matches(withText("John")));
-
-        onView( withId(R.id.editTextProfileNickname)).perform(typeText("JD"));
-        onView( withId(R.id.editTextProfileNickname)).check(matches(withText("JD")));
-
-        onView( withId(R.id.editTextProfileLocation)).perform(typeText("Nowhere"));
-        onView( withId(R.id.editTextProfileLocation)).check(matches(withText("Nowhere")));
-
-        Espresso.pressBack();
-        onView( withId(R.id.editTextProfileDescription)).perform(typeText("I'm the devil in disguise"));
-        onView(withId(R.id.editTextProfileDescription)).check(matches(withText("I'm the devil in disguise")));
+        onView(withId(R.id.ButtonSave)).perform(click());
     }
-
+    */
 }
