@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         //get reference to the ExpandableListView
         myList = (ExpandableListView) findViewById(R.id.expandableList);
         //create the adapter by passing your ArrayList data
-        listAdapter = new MyListAdapter(MainActivity.this, hobbyList);
+        listAdapter = new MyListAdapter(MainActivity.this, hobbyList );
         //attach the adapter to the list
         myList.setAdapter(listAdapter);
 

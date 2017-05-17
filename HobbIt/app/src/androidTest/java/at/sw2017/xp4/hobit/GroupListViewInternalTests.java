@@ -26,7 +26,6 @@ import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 //import static android.support.test.espresso.contrib.DrawerAction;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static at.sw2017.xp4.hobit.R.id.expandableListViewHobbyGroups;
 import static org.junit.Assert.assertEquals;
 
 /**

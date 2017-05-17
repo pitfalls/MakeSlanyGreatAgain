@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,19 @@ public class MyListAdapter  extends BaseExpandableListAdapter {
     private ArrayList<HobbyData> hobbyList;
     private ArrayList<HobbyData> originalList;
 
-    public MyListAdapter(Context context, ArrayList<HobbyData> hobbyList) {
+ //   private Context packageContext;
+
+    public MyListAdapter(Context context,
+                         ArrayList<HobbyData> hobbyList )
+    //                     Context packageContext)
+    {
         this.context = context;
         this.hobbyList = new ArrayList<HobbyData>();
         this.hobbyList.addAll(hobbyList);
         this.originalList = new ArrayList<HobbyData>();
         this.originalList.addAll(hobbyList);
+
+ //       this.packageContext = packageContext;
     }
 
     @Override
@@ -45,14 +53,33 @@ public class MyListAdapter  extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
                              View view, ViewGroup parent) {
 
-        GroupData group = (GroupData) getChild(groupPosition, childPosition);
+        final GroupData group = (GroupData) getChild(groupPosition, childPosition);
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.child_row, null);
         }
 
-        TextView name = (TextView) view.findViewById(R.id.name);
-        name.setText(group.getName().trim());
+        TextView item = (TextView) view.findViewById(R.id.name);
+        item.setText(group.getName().trim());
+
+        View.OnClickListener clickListen = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*int duration = Toast.LENGTH_SHORT;
+                String text = "test on click output Name:" + group.getName() + " ID:" + group.getId();
+                Toast save_toast = Toast.makeText(appContext, text, duration);
+                save_toast.show();*/
+
+                Intent intent = new Intent(context, GroupOverview.class);
+                // pass group data details to next activity
+                de.greenrobot.event.EventBus.getDefault().postSticky(group);
+
+                //context.startActivityForResult(intent,0);
+
+                context.startActivity(intent);
+            }
+        };
+        item.setOnClickListener( clickListen );
 
         return view;
     }
