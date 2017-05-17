@@ -3,6 +3,7 @@ package at.sw2017.xp4.hobit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
@@ -70,6 +71,8 @@ public class ProfilePageInstrumentedTest {
 
         onView(withId(R.id.ButtonSave)).perform(click());
 
+        Thread.sleep(2000);
+
         Globals.getInstance().setUserID("fb1296393277116865");
         mActivityRule.getActivity().update();
         Thread.sleep(1000);
@@ -103,11 +106,27 @@ public class ProfilePageInstrumentedTest {
     public void failedDatabaseTest() throws Exception {
         Globals.getInstance().setUserID("test00FAIL");
         mActivityRule.getActivity().update();
+
         Thread.sleep(1000);
 
         onView(withId(R.id.editTextProfileNickname)).check(matches(withText("")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("")));
         onView(withId(R.id.editTextProfileSurename)).check(matches(withText("")));
         onView(withId(R.id.editTextProfileLocation)).check(matches(withText("")));
+    }
+
+    @Test
+    public void wrongUserIdTest() throws Exception {
+        Globals.getInstance().setUserID("not_existing");
+        mActivityRule.getActivity().update();
+
+        Thread.sleep(1000);
+
+        onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Il Dottore"));
+        onView(withId(R.id.editTextProfileForename)).perform(replaceText("Valentino"));
+        onView(withId(R.id.editTextProfileSurename)).perform(replaceText("Rossi"));
+        onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Italy"));
+
+        onView(withId(R.id.ButtonSave)).perform(click());
     }
 }

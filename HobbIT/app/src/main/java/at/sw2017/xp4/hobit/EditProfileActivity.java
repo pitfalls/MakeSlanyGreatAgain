@@ -36,6 +36,11 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+
+        editTextNickname = (EditText)findViewById(R.id.editTextProfileNickname);
+        editTextForename = (EditText)findViewById(R.id.editTextProfileForename);
+        editTextSurename = (EditText)findViewById(R.id.editTextProfileSurename);
+        editTextLocation = (EditText)findViewById(R.id.editTextProfileLocation);
         fillData();
     }
 
