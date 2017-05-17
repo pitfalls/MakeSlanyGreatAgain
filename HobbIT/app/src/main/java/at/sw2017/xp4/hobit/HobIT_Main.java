@@ -52,14 +52,17 @@ public class HobIT_Main extends AppCompatActivity
 
     private NavigationView sideBarNavigationView;
 
-    public ArrayList<String> User_Hobbys = new ArrayList<String>();
+    public ArrayList<String> User_Hobbys = Globals.getInstance().getGlobal_array();
 
     public void toArrayList(JSONArray array) {
         if (array == null)
             return;
 
-        for (int i = 0; i < array.length(); i++) {
-            User_Hobbys.add(array.optString(i));
+        if(User_Hobbys.size() == 0)
+        {
+            for (int i = 0; i < array.length(); i++) {
+                User_Hobbys.add(array.optString(i));
+            }
         }
     }
 
@@ -119,6 +122,7 @@ public class HobIT_Main extends AppCompatActivity
                     JSONObject jsonResponse = new JSONObject(response);
                     final JSONArray allHobbies = jsonResponse.getJSONArray("hobby");
                     toArrayList(allHobbies);
+                    Globals.getInstance().setGlobal_array(User_Hobbys);
                 }
                 catch (JSONException e)
                 {
@@ -143,7 +147,6 @@ public class HobIT_Main extends AppCompatActivity
         GetHobbysRequest getHobbysRequest = new GetHobbysRequest(GroupResponseListener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(HobIT_Main.this);
         queue.add(getHobbysRequest);
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, User_Hobbys);
