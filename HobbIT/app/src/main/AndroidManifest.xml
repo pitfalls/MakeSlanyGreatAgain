@@ -39,7 +39,7 @@
             android:name=".GroupCreation"
             android:label="@string/groubCreation" />
         <activity
-            android:name=".MainActivity"
+            android:name=".HobbyGroupListActivity"
             android:label="@string/mainActivity" />
         <activity android:name=".GroupOverview"></activity>
 

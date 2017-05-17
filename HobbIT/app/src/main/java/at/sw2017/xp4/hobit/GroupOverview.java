@@ -14,6 +14,8 @@ import de.greenrobot.event.EventBus;
 
 public class GroupOverview extends AppCompatActivity {
 
+    GroupData group;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,22 @@ public class GroupOverview extends AppCompatActivity {
         setTitle("<GroupName>");
         setOnClickListeners();
 
+        getObjectFromEventQueue();
+    }
+
+    private void getObjectFromEventQueue ()
+    {
+        group = (GroupData) EventBus.getDefault().removeStickyEvent(GroupData.class);
+
+        if ( null == group )
+        {
+            group = new GroupData("Default Group", 0);
+        }
+        else {
+            printDebugToast("Group Data received: " + group.getName() + " ID: " + group.getId());
+        }
+
+        ///@todo place data of group object in the corresponding textfields
     }
 
     private void setOnClickListeners() {
@@ -35,12 +53,6 @@ public class GroupOverview extends AppCompatActivity {
                 finish();
             }
         });
-
-        GroupData group = (GroupData) EventBus.getDefault().removeStickyEvent(GroupData.class);
-
-        printDebugToast("Group Data received: " + group.getName() + " ID: " + group.getId());
-
-        ///@todo place data of group object in the corresponding textfields
     }
 
     public void printDebugToast (CharSequence text )

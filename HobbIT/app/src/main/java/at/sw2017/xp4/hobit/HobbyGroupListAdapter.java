@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class MyListAdapter  extends BaseExpandableListAdapter {
+public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private ArrayList<HobbyData> hobbyList;
@@ -25,8 +25,8 @@ public class MyListAdapter  extends BaseExpandableListAdapter {
 
  //   private Context packageContext;
 
-    public MyListAdapter(Context context,
-                         ArrayList<HobbyData> hobbyList )
+    public HobbyGroupListAdapter(Context context,
+                                 ArrayList<HobbyData> hobbyList )
     //                     Context packageContext)
     {
         this.context = context;
@@ -136,7 +136,7 @@ public class MyListAdapter  extends BaseExpandableListAdapter {
     public void filterData(String query){
 
         query = query.toLowerCase();
-        Log.v("MyListAdapter", String.valueOf(hobbyList.size()));
+        Log.v("HobbyGroupListAdapter", String.valueOf(hobbyList.size()));
         hobbyList.clear();
 
         if(query.isEmpty()){
@@ -161,7 +161,7 @@ public class MyListAdapter  extends BaseExpandableListAdapter {
     }
         }
 
-        Log.v("MyListAdapter", String.valueOf(hobbyList.size()));
+        Log.v("HobbyGroupListAdapter", String.valueOf(hobbyList.size()));
         notifyDataSetChanged();
 
     }

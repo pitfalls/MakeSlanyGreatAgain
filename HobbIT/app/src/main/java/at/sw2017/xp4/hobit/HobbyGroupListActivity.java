@@ -10,14 +10,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
-import android.view.Menu;
 import android.widget.ExpandableListView;
 import android.widget.SearchView;
 
-public class MainActivity extends Activity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+public class HobbyGroupListActivity extends Activity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
     private SearchView search;
-    private MyListAdapter listAdapter;
+    private HobbyGroupListAdapter listAdapter;
     private ExpandableListView myList;
     private ArrayList<HobbyData> hobbyList = new ArrayList<HobbyData>();
 
@@ -65,7 +64,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         //get reference to the ExpandableListView
         myList = (ExpandableListView) findViewById(R.id.expandableList);
         //create the adapter by passing your ArrayList data
-        listAdapter = new MyListAdapter(MainActivity.this, hobbyList );
+        listAdapter = new HobbyGroupListAdapter(HobbyGroupListActivity.this, hobbyList );
         //attach the adapter to the list
         myList.setAdapter(listAdapter);
 
