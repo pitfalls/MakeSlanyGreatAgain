@@ -39,7 +39,7 @@ import static org.junit.Assert.assertEquals;
 public class GroupListViewInternalTests {
 
     @Rule
-    public ActivityTestRule<ListHobbyGroups> mActivityRule = new ActivityTestRule<>(ListHobbyGroups.class);
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void joinButtonTest() throws Exception {

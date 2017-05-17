@@ -41,9 +41,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/mainActivity" />
-        <activity
-            android:name=".ListHobbyGroups"
-            android:label="@string/list_hobby_groups" />
         <activity android:name=".GroupOverview"></activity>
 
         <activity android:name=".EditProfileActivity"
