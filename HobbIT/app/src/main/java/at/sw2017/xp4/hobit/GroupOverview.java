@@ -29,6 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.sw2017.xp4.hobit.requests.GetHobbiesDestinationRequest;
+import at.sw2017.xp4.hobit.requests.joinGroupRequest;
+
+import static at.sw2017.xp4.hobit.Globals.getInstance;
+import static at.sw2017.xp4.hobit.Globals.getUserID;
 
 public class GroupOverview extends AppCompatActivity {
 
@@ -220,6 +224,12 @@ public class GroupOverview extends AppCompatActivity {
         currentId = spinnerArray[4][idPosition];
         descriptionView.setText(spinnerArray[3][idPosition]);
 
+        if (groupList.isEmpty())
+        {
+            currentId = "";
+            descriptionView.setText("");
+        }
+
     }
 
     //----------------------------------------------------------------------------------------------
@@ -233,6 +243,7 @@ public class GroupOverview extends AppCompatActivity {
 
         setAdapterContent(groupList);
         spinnerGroup.setAdapter(adapter);
+
     }
 
     //----------------------------------------------------------------------------------------------
@@ -268,6 +279,7 @@ public class GroupOverview extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 HandleSpinnercontent(groupInput.getText().toString(), locationInput.getText().toString());
+
             }
 
             @Override
@@ -297,7 +309,7 @@ public class GroupOverview extends AppCompatActivity {
 
         //------------------------------------------------------------------------------------------
 
-        Response.Listener<String> joinResponseListener = new Response.Listener<String>() {
+        final Response.Listener<String> joinResponseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -318,11 +330,14 @@ public class GroupOverview extends AppCompatActivity {
                     }
                     else
                     {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
-                        builder.setMessage("You are already member of this group :-)")
-                                .setNegativeButton("Ok", null)
-                                .create()
-                                .show();
+                        printDebugToast(currentId);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+                            builder.setMessage("You are already member of this group :-)")
+                                    .setNegativeButton("Ok", null)
+                                    .create()
+                                    .show();
+
                     }
 
                 } catch (JSONException e) {
@@ -332,7 +347,7 @@ public class GroupOverview extends AppCompatActivity {
             }
         };
 
-        Response.ErrorListener joinErrorListener = new Response.ErrorListener() {
+        final Response.ErrorListener joinErrorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
@@ -450,13 +465,8 @@ public class GroupOverview extends AppCompatActivity {
                 }
 
                 //-------------------------------------------------------------
-
-
             }
         };
-
-
-
 
 
         Response.ErrorListener errorListener = new Response.ErrorListener() {
@@ -471,10 +481,32 @@ public class GroupOverview extends AppCompatActivity {
         };
 
         GetHobbiesDestinationRequest getHobbiesDestinationRequest = new GetHobbiesDestinationRequest(responseListener, errorListener);
-        RequestQueue queue = Volley.newRequestQueue(GroupOverview.this);
+        final RequestQueue queue = Volley.newRequestQueue(GroupOverview.this);
         queue.add(getHobbiesDestinationRequest);
- //TODO EINFÜGEN WICHTIGE 2 ZEILE
 
+        Button joinButton = (Button) findViewById(R.id.btn_join);
+
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String testId = Globals.getInstance().getUserID();
+
+                if (currentId.isEmpty())
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+                    builder.setMessage("No Group was selected :) punk - testId: ")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                }
+                else {
+                  joinGroupRequest joinRequest = new joinGroupRequest(testId, currentId, joinResponseListener, joinErrorListener);
+
+                  queue.add(joinRequest);
+              }}
+
+        });
 
         //##########################################################################################
 
