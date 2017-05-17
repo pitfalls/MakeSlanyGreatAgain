@@ -31,5 +31,10 @@
     </string-array>
 
     <string name="action_edit_profile">Edit Profile</string>
+    <string name="search_hint">Edit Profile</string>
+
+    <string name="mainActivity">Example Expandable List Project</string>
+
+
 >
 </resources>

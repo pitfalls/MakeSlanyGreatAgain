@@ -46,10 +46,15 @@ public class HobIT_Main extends AppCompatActivity
         ButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
-                startActivity(intent);
+                startListHobbyGroups();
             }
         });
+    }
+
+    public void startListHobbyGroups()
+    {
+        Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+        startActivity(intent);
     }
 
 
@@ -176,7 +181,7 @@ public class HobIT_Main extends AppCompatActivity
             // Handle the camera action
 
 
-            Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+            Intent intent = new Intent(HobIT_Main.this, MainActivity.class); //ListHobbyGroups.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
