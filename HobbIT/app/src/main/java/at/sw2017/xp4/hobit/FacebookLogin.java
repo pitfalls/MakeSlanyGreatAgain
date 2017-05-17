@@ -60,9 +60,9 @@ public class FacebookLogin extends AppCompatActivity {
 
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
-        if (Globals.getInstance().getUserID().equals("") &&
-                loginButton.getText().equals("Abmelden")) {
+        if (Globals.getInstance().getUserID().equals("")) {
             LoginManager.getInstance().logOut();
+            Globals.getInstance().setUserID("");
         }
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
