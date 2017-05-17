@@ -34,20 +34,16 @@ import at.sw2017.xp4.hobit.requests.joinGroupRequest;
 import static at.sw2017.xp4.hobit.Globals.getInstance;
 import static at.sw2017.xp4.hobit.Globals.getUserID;
 
+import de.greenrobot.event.EventBus;
+
 public class GroupOverview extends AppCompatActivity {
+
+    GroupData group;
 
 
     private void setAdapterContent(List<String> content)
     {
       adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, content);
-    }
-
-    public void printDebugToast (CharSequence text )
-    {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast save_toast = Toast.makeText(context, text, duration);
-        save_toast.show();
     }
 
     List<String> fullHobbyList = new ArrayList<String>();
@@ -76,6 +72,22 @@ public class GroupOverview extends AppCompatActivity {
         CreateHobbyLocation();
         setOnClickListeners();
 
+        getObjectFromEventQueue();
+    }
+
+    private void getObjectFromEventQueue ()
+    {
+        group = (GroupData) EventBus.getDefault().removeStickyEvent(GroupData.class);
+
+        if ( null == group )
+        {
+            group = new GroupData("Default Group", 0);
+        }
+        else {
+            printDebugToast("Group Data received: " + group.getName() + " ID: " + group.getId());
+        }
+
+        ///@todo place data of group object in the corresponding textfields
     }
 
 // Source : http://stackoverflow.com/questions/15871309/convert-jsonarray-to-string-array
@@ -270,16 +282,15 @@ public class GroupOverview extends AppCompatActivity {
         locationInput = (EditText) findViewById(R.id.txtview_location_input);
 
         groupInput.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 HandleSpinnercontent(groupInput.getText().toString(), locationInput.getText().toString());
-
             }
 
             @Override
@@ -513,5 +524,13 @@ public class GroupOverview extends AppCompatActivity {
 
 
 
+    }
+
+    public void printDebugToast (CharSequence text )
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
     }
 }

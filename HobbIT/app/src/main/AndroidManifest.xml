@@ -44,8 +44,9 @@
             android:label="Startscreen" />
 
         <activity
-            android:name=".ListHobbyGroups"
+            android:name=".HobbyGroupListActivity"
             android:label="@string/list_hobby_groups" />
+
         <activity android:name=".GroupOverview"
             android:parentActivityName=".HobIT_Main" />
         <activity

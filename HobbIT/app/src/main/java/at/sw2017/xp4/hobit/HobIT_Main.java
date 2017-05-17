@@ -106,12 +106,16 @@ public class HobIT_Main extends AppCompatActivity
                             .show();
                     return;
                 }
-                Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
-                startActivity(intent);
+                startListHobbyGroups();
             }
         });
     }
 
+    public void startListHobbyGroups()
+    {
+        Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
+        startActivity(intent);
+    }
     public void initListViewGroups()
     {
         final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
@@ -314,7 +318,7 @@ public class HobIT_Main extends AppCompatActivity
             // Handle the camera action
 
 
-            Intent intent = new Intent(HobIT_Main.this, ListHobbyGroups.class);
+            Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 

@@ -60,7 +60,7 @@ public class HobbyListViewInstrumentedTest {
         onView(withId(R.id.nav_view))
                 .perform(NavigationViewActions.navigateTo(R.id.join_group_sidebar_action));
 
-        // Check that you Activity was opened.
+        // Check that your Activity was opened.
 /*        String expectedNoStatisticsText = InstrumentationRegistry.getTargetContext()
                 .getString(R.string.no_item_available);
         onView(withId(R.id.no_statistics)).check(matches(withText(expectedNoStatisticsText)));

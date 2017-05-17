@@ -5,8 +5,8 @@
     android:padding="10dp" >
 
     <TextView
-        android:id="@+id/laptop"
-        android:layout_width="wrap_content"
+        android:id="@+id/hg_child_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
