@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/private_settings_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="23dp"
+        android:text="Private Settings:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/settings_info_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/private_settings_textView"
+        android:layout_below="@+id/private_settings_textView"
+        android:text="Checked boxes will be visible for other users"
+        android:textAllCaps="false"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/notifications_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/location_checkBox"
+        android:layout_alignStart="@+id/settings_info_textView" />
+
+    <CheckBox
+        android:id="@+id/real_name_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/notifications_textView"
+        android:layout_below="@+id/settings_info_textView"
+        android:layout_marginTop="15dp"
+        android:text="Real Name" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/real_name_checkBox"
+        android:layout_below="@+id/real_name_checkBox"
+        android:text="Nick Name"
+        android:id="@+id/nick_name_checkBox" />
+
+    <CheckBox
+        android:id="@+id/location_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_below="@+id/nick_name_checkBox"
+        android:layout_alignStart="@+id/nick_name_checkBox" />
+
+    <CheckBox
+        android:id="@+id/notifications_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="deactivate notifications from the App"
+        android:layout_below="@+id/notifications_textView"
+        android:layout_alignStart="@+id/location_checkBox"
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:id="@+id/go_inactive_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go Inactive"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/notifications_checkBox"
+        android:layout_alignStart="@+id/notifications_textView"
+        android:layout_marginTop="27dp" />
+
+    <TextView
+        android:id="@+id/info_inactivity_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="When you´re going inactive, your account will be hidden for everyone and you can´ get Messages anymore"
+        android:layout_below="@+id/go_inactive_textView"
+        android:layout_alignStart="@+id/go_inactive_textView" />
+
+    <CheckBox
+        android:id="@+id/inactivity_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/notifications_checkBox"
+        android:layout_below="@+id/info_inactivity_textView"
+        android:layout_marginTop="17dp"
+        android:text="activate inactivity" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/inactivity_checkBox"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

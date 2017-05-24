@@ -55,6 +55,10 @@
         <activity android:name=".EditProfileHobbiesActivity" />
 
         <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".HobIT_Main" />
+
+        <activity
             android:name=".RegisterUser"
             android:label="Register"
             android:parentActivityName=".FacebookLogin">

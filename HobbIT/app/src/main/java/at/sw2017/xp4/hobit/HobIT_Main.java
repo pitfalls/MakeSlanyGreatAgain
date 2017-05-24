@@ -271,6 +271,8 @@ public class HobIT_Main extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent settings = new Intent(this, SettingsActivity.class);
+            startActivity(settings);
             return true;
         } else if (id == R.id.action_login) {
             Intent login = new Intent(this, FacebookLogin.class);
