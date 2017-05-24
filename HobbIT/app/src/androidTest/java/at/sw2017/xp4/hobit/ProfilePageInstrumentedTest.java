@@ -73,6 +73,8 @@ public class ProfilePageInstrumentedTest {
 
         Thread.sleep(3000);
 
+        onView(withText("OK")).perform(click());
+
         Globals.getInstance().setUserID("fb103863606870788");
         mActivityRule.getActivity().update();
         Thread.sleep(3000);
