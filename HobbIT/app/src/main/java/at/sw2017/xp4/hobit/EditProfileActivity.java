@@ -41,6 +41,25 @@ public class EditProfileActivity extends AppCompatActivity {
         editTextForename = (EditText)findViewById(R.id.editTextProfileForename);
         editTextSurename = (EditText)findViewById(R.id.editTextProfileSurename);
         editTextLocation = (EditText)findViewById(R.id.editTextProfileLocation);
+
+        final Button interestsButton = (Button) findViewById(R.id.buttonEditInterests);
+        interestsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // This Perform action on click
+                Intent intent = new Intent(view.getContext(), EditProfileHobbiesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final Button saveButton = (Button) findViewById(R.id.ButtonSave);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateUser();
+            }
+        });
+
         fillData();
     }
 
@@ -86,4 +105,50 @@ public class EditProfileActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(EditProfileActivity.this);
         queue.add(getUserRequest);
     }
+
+    private void updateUser() {
+        Response.Listener<String> updateUserResponseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+                    if (success) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
+                        builder.setMessage("User updated")
+                                .setPositiveButton("OK", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Response.ErrorListener updateUserErrorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
+                builder.setMessage("Connection failed")
+                        .setNegativeButton("OK", null)
+                        .create()
+                        .show();
+            }
+        };
+
+        UpdateUserRequest getUserRequest = new UpdateUserRequest(
+                Globals.getInstance().getUserID(),
+                editTextNickname.getText().toString(),
+                editTextForename.getText().toString(),
+                editTextSurename.getText().toString(),
+                editTextLocation.getText().toString(),
+                updateUserResponseListener, updateUserErrorListener);
+
+        RequestQueue queue = Volley.newRequestQueue(EditProfileActivity.this);
+        queue.add(getUserRequest);
+    }
+
 }
