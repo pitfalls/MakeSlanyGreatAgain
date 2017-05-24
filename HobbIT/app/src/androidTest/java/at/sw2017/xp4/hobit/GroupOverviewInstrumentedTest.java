@@ -46,7 +46,7 @@ public class GroupOverviewInstrumentedTest {
     public void testSpinners() throws Exception {
 
         //get Data from DB
-        Thread.sleep(3000);
+        Thread.sleep(7500);
 
         onView(withId(R.id.spinnerHobbies)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Football"))).perform(click());
@@ -60,7 +60,7 @@ public class GroupOverviewInstrumentedTest {
         onData(allOf(is(instanceOf(String.class)), is("Cycling"))).perform(click());
         onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Cycling"))));
 
-        Thread.sleep(1500);
+        Thread.sleep(2000);
 
         onView(withId(R.id.spinnerLocation)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
@@ -79,14 +79,14 @@ public class GroupOverviewInstrumentedTest {
         onData(allOf(is(instanceOf(String.class)), is("Innsbruck"))).perform(click());
         onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Innsbruck"))));
 
-        Thread.sleep(1500);
+        Thread.sleep(2000);
 
         onView(withId(R.id.spinnerGroup)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("TestGroup1"))).perform(click());
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TestGroup1"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Test test test test")));
         onView(withId(R.id.btn_join)).perform(click());
-        Thread.sleep(1500);
+        Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
@@ -95,7 +95,7 @@ public class GroupOverviewInstrumentedTest {
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TennisWien"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Playing tennis in vienna")));
         onView(withId(R.id.btn_join)).perform(click());
-        Thread.sleep(1500);
+        Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
@@ -104,7 +104,7 @@ public class GroupOverviewInstrumentedTest {
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("CyclingSalzburg"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Cycling in Salzburg :)")));
         onView(withId(R.id.btn_join)).perform(click());
-        Thread.sleep(1500);
+        Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
@@ -113,7 +113,7 @@ public class GroupOverviewInstrumentedTest {
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("FootballInnsbruck"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Playing footbal in Innsbruck")));
         onView(withId(R.id.btn_join)).perform(click());
-        Thread.sleep(1500);
+        Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
