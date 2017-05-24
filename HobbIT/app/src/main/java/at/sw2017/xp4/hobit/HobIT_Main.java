@@ -55,15 +55,13 @@ public class HobIT_Main extends AppCompatActivity
     public ArrayList<String> User_Hobbys;
 
     public void toArrayList(JSONArray array) {
-        if (array == null)
-            return;
-
-        if(User_Hobbys.size() == 0)
-        {
-            for (int i = 0; i < array.length(); i++) {
-                User_Hobbys.add(array.optString(i));
+        if (array != null)
+            if(User_Hobbys.size() == 0)
+            {
+                for (int i = 0; i < array.length(); i++) {
+                    User_Hobbys.add(array.optString(i));
+                }
             }
-        }
     }
 
     public void printDebugToast2(CharSequence text) {
@@ -224,16 +222,6 @@ public class HobIT_Main extends AppCompatActivity
             initGroupOverview();
             initListViewGroups();
             /**--------------------END INIT BUTTON--------------------**/
-
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
