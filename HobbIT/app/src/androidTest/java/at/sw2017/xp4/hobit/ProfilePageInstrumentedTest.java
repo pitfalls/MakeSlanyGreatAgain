@@ -57,10 +57,10 @@ public class ProfilePageInstrumentedTest {
 
         assertEquals("at.sw2017.xp4.hobit", appContext.getPackageName());
     }
-/*
+
     @Test
     public void changeProperties() throws Exception {
-        Globals.getInstance().setUserID("test0000");
+        Globals.getInstance().setUserID("2");
         mActivityRule.getActivity().update();
         Thread.sleep(2000);
 
@@ -73,16 +73,16 @@ public class ProfilePageInstrumentedTest {
 
         Thread.sleep(3000);
 
-        Globals.getInstance().setUserID("fb1296393277116865");
+        Globals.getInstance().setUserID("fb103863606870788");
         mActivityRule.getActivity().update();
         Thread.sleep(3000);
 
-        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("bert")));
-        onView(withId(R.id.editTextProfileForename)).check(matches(withText("gerd")));
-        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("berger")));
-        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("graz")));
+        onView(withId(R.id.editTextProfileNickname)).check(matches(withText("SlanyTest")));
+        onView(withId(R.id.editTextProfileForename)).check(matches(withText("Slany")));
+        onView(withId(R.id.editTextProfileSurename)).check(matches(withText("GreatAgain")));
+        onView(withId(R.id.editTextProfileLocation)).check(matches(withText("Graz")));
 
-        Globals.getInstance().setUserID("test0000");
+        Globals.getInstance().setUserID("2");
         mActivityRule.getActivity().update();
         Thread.sleep(3000);
 
@@ -128,5 +128,4 @@ public class ProfilePageInstrumentedTest {
 
         onView(withId(R.id.ButtonSave)).perform(click());
     }
-    */
 }

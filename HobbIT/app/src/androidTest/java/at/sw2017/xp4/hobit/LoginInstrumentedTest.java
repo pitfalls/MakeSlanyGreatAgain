@@ -35,7 +35,7 @@ public class LoginInstrumentedTest {
 
         Thread.sleep(10000);
 
-        assertEquals("test0000", Globals.getInstance().getUserID());
+        assertEquals("2", Globals.getInstance().getUserID());
 
         Globals.getInstance().setUserID("");
     }
@@ -51,7 +51,7 @@ public class LoginInstrumentedTest {
 
         Thread.sleep(10000);
 
-        assertEquals("fb1296393277116865", Globals.getInstance().getUserID());
+        assertEquals("fb103863606870788", Globals.getInstance().getUserID());
     }
 
 
