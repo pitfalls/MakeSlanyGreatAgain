@@ -49,7 +49,21 @@ public class LoginInstrumentedTest {
         Globals.getInstance().setUserID("");
     }
 
+    @Test
+    public void emptyCredentials() throws Exception {
+        onView(withId(R.id.username)).perform(replaceText(""));
+        onView(withId(R.id.password)).perform(replaceText(""));
 
+        onView(withId(R.id.login)).perform(click());
+
+        Thread.sleep(10000);
+
+        assertEquals("", Globals.getInstance().getUserID());
+
+        Globals.getInstance().setUserID("");
+    }
+
+/*
     @Test
     public void fbLoginTest() throws Exception {
         if (!Globals.getInstance().getUserID().equals("")) {
@@ -103,7 +117,7 @@ public class LoginInstrumentedTest {
 
         assertEquals("fb103863606870788", Globals.getInstance().getUserID());
     }
-
+*/
 
     @Test
     public void registerTest() throws Exception {
