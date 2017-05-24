@@ -2,7 +2,9 @@
 package at.sw2017.xp4.hobit;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -43,42 +45,46 @@ public class GroupOverviewInstrumentedTest {
 
 
     @Test
-    public void testSpinners() throws Exception {
+    public void testSpinners0() throws Exception {
 
         //get Data from DB
-        Thread.sleep(7500);
-
-        onView(withId(R.id.spinnerHobbies)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Football"))).perform(click());
-        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Football"))));
-
-        onView(withId(R.id.spinnerHobbies)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Tennis"))).perform(click());
-        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Tennis"))));
-
-        onView(withId(R.id.spinnerHobbies)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Cycling"))).perform(click());
-        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Cycling"))));
-
         Thread.sleep(2000);
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Graz"))));
+        onView(withId(R.id.spinnerHobbies)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Games"))).perform(click());
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Games"))));
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Wien"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Wien"))));
+        Thread.sleep(500);
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Salzburg"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Salzburg"))));
+        onView(withId(R.id.spinnerHobbies)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Sports"))).perform(click());
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Sports"))));
 
+    }
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Innsbruck"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Innsbruck"))));
+        @Test
+        public void testSpinners1() throws Exception {
+            Thread.sleep(2000);
 
+            onView(withId(R.id.spinnerLocation)).perform(click());
+            onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
+            onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Graz"))));
+
+            onView(withId(R.id.spinnerLocation)).perform(click());
+            onData(allOf(is(instanceOf(String.class)), is("Wien"))).perform(click());
+            onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Wien"))));
+
+            onView(withId(R.id.spinnerLocation)).perform(click());
+            onData(allOf(is(instanceOf(String.class)), is("Salzburg"))).perform(click());
+            onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Salzburg"))));
+
+            onView(withId(R.id.spinnerLocation)).perform(click());
+            onData(allOf(is(instanceOf(String.class)), is("Innsbruck"))).perform(click());
+            onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Innsbruck"))));
+        }
+
+    @Test
+    public void testSpinners2() throws Exception {
         Thread.sleep(2000);
 
         onView(withId(R.id.spinnerGroup)).perform(click());
@@ -118,11 +124,74 @@ public class GroupOverviewInstrumentedTest {
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
     }
-      /*  @Test
+
+    @Test
+    public void testHandlerEmpty() throws Exception {
+
+        //get Data from DB
+        Thread.sleep(4000);
+
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(" "));
+        onView(withId(R.id.spinnerHobbies)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(""))).perform(click());
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString(""))));
+
+        onView(withId(R.id.spinnerLocation)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(""))).perform(click());
+        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString(""))));
+
+        onView(withId(R.id.spinnerGroup)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(""))).perform(click());
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
+
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
+        Thread.sleep(2000);
+
+        //TODO Check why " " is not valid
+        onView(withId(R.id.txtGroupText)).perform(replaceText("  "));
+        onView(withId(R.id.spinnerHobbies)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(""))).perform(click());
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString(""))));
+
+        onView(withId(R.id.spinnerLocation)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(""))).perform(click());
+        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString(""))));
+
+        onView(withId(R.id.spinnerGroup)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(""))).perform(click());
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
+
+    }
+
+    @Test
+    public void testHandlerInsertDelete() throws Exception {
+
+        //get Data from DB
+        Thread.sleep(2000);
+
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(" "));
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
+        onView(withId(R.id.spinnerHobbies)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Sports"))).perform(click());
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Sports"))));
+
+        onView(withId(R.id.spinnerLocation)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
+        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Graz"))));
+
+        onView(withId(R.id.spinnerGroup)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("TestGroup1"))).perform(click());
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TestGroup1"))));
+
+
+        onView(withId(R.id.txtGroupText)).perform(replaceText(" "));
+
+    }
+        /*@Test
         public void testFilter() throws Exception {
 
             Thread.sleep(7500);
-         /*
+
         onView(withId(R.id.txtview_location_input)).perform(replaceText("shitshitshit"));
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText("")));
         onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText("")));
@@ -138,5 +207,5 @@ public class GroupOverviewInstrumentedTest {
 
 
 
-    }   */
+    }*/
 }

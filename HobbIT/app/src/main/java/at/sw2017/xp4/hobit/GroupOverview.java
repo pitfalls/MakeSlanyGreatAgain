@@ -90,17 +90,6 @@ public class GroupOverview extends AppCompatActivity {
         ///@todo place data of group object in the corresponding textfields
     }
 
-// Source : http://stackoverflow.com/questions/15871309/convert-jsonarray-to-string-array
-    public static String[] toStringArray(JSONArray array) {
-        if(array==null)
-            return null;
-
-        String[] arr=new String[array.length()];
-        for(int i=0; i<arr.length; i++) {
-            arr[i]=array.optString(i);
-        }
-        return arr;
-    }
 
     public void CreateHobbySpinner() {/*
         spinnerHobby = (Spinner) findViewById(R.id.spinnerHobbies);
@@ -231,6 +220,9 @@ public class GroupOverview extends AppCompatActivity {
             }
         }
 
+        hobbyList.add("");
+        locationList.add("");
+        groupList.add("");
         UpdateSpinner();
 
         currentId = spinnerArray[4][idPosition];
