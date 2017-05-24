@@ -7,6 +7,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.Swipe;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.Gravity;
@@ -22,6 +23,8 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.DrawerActions.open;
 import static android.support.test.espresso.contrib.DrawerActions.openDrawer;
 import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 //import static android.support.test.espresso.contrib.DrawerAction;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -36,7 +39,7 @@ import static org.junit.Assert.assertEquals;
 public class HobbyListViewInstrumentedTest {
 
     @Rule
-    public ActivityTestRule<HobIT_Main> mActivityRule = new ActivityTestRule<>(HobIT_Main.class);
+    public ActivityTestRule<HobbyGroupListActivity> mActivityRule = new ActivityTestRule<>(HobbyGroupListActivity.class);
 
     @Test
     public void useAppContext() throws Exception {
@@ -47,35 +50,81 @@ public class HobbyListViewInstrumentedTest {
     }
 
     @Test
-    public void openHobbyListViewViaSidebar() throws Exception {
-        // Context of the app under test.
+    public void joinButtonTest() throws Exception {
+    /*    Thread.sleep(1000);
 
+        //onView(withText("Football")).perform(click());
+        onView(withText("TestGroup1")).perform(click());
 
-        // Open Drawer to click on navigation.
-        onView(withId(R.id.drawer_layout))
-                .check(matches(isClosed(Gravity.LEFT))) // Left Drawer should be closed.
-                .perform(open()); // Open Drawer
-
-        // Start the screen of your activity.
-        onView(withId(R.id.nav_view))
-                .perform(NavigationViewActions.navigateTo(R.id.join_group_sidebar_action));
-
-        // Check that your Activity was opened.
-/*        String expectedNoStatisticsText = InstrumentationRegistry.getTargetContext()
-                .getString(R.string.no_item_available);
-        onView(withId(R.id.no_statistics)).check(matches(withText(expectedNoStatisticsText)));
-*/
-       // onView(withId(R.id.acti))
-
-//        Context appContext = InstrumentationRegistry.getTargetContext();
-//        String s = appContext.getApplicationContext().getApplicationInfo().toString();
-//        System.out.println(s);
-
-
-
-        //intended(hasComponent(ExpectedActivity.class.getName()));
-    Thread.sleep(1000);
-
-
+        onView(withId(R.id. btn_join)).perform(click());
+        Thread.sleep(1000);*/
     }
+
+ /*   @Test
+    public void backButtonTest() throws Exception {
+        Thread.sleep(1000);
+
+        onView(withText("Boobs")).perform(click());
+        onView(withText("Pamela Anderson")).perform(click());
+
+        onView(withId(R.id.btn_back)).perform(click());
+        Thread.sleep(1000);
+    }
+
+    @Test
+    public void navigationTest() throws Exception {
+        Thread.sleep(1000);
+
+        onView(withText("Boobs")).perform(click());
+        onView(withText("Pamela Anderson")).perform(click());
+        onView(withId(R.id.btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Category_test")).perform(click());
+        onView(withText("Group_X")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Group_Y")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Megan Fox")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Megan Fox")).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+    }
+*/
+
+    /*
+    This test is for the case a Leave Button gets implemented
+
+    @Test
+    public void leaveButtonTest() throws Exception {
+        Thread.sleep(1000);
+
+        onView(withText("Category_test")).perform(click());
+        onView(withText("Group_X")).perform(click());
+        onView(withId(R.id. btn_join)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+
+        Thread.sleep(1000);
+
+        onView(withText("Category_test")).perform(click());
+        onView(withText("Group_X")).perform(click());
+        onView(withId(R.id. btn_leave)).perform(click());
+        onView(withId(R.id. btn_back)).perform(click());
+        Thread.sleep(1000);
+    }*/
 }

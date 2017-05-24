@@ -204,7 +204,7 @@ public class HobIT_Main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+/*
         if (Globals.getInstance().getStartStatus() == 0) {
             Intent startscreen = new Intent(this, HobbiT_Main_Startscreen.class);
             startActivity(startscreen);
@@ -212,7 +212,7 @@ public class HobIT_Main extends AppCompatActivity
             finish();
         }
         else
-        {
+        {*/
             User_Hobbys = Globals.getInstance().getGlobal_array();
             setContentView(R.layout.activity_hob_it__main);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -248,7 +248,7 @@ public class HobIT_Main extends AppCompatActivity
 
             SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
             String currentUser = settings.getString("CurrentUser", "");
-        }
+     //   }
     }
 
     @Override
