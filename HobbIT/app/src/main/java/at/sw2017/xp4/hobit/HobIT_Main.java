@@ -205,50 +205,42 @@ public class HobIT_Main extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        if (Globals.getInstance().getStartStatus() == 0) {
-            Intent startscreen = new Intent(this, HobbiT_Main_Startscreen.class);
-            startActivity(startscreen);
-            Globals.getInstance().setStartStatus(1);
-            finish();
-        }
-        else
-        {
-            User_Hobbys = Globals.getInstance().getGlobal_array();
-            setContentView(R.layout.activity_hob_it__main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+        User_Hobbys = Globals.getInstance().getGlobal_array();
+        setContentView(R.layout.activity_hob_it__main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            /**--------------------------INIT BUTTON------------------**/
-            initGroupCreation();
-            initListGroups();
-            initGroupOverview();
-            initListViewGroups();
-            /**--------------------END INIT BUTTON--------------------**/
+        /**--------------------------INIT BUTTON------------------**/
+        initGroupCreation();
+        initListGroups();
+        initGroupOverview();
+        initListViewGroups();
+        /**--------------------END INIT BUTTON--------------------**/
 
 
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.setDrawerListener(toggle);
-            toggle.syncState();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
-            sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
-            sideBarNavigationView.setNavigationItemSelectedListener(this);
+        sideBarNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        sideBarNavigationView.setNavigationItemSelectedListener(this);
 
-            setTitle("HobbiT Homepage");
+        setTitle("HobbiT Homepage");
 
-            SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
-            String currentUser = settings.getString("CurrentUser", "");
-        }
+        SharedPreferences settings = getSharedPreferences("CurrentUser", 0);
+        String currentUser = settings.getString("CurrentUser", "");
+
     }
 
     @Override
@@ -320,12 +312,15 @@ public class HobIT_Main extends AppCompatActivity
 
             Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        }
+        else if (id == R.id.group_overview) {
+            Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        }
+        else if (id == R.id.group_creation) {
+            Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

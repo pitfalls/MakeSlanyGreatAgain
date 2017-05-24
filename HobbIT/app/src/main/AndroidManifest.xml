@@ -11,16 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".HobIT_Main"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -28,31 +24,41 @@
 
         <activity
             android:name=".FacebookLogin"
-            android:label="activity_facebook_login"
-            android:parentActivityName=".HobIT_Main" />
+            android:label="LOGIN" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name=".GroupCreation"
-            android:label="@string/groubCreation" />
 
         <activity
-            android:name=".HobbiT_Main_Startscreen"
-            android:label="Startscreen" />
+            android:name=".GroupCreation"
+            android:label="@string/groubCreation"
+            android:parentActivityName=".HobIT_Main"/>
+
+        <activity
+            android:name=".HobbiT_Main_Startscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".HobbyGroupListActivity"
-            android:label="@string/list_hobby_groups" />
+            android:label="@string/list_hobby_groups"
+            android:parentActivityName=".HobIT_Main" />
 
         <activity android:name=".GroupOverview"
             android:parentActivityName=".HobIT_Main" />
+
         <activity
             android:name=".EditProfileActivity"
             android:label="@string/activity_edit_profile_name"
             android:parentActivityName=".HobIT_Main" />
+
         <activity android:name=".EditProfileHobbiesActivity" />
 
         <activity

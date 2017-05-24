@@ -7,17 +7,13 @@
             android:icon="@drawable/ic_menu_join_group"
             android:title="Join Group" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/group_overview"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Group Overview" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/group_creation"
+            android:icon="@android:drawable/btn_star_big_on"
+            android:title="Group Creation" />
     </group>
 
     <item android:title="Communicate">
@@ -25,11 +21,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="TODO DELETE" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="TODO DELETE" />
         </menu>
     </item>
 
