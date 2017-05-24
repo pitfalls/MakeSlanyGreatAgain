@@ -34,7 +34,6 @@ public class HobbiT_Main_Startscreen extends AppCompatActivity {
             public void run() {
                 Intent login2 = new Intent(HobbiT_Main_Startscreen.this, FacebookLogin.class);
                 startActivityForResult(login2, 1);
-                finish();
             }
         }, 5000);
     }

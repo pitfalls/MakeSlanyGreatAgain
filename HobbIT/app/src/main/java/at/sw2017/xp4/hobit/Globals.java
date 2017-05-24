@@ -10,7 +10,6 @@ public class Globals {
     private static Globals instance;
     private static String UserID = "";
     private static String TempID = "";
-    private static int StartStatus = 0;
 
     public ArrayList<String> getGlobal_array() {
         return global_array;
@@ -33,10 +32,6 @@ public class Globals {
     public static String getTempID() { return TempID;}
 
     public static void setTempID(String tempID) { TempID = tempID;}
-
-    public static int getStartStatus() { return StartStatus; }
-
-    public static void setStartStatus(int startStatus) { StartStatus = startStatus; }
 
     public static synchronized Globals getInstance(){
         if(instance==null){
