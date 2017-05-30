@@ -1,6 +1,7 @@
 
 package at.sw2017.xp4.hobit;
 
+import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.Gravity;
@@ -66,37 +67,58 @@ public class MainInstumentedTests {
         onView(withText("Group Creation")).perform(click());
     }
 
-    @Test
-    public void test() throws Exception {
-
-        onView(withId(R.id.drawer_layout))
-                .check(matches(isClosed(Gravity.LEFT))) // Left Drawer should be closed.
-                .perform(open()); // Open Drawer
-        onView(withText("Group Creation")).perform(click());
+  /*  @Test
+    public void testArrayListHouseandGarden() throws Exception
+    {
+        onView(withText("House & garden")).perform(click());
     }
 
-        /* onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Football"))));
+    @Test
+    public void testArrayListFashion() throws Exception
+    {
+        onView(withText("Fashion")).perform(click());
+    }
 
-        onView(withId(R.id.spinnerHobbies)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Tennis"))).perform(click());
-        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Tennis"))));
+    @Test
+    public void testArrayListLiterature() throws Exception
+    {
+        Globals.getInstance().setUserID("1");
+        Thread.sleep(10000);
+        onView(withText("Literature")).perform(click());
+    }*/
 
-        onView(withId(R.id.spinnerHobbies)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Cycling"))).perform(click());
-        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString("Cycling"))));
+    @Test
+    public void testLogout() throws Exception
+    {
+        onView(withId(R.id.toolbar)).perform(click());
+        Thread.sleep(2000);
+        onView(withText("Login")).perform(click());
+    }
 
-        Thread.sleep(1500);
+    @Test
+    public void testFab() throws Exception
+    {
+        onView(withId(R.id.fab)).perform(click());
+    }
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Graz"))));
+    @Test
+    public void testEditProfile() throws Exception
+    {
+        onView(withId(R.id.toolbar)).perform(click());
+        onView(withText("Edit Profile")).perform(click());
+    }
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Wien"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Wien"))));
+    @Test
+    public void testthreedot() throws Exception
+    {
+        onView(withId(R.id.toolbar)).perform(click());
+        onView(withText("Settings")).perform(click());
+    }
 
-        onView(withId(R.id.spinnerLocation)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Salzburg"))).perform(click());
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Salzburg"))));*/
+    @Test
+    public void testeverything() throws Exception
+    {
+        onView(withId(R.id.toolbar)).perform(open());
+        //onView(withText("Edit Profile")).perform(click());
     }
 }
