@@ -41,8 +41,8 @@ public class GroupCreationInstrumentedTest {
     @Test
     public void testHobbySpinner() throws Exception {
         onView(withId(R.id.spinner_hobby)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Football"))).perform(click());
-        onView(withId(R.id.spinner_hobby)).check(matches(withSpinnerText(containsString("Football"))));
+        onData(allOf(is(instanceOf(String.class)), is("Games"))).perform(click());
+        onView(withId(R.id.spinner_hobby)).check(matches(withSpinnerText(containsString("Games"))));
     }
 
     @Test
@@ -55,6 +55,35 @@ public class GroupCreationInstrumentedTest {
 
         onView(withId(R.id.editText_Groupname)).perform(replaceText("TEST"));
         onView(withId(R.id.editText_Description)).perform(replaceText("The best of the best of the best!"));
+
+        onView(withId(R.id.btn_save)).perform(click());
+    }
+
+    @Test
+    public void cancelGroupCreation() throws Exception {
+        onView(withId(R.id.spinner_location)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
+
+        onView(withId(R.id.spinner_hobby)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Sports"))).perform(click());
+
+        onView(withId(R.id.editText_Groupname)).perform(replaceText("TEST"));
+        onView(withId(R.id.editText_Description)).perform(replaceText("The best of the best of the best!"));
+
+        onView(withId(R.id.btn_cancel)).perform(click());
+    }
+
+
+    @Test
+    public void emptyFields() throws Exception {
+        onView(withId(R.id.spinner_location)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
+
+        onView(withId(R.id.spinner_hobby)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Sports"))).perform(click());
+
+        onView(withId(R.id.editText_Groupname)).perform(replaceText(""));
+        onView(withId(R.id.editText_Description)).perform(replaceText(""));
 
         onView(withId(R.id.btn_save)).perform(click());
     }
