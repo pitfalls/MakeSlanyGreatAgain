@@ -164,9 +164,6 @@ public class GroupOverview extends AppCompatActivity {
             }
         }
 
-        hobbyList.add("");
-        locationList.add("");
-        groupList.add("");
         UpdateSpinner();
 
         currentId = spinnerArray[4][idPosition];
