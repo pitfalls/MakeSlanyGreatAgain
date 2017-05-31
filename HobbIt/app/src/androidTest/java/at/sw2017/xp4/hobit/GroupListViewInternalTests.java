@@ -29,6 +29,10 @@ public class GroupListViewInternalTests {
     @Rule
     public ActivityTestRule<HobbyGroupListActivity> mActivityRule = new ActivityTestRule<>(HobbyGroupListActivity.class);
 
+    @Test
+    public void emptyTest() throws Exception {
+        assertEquals(0, 0);
+    }
 /*    @Test
     public void joinButtonTest() throws Exception {
         Thread.sleep(1000);
