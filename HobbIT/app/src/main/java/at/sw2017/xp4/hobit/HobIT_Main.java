@@ -66,56 +66,6 @@ public class HobIT_Main extends AppCompatActivity
         }
     }
 
-    public void printDebugToast2(CharSequence text) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast save_toast = Toast.makeText(context, text, duration);
-        save_toast.show();
-    }
-
-    public void initGroupCreation() {
-        Button ButtonClick = (Button) findViewById(R.id.button_creation);
-
-        ButtonClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Globals.getInstance().getUserID().equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
-                    builder.setMessage("Please login first")
-                            .setNegativeButton("Retry", null)
-                            .create()
-                            .show();
-                    return;
-                }
-                Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void initListGroups() {
-        Button ButtonClick = (Button) findViewById(R.id.button_list);
-        ButtonClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Globals.getInstance().getUserID().equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
-                    builder.setMessage("Please login first")
-                            .setNegativeButton("Retry", null)
-                            .create()
-                            .show();
-                    return;
-                }
-                startListHobbyGroups();
-            }
-        });
-    }
-
-    public void startListHobbyGroups()
-    {
-        Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
-        startActivity(intent);
-    }
     public void initListViewGroups()
     {
         final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
@@ -175,30 +125,10 @@ public class HobIT_Main extends AppCompatActivity
 
                 Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
                 startActivity(newIntent);
-
-            }
-        });
-
-    }
-
-    public void initGroupOverview() {
-        Button ButtonClick = (Button) findViewById(R.id.button_overview);
-        ButtonClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Globals.getInstance().getUserID().equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(HobIT_Main.this);
-                    builder.setMessage("Please login first")
-                            .setNegativeButton("Retry", null)
-                            .create()
-                            .show();
-                    return;
-                }
-                Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
-                startActivity(intent);
             }
         });
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -211,9 +141,6 @@ public class HobIT_Main extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         /**--------------------------INIT BUTTON------------------**/
-        initGroupCreation();
-        initListGroups();
-        initGroupOverview();
         initListViewGroups();
         /**--------------------END INIT BUTTON--------------------**/
 

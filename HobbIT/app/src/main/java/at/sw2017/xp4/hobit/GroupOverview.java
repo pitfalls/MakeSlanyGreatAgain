@@ -1,7 +1,6 @@
 package at.sw2017.xp4.hobit;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,9 +30,6 @@ import java.util.List;
 import at.sw2017.xp4.hobit.requests.GetHobbiesDestinationRequest;
 import at.sw2017.xp4.hobit.requests.joinGroupRequest;
 
-import static at.sw2017.xp4.hobit.Globals.getInstance;
-import static at.sw2017.xp4.hobit.Globals.getUserID;
-
 import de.greenrobot.event.EventBus;
 
 public class GroupOverview extends AppCompatActivity {
@@ -57,7 +53,6 @@ public class GroupOverview extends AppCompatActivity {
     TextView descriptionView ;
     String[][] spinnerArray;
     ArrayAdapter<String> adapter;
-    String GroupHobby;
     Spinner spinnerHobby, spinnerLocation, spinnerGroup;
     EditText groupInput,locationInput;
 
@@ -68,8 +63,6 @@ public class GroupOverview extends AppCompatActivity {
 
         setTitle("<GroupName>");
         setOnClickListeners();
-        CreateHobbySpinner();
-        CreateHobbyLocation();
         setOnClickListeners();
 
         getObjectFromEventQueue();
@@ -79,64 +72,15 @@ public class GroupOverview extends AppCompatActivity {
     {
         group = (GroupData) EventBus.getDefault().removeStickyEvent(GroupData.class);
 
-        if ( null == group )
+        if (group == null)
         {
             group = new GroupData("Default Group", 0);
-        }
-        else {
-            printDebugToast("Group Data received: " + group.getName() + " ID: " + group.getId());
         }
 
         ///@todo place data of group object in the corresponding textfields
     }
 
 
-    public void CreateHobbySpinner() {/*
-        spinnerHobby = (Spinner) findViewById(R.id.spinnerHobbies);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.hobbies_array, android.R.layout.simple_spinner_item);
-
-        //with Database we have to use a CoursorAdapter
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerHobby.setAdapter(adapter);
-
-        spinnerHobby.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                GroupHobby = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                GroupHobby = "";
-            }
-        });*/
-
-    }
-
-    public void CreateHobbyLocation()
-    {/*
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerLocation);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.locations_array, android.R.layout.simple_spinner_item);
-
-        //with Database we have to use a CoursorAdapter
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                GroupHobby = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                GroupHobby = "";
-            }
-        });*/
-
-    }
 
     //----------------------------------------------------------------------------------------------
     void HandleSpinnercontent(String groupFilter, String locationFilter)
