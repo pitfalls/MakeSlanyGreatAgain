@@ -35,10 +35,14 @@ public class GroupCreation extends AppCompatActivity {
     private String GroupHobby = "";
     private String GroupLocation = "";
 
+    private RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_creation);
+
+        queue = Volley.newRequestQueue(GroupCreation.this);
 
         createHobbySpinner();
         createLocationSpinner();
@@ -48,7 +52,6 @@ public class GroupCreation extends AppCompatActivity {
 
     public void createHobbySpinner()
     {
-
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item);//, spinnerArray);
 
@@ -59,11 +62,7 @@ public class GroupCreation extends AppCompatActivity {
                 JSONObject jsonResponse = new JSONObject(response);
                 boolean success = jsonResponse.getBoolean("success");
 
-                if (success) {AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                    builder.setMessage("success")
-                            .setNegativeButton("OK", null)
-                            .create()
-                            .show();
+                if (success) {
                     JSONArray hobbies = jsonResponse.getJSONArray("hobbies");
                     for (int i = 0; i < hobbies.length(); i++) {
                         adapter.add(hobbies.get(i).toString());
@@ -105,7 +104,6 @@ public class GroupCreation extends AppCompatActivity {
         GetAllHobbiesRequest getHobbiesRequest = new GetAllHobbiesRequest(
                 getHobbiesResponseListener, getHobbiesErrorListener);
 
-        RequestQueue queue = Volley.newRequestQueue(GroupCreation.this);
         queue.add(getHobbiesRequest);
     }
 
@@ -154,43 +152,43 @@ public class GroupCreation extends AppCompatActivity {
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
 
-                        if (success) {
-                            Intent intent = new Intent(GroupCreation.this, HobIT_Main.class);
-                            GroupCreation.this.startActivity(intent);
-                        } else {
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(GroupCreation.this);
-                            builder.setMessage("Group Creation failed")
-                                    .setNegativeButton("Retry", null)
-                                    .create()
-                                    .show();
+                            if (success) {
+                                Intent intent = new Intent(GroupCreation.this, HobIT_Main.class);
+                                GroupCreation.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(GroupCreation.this);
+                                builder.setMessage("Group Creation failed")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                     }
                 };
 
                 Response.ErrorListener errorListener = new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                    builder.setMessage("Connection failed")
-                            .setNegativeButton("Retry", null)
-                            .create()
-                            .show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
+                        builder.setMessage("Connection failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
                     }
                 };
 
                 GroupCreationRequest groupCreationRequest =
                         new GroupCreationRequest(GroupName, GroupDescription, GroupHobby,
                                 GroupLocation, responseListener, errorListener);
-                RequestQueue queue = Volley.newRequestQueue(GroupCreation.this);
+
                 queue.add(groupCreationRequest);
 
             } else {
