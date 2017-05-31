@@ -48,7 +48,7 @@ public class GroupOverviewInstrumentedTest {
     public void testSpinners0() throws Exception {
 
         //get Data from DB
-        Thread.sleep(2000);
+        Thread.sleep(3500);
 
         onView(withId(R.id.spinnerHobbies)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Games"))).perform(click());
@@ -64,7 +64,7 @@ public class GroupOverviewInstrumentedTest {
 
         @Test
         public void testSpinners1() throws Exception {
-            Thread.sleep(2000);
+            Thread.sleep(3500);
 
             onView(withId(R.id.spinnerLocation)).perform(click());
             onData(allOf(is(instanceOf(String.class)), is("Graz"))).perform(click());
@@ -85,7 +85,7 @@ public class GroupOverviewInstrumentedTest {
 
     @Test
     public void testSpinners2() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(3500);
 
         onView(withId(R.id.spinnerGroup)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("TestGroup1"))).perform(click());
@@ -167,7 +167,7 @@ public class GroupOverviewInstrumentedTest {
     public void testHandlerInsertDelete() throws Exception {
 
         //get Data from DB
-        Thread.sleep(2000);
+        Thread.sleep(3500);
 
         onView(withId(R.id.txtview_location_input)).perform(replaceText(" "));
         onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
@@ -187,25 +187,47 @@ public class GroupOverviewInstrumentedTest {
         onView(withId(R.id.txtGroupText)).perform(replaceText(" "));
 
     }
-        /*@Test
+        @Test
         public void testFilter() throws Exception {
 
-            Thread.sleep(7500);
+            Thread.sleep(3500);
 
         onView(withId(R.id.txtview_location_input)).perform(replaceText("shitshitshit"));
-        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText("")));
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText("")));
-        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText("")));
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
+            onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText("")));
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
         onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
                Thread.sleep(2000);
         onView(withId(R.id.txtGroupText)).perform(replaceText("shitshitshit"));
-        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText("")));
-        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText("")));
-        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText("")));
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString(""))));
+        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString(""))));
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
 
         //onView(withId(R.id.)).perform(replaceText("shitshitshit"));
 
+    }
+
+    @Test
+    public void testEmptyValues() throws Exception {
+
+        Thread.sleep(3500);
+
+        onView(withId(R.id.txtview_location_input)).perform(replaceText("shitshitshit"));
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
+        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText("")));
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
+        Thread.sleep(2000);
+        onView(withId(R.id.txtGroupText)).perform(replaceText("shitshitshit"));
+        onView(withId(R.id.spinnerHobbies)).check(matches(withSpinnerText(containsString(""))));
+        onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString(""))));
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString(""))));
+
+        //onView(withId(R.id.)).perform(replaceText("shitshitshit"));
+
+    }
 
 
-    }*/
+
+
 }
