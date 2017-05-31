@@ -18,9 +18,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import at.sw2017.xp4.hobit.requests.GetAllHobbiesRequest;
+import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
+import at.sw2017.xp4.hobit.requests.GetUserRequest;
 import at.sw2017.xp4.hobit.requests.GroupCreationRequest;
 
 public class GroupCreation extends AppCompatActivity {
@@ -28,31 +35,88 @@ public class GroupCreation extends AppCompatActivity {
     private String GroupHobby = "";
     private String GroupLocation = "";
 
-    public void CreateHobbySpinner()
-    {
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_hobby);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.hobbies_array, android.R.layout.simple_spinner_item);
-        //with Database we have to use a CoursorAdapter
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                GroupHobby = parent.getItemAtPosition(position).toString();
-            }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_group_creation);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                GroupHobby = "";
-            }
-        });
+        createHobbySpinner();
+        createLocationSpinner();
+        saveGroupCreation();
+        cancelGroupCreation();
     }
 
-    public void CreateLocationSpinner()
+    public void createHobbySpinner()
+    {
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_dropdown_item);//, spinnerArray);
+
+        Response.Listener<String> getHobbiesResponseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                boolean success = jsonResponse.getBoolean("success");
+
+                if (success) {AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
+                    builder.setMessage("success")
+                            .setNegativeButton("OK", null)
+                            .create()
+                            .show();
+                    JSONArray hobbies = jsonResponse.getJSONArray("hobbies");
+                    for (int i = 0; i < hobbies.length(); i++) {
+                        adapter.add(hobbies.get(i).toString());
+                    }
+
+                    Spinner spinner = (Spinner)findViewById(R.id.spinner_hobby);
+
+                    spinner.setAdapter(adapter);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            GroupHobby = parent.getItemAtPosition(position).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            GroupHobby = "";
+                        }
+                    });
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            }
+        };
+
+        Response.ErrorListener getHobbiesErrorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
+                builder.setMessage("Connection failed")
+                        .setNegativeButton("OK", null)
+                        .create()
+                        .show();
+            }
+        };
+
+        GetAllHobbiesRequest getHobbiesRequest = new GetAllHobbiesRequest(
+                getHobbiesResponseListener, getHobbiesErrorListener);
+
+        RequestQueue queue = Volley.newRequestQueue(GroupCreation.this);
+        queue.add(getHobbiesRequest);
+    }
+
+    public void createLocationSpinner()
     {
         Spinner spinner = (Spinner) findViewById(R.id.spinner_location);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.locations_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(
+                        this, R.array.locations_array, android.R.layout.simple_spinner_item);
         //with Database we have to use a CoursorAdapter
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -68,8 +132,7 @@ public class GroupCreation extends AppCompatActivity {
         });
     }
 
-
-    public void SaveGroupCreation()
+    public void saveGroupCreation()
     {
         final EditText DescText = (EditText) findViewById(R.id.editText_Description); //TODO /n in description is not allowed
         final EditText NameText = (EditText) findViewById(R.id.editText_Groupname);
@@ -78,71 +141,70 @@ public class GroupCreation extends AppCompatActivity {
         ButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
-                CharSequence text = "Group Saved";
-                int duration = Toast.LENGTH_LONG;
-                Toast save_toast = Toast.makeText(context, text, duration);
-                save_toast.show();
-                String GroupDescription = DescText.getText().toString();
-                String GroupName = NameText.getText().toString();
+            Context context = getApplicationContext();
+            CharSequence text = "Group Saved";
+            int duration = Toast.LENGTH_LONG;
+            Toast save_toast = Toast.makeText(context, text, duration);
+            save_toast.show();
+            String GroupDescription = DescText.getText().toString();
+            String GroupName = NameText.getText().toString();
 
-                //Write to database
-                if(GroupDescription.length()>0 && GroupName.length()>0 ) {
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(response);
-                                boolean success = jsonResponse.getBoolean("success");
+            //Write to database
+            if(GroupDescription.length()>0 && GroupName.length()>0 ) {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
 
-                                if (success) {
-                                    Intent intent = new Intent(GroupCreation.this, HobIT_Main.class);
-                                    GroupCreation.this.startActivity(intent);
-                                } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                                    builder.setMessage("Group Creation failed")
-                                            .setNegativeButton("Retry", null)
-                                            .create()
-                                            .show();
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
-
-                    Response.ErrorListener errorListener = new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                            builder.setMessage("Connection failed")
+                        if (success) {
+                            Intent intent = new Intent(GroupCreation.this, HobIT_Main.class);
+                            GroupCreation.this.startActivity(intent);
+                        } else {
+                            AlertDialog.Builder builder =
+                                    new AlertDialog.Builder(GroupCreation.this);
+                            builder.setMessage("Group Creation failed")
                                     .setNegativeButton("Retry", null)
                                     .create()
                                     .show();
                         }
-                    };
 
-                    GroupCreationRequest groupCreationRequest = new GroupCreationRequest(GroupName, GroupDescription, GroupHobby, GroupLocation, responseListener, errorListener);
-                    RequestQueue queue = Volley.newRequestQueue(GroupCreation.this);
-                    queue.add(groupCreationRequest);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    }
+                };
 
-                }
-                else{
+                Response.ErrorListener errorListener = new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                    builder.setMessage("Please fill in the Name and Description fields")
+                    builder.setMessage("Connection failed")
                             .setNegativeButton("Retry", null)
                             .create()
                             .show();
-                }
+                    }
+                };
 
+                GroupCreationRequest groupCreationRequest =
+                        new GroupCreationRequest(GroupName, GroupDescription, GroupHobby,
+                                GroupLocation, responseListener, errorListener);
+                RequestQueue queue = Volley.newRequestQueue(GroupCreation.this);
+                queue.add(groupCreationRequest);
+
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
+                builder.setMessage("Please fill in the Name and Description fields")
+                        .setNegativeButton("Retry", null)
+                        .create()
+                        .show();
+            }
             }
         });
     }
 
-
-
-    public void CancelGroupCreation()
+    public void cancelGroupCreation()
     {
         Button ButtonSave = (Button) findViewById(R.id.btn_cancel);
         ButtonSave.setOnClickListener(new View.OnClickListener() {
@@ -157,23 +219,5 @@ public class GroupCreation extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-
-
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_creation);
-
-        CreateHobbySpinner();
-        CreateLocationSpinner();
-        SaveGroupCreation();
-        CancelGroupCreation();
-
     }
 }
