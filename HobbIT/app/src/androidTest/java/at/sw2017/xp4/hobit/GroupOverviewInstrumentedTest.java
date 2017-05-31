@@ -87,15 +87,15 @@ public class GroupOverviewInstrumentedTest {
     public void testSpinners2() throws Exception {
         Thread.sleep(3500);
 
-        onView(withId(R.id.spinnerGroup)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("TestGroup1"))).perform(click());
-        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TestGroup1"))));
-        onView(withId(R.id.txtview_description_input)).check(matches(withText("Test test test test")));
+       /* onView(withId(R.id.spinnerGroup)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Slacking Graz"))).perform(click());
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("Slacking Graz"))));
+        onView(withId(R.id.txtview_description_input)).check(matches(withText("Doing nothing @ TU Graz")));
         onView(withId(R.id.btn_join)).perform(click());
         Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-
+*/
         onView(withId(R.id.spinnerGroup)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("TennisWien"))).perform(click());
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TennisWien"))));
@@ -180,8 +180,8 @@ public class GroupOverviewInstrumentedTest {
         onView(withId(R.id.spinnerLocation)).check(matches(withSpinnerText(containsString("Graz"))));
 
         onView(withId(R.id.spinnerGroup)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("TestGroup1"))).perform(click());
-        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TestGroup1"))));
+        onData(allOf(is(instanceOf(String.class)), is("Slacking Graz"))).perform(click());
+        onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("Slacking Graz"))));
 
 
         onView(withId(R.id.txtGroupText)).perform(replaceText(" "));
