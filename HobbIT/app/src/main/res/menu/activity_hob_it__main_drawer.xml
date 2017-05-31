@@ -18,14 +18,15 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
+            <!--if we wannt to add something to the sidebar use this
+           <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="TODO DELETE" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="TODO DELETE" />
+                android:title="TODO DELETE" /> -->
         </menu>
     </item>
 
