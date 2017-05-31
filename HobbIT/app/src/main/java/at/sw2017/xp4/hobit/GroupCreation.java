@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.sw2017.xp4.hobit.requests.GetAllHobbiesRequest;
+import at.sw2017.xp4.hobit.requests.GetAllLocationsRequest;
 import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
 import at.sw2017.xp4.hobit.requests.GetUserRequest;
 import at.sw2017.xp4.hobit.requests.GroupCreationRequest;
@@ -109,25 +110,59 @@ public class GroupCreation extends AppCompatActivity {
 
     public void createLocationSpinner()
     {
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_location);
-        ArrayAdapter<CharSequence> adapter =
-                ArrayAdapter.createFromResource(
-                        this, R.array.locations_array, android.R.layout.simple_spinner_item);
-        //with Database we have to use a CoursorAdapter
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_dropdown_item);//, spinnerArray);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Response.Listener<String> getLocationsResponseListener = new Response.Listener<String>() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                GroupLocation = parent.getItemAtPosition(position).toString();
-            }
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                GroupLocation = "";
+                    if (success) {
+                        JSONArray hobbies = jsonResponse.getJSONArray("locations");
+                        for (int i = 0; i < hobbies.length(); i++) {
+                            adapter.add(hobbies.get(i).toString());
+                        }
+
+                        Spinner spinner = (Spinner)findViewById(R.id.spinner_location);
+
+                        spinner.setAdapter(adapter);
+                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                GroupLocation = parent.getItemAtPosition(position).toString();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+                                GroupLocation = "";
+                            }
+                        });
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        });
+        };
+
+        Response.ErrorListener getLocationsErrorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
+            builder.setMessage("Connection failed")
+                    .setNegativeButton("OK", null)
+                    .create()
+                    .show();
+            }
+        };
+
+        GetAllLocationsRequest getHobbiesRequest = new GetAllLocationsRequest(
+                getLocationsResponseListener, getLocationsErrorListener);
+
+        queue.add(getHobbiesRequest);
     }
 
     public void saveGroupCreation()
