@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="16dp"
-        android:text="Swimming"
+        android:text="@string/hobby_1"
         app:layout_constraintBottom_toTopOf="@+id/checkBox2"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Hiking"
+        android:text="@string/hobby_2"
         app:layout_constraintBottom_toTopOf="@+id/checkBox3"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Fitness studio"
+        android:text="@string/hobby_3"
         app:layout_constraintBottom_toTopOf="@+id/checkBox4"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Playing cards"
+        android:text="@string/hobby_4"
         app:layout_constraintBottom_toTopOf="@+id/checkBox5"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Computer Games"
+        android:text="@string/hobby_5"
         app:layout_constraintBottom_toTopOf="@+id/checkBox6"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Solve quiz"
+        android:text="@string/hobby_6"
         app:layout_constraintBottom_toTopOf="@+id/checkBox7"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Ride a bicycle"
+        android:text="@string/hobby_7"
         app:layout_constraintBottom_toTopOf="@+id/checkBox8"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Puzzle"
+        android:text="@string/hobby_8"
         app:layout_constraintBottom_toTopOf="@+id/checkBox9"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Needle"
+        android:text="@string/hobby_9"
         app:layout_constraintBottom_toTopOf="@+id/checkBox10"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginLeft="16dp"
-        android:text="Model making"
+        android:text="@string/hobby_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -112,8 +112,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="94dp"
-        android:text="Yoyo playing"
+        android:layout_marginLeft="40dp"
+        android:text="@string/hobby_11"
         app:layout_constraintBottom_toTopOf="@+id/checkBox12"
         app:layout_constraintLeft_toRightOf="@+id/checkBox1" />
 
@@ -122,8 +122,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="121dp"
-        android:text="Dancing"
+        android:layout_marginLeft="105dp"
+        android:text="@string/hobby_12"
         app:layout_constraintBottom_toTopOf="@+id/checkBox13"
         app:layout_constraintLeft_toRightOf="@+id/checkBox2" />
 
@@ -132,8 +132,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="74dp"
-        android:text="Climbing"
+        android:layout_marginLeft="92dp"
+        android:text="@string/hobby_13"
         app:layout_constraintBottom_toTopOf="@+id/checkBox14"
         app:layout_constraintLeft_toRightOf="@+id/checkBox3" />
 
@@ -142,8 +142,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="78dp"
-        android:text="Astronomy"
+        android:layout_marginLeft="109dp"
+        android:text="@string/hobby_14"
         app:layout_constraintBottom_toTopOf="@+id/checkBox15"
         app:layout_constraintLeft_toRightOf="@+id/checkBox4" />
 
@@ -152,8 +152,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="51dp"
-        android:text="Collecting"
+        android:layout_marginLeft="111dp"
+        android:text="@string/hobby_15"
         app:layout_constraintBottom_toTopOf="@+id/checkBox16"
         app:layout_constraintLeft_toRightOf="@+id/checkBox5" />
 
@@ -162,8 +162,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="97dp"
-        android:text="Cooking"
+        android:layout_marginLeft="103dp"
+        android:text="@string/hobby_16"
         app:layout_constraintBottom_toTopOf="@+id/checkBox17"
         app:layout_constraintLeft_toRightOf="@+id/checkBox6" />
 
@@ -172,8 +172,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="76dp"
-        android:text="Football"
+        android:layout_marginLeft="5dp"
+        android:text="@string/hobby_17"
         app:layout_constraintBottom_toTopOf="@+id/checkBox18"
         app:layout_constraintLeft_toRightOf="@+id/checkBox7" />
 
@@ -182,8 +182,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="120dp"
-        android:text="Music"
+        android:layout_marginLeft="12dp"
+        android:text="@string/hobby_18"
         app:layout_constraintBottom_toTopOf="@+id/checkBox19"
         app:layout_constraintLeft_toRightOf="@+id/checkBox8" />
 
@@ -192,8 +192,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="117dp"
-        android:text="others"
+        android:layout_marginLeft="103dp"
+        android:text="@string/hobby_19"
         app:layout_constraintBottom_toTopOf="@+id/cont_button"
         app:layout_constraintLeft_toRightOf="@+id/checkBox9" />
 

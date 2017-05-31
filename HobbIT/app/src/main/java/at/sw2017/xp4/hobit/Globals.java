@@ -11,6 +11,16 @@ public class Globals {
     private static String UserID = "";
     private static String TempID = "";
 
+    public static String getTestValue() {
+        return testValue;
+    }
+
+    public static void setTestValue(String testValue) {
+        Globals.testValue = testValue;
+    }
+
+    private static String testValue = "";
+
     public ArrayList<String> getGlobal_array() {
         return global_array;
     }

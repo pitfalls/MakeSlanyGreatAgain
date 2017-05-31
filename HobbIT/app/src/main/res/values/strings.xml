@@ -15,11 +15,27 @@
 
     <string name="facebook_app_id">1723407201283005</string>
 
-    <string-array name="hobbies_array">
-        <item>Football</item>
-        <item>Tennis</item>
-        <item>Cycling</item>
-    </string-array>
+    <string name="hobby_1">House and garden</string>
+    <string name="hobby_2">Fashion</string>
+    <string name="hobby_3">Literature</string>
+    <string name="hobby_4">Games</string>
+    <string name="hobby_5">Sports</string>
+    <string name="hobby_6">Crafting</string>
+    <string name="hobby_7">Computer and consoles</string>
+    <string name="hobby_8">Music and instruments</string>
+    <string name="hobby_9">Dancing</string>
+    <string name="hobby_10">Art</string>
+    <string name="hobby_11">Astronomy and universe </string>
+    <string name="hobby_12">Collecting</string>
+    <string name="hobby_13">Science</string>
+    <string name="hobby_14">Racing</string>
+    <string name="hobby_15">TV and cinema</string>
+    <string name="hobby_16">Traveling</string>
+    <string name="hobby_17">Extreme sports</string>
+    <string name="hobby_18">Health and fitness</string>
+    <string name="hobby_19">Other</string>
+
+
 
 
     <string-array name="locations_array">

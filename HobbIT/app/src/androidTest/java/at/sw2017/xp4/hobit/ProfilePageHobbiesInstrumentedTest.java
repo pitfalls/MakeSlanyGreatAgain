@@ -33,25 +33,25 @@ public class ProfilePageHobbiesInstrumentedTest {
     @Test
     public void testContentExistence() throws Exception {
 
-        onView(withText("Swimming")).perform(click());
-        onView(withText("Hiking")).perform(click());
-        onView(withText("Fitness studio")).perform(click());
-        onView(withText("Playing cards")).perform(click());
-        onView(withText("Computer Games")).perform(click());
-        onView(withText("Solve quiz")).perform(click());
-        onView(withText("Ride a bicycle")).perform(click());
-        onView(withText("Puzzle")).perform(click());
-        onView(withText("Needle")).perform(click());
-        onView(withText("Model making")).perform(click());
-        onView(withText("Yoyo playing")).perform(click());
+        onView(withText("House and garden")).perform(click());
+        onView(withText("Fashion")).perform(click());
+        onView(withText("Literature")).perform(click());
+        onView(withText("Games")).perform(click());
+        onView(withText("Sports")).perform(click());
+        onView(withText("Crafting")).perform(click());
+        onView(withText("Computer and consoles")).perform(click());
+        onView(withText("Music and instruments")).perform(click());
         onView(withText("Dancing")).perform(click());
-        onView(withText("Climbing")).perform(click());
-        onView(withText("Astronomy")).perform(click());
+        onView(withText("Art")).perform(click());
+        onView(withText("Astronomy and universe")).perform(click());
         onView(withText("Collecting")).perform(click());
-        onView(withText("Cooking")).perform(click());
-        onView(withText("Football")).perform(click());
-        onView(withText("Music")).perform(click());
-        onView(withText("others")).perform(click());
+        onView(withText("Science")).perform(click());
+        onView(withText("Racing")).perform(click());
+        onView(withText("TV and cinema")).perform(click());
+        onView(withText("Traveling")).perform(click());
+        onView(withText("Extreme sports")).perform(click());
+        onView(withText("Health and fitness")).perform(click());
+        onView(withText("Other")).perform(click());
         onView(withText("Continue")).perform(click());
     }
 }
