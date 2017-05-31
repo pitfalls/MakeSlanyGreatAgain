@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.contrib.DrawerActions.open;
 import static android.support.test.espresso.contrib.DrawerActions.openDrawer;
@@ -54,42 +55,26 @@ public class GroupListViewInternalTests {
         onView(withId(R.id.btn_back)).perform(click());
         Thread.sleep(1000);
     }
-
+*/
     @Test
     public void navigationTest() throws Exception {
         Thread.sleep(1000);
 
-        onView(withText("Boobs")).perform(click());
-        onView(withText("Pamela Anderson")).perform(click());
-        onView(withId(R.id.btn_back)).perform(click());
+        onView(withText("Fashion")).perform(click());
+        onView(withText("Fashion")).perform(click());
+        onView(withText("Gaga-Style")).perform(click());
+        pressBack();
 
         Thread.sleep(1000);
 
-        onView(withText("Category_test")).perform(click());
-        onView(withText("Group_X")).perform(click());
-        onView(withId(R.id. btn_join)).perform(click());
-        onView(withId(R.id. btn_back)).perform(click());
+
+       onView(withText("Flowerpower")).perform(click());
+       pressBack();
 
         Thread.sleep(1000);
 
-        onView(withText("Group_Y")).perform(click());
-        onView(withId(R.id. btn_join)).perform(click());
-        onView(withId(R.id. btn_back)).perform(click());
-
-        Thread.sleep(1000);
-
-        onView(withText("Megan Fox")).perform(click());
-        onView(withId(R.id. btn_join)).perform(click());
-        onView(withId(R.id. btn_back)).perform(click());
-
-        Thread.sleep(1000);
-
-        onView(withText("Megan Fox")).perform(click());
-        onView(withId(R.id. btn_back)).perform(click());
-
-        Thread.sleep(1000);
     }
-*/
+
 
     /*
     This test is for the case a Leave Button gets implemented
