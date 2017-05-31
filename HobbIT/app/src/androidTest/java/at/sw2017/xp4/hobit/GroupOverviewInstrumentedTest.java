@@ -90,7 +90,9 @@ public class GroupOverviewInstrumentedTest {
     public void testSpinners2() throws Exception {
         Thread.sleep(3500);
         System.out.println("GroupOverviewInstrumentedTest.testSpinners2");
+
         onView(withId(R.id.spinnerGroup)).perform(click());
+
         onData(allOf(is(instanceOf(String.class)), is("Slacking Graz"))).perform(click());
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("Slacking Graz"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Doing nothing @ TU Graz")));
@@ -99,33 +101,37 @@ public class GroupOverviewInstrumentedTest {
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
+        Thread.sleep(2000);
         onView(withId(R.id.spinnerGroup)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("TennisWien"))).perform(click());
+        Thread.sleep(1000);
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("TennisWien"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Playing tennis in vienna")));
         onView(withId(R.id.btn_join)).perform(click());
         Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-
+        Thread.sleep(2000);
         onView(withId(R.id.spinnerGroup)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("CyclingSalzburg"))).perform(click());
+        Thread.sleep(1000);
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("CyclingSalzburg"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Cycling in Salzburg :)")));
         onView(withId(R.id.btn_join)).perform(click());
         Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-
+        Thread.sleep(2000);
         onView(withId(R.id.spinnerGroup)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("FootballInnsbruck"))).perform(click());
+        Thread.sleep(1000);
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("FootballInnsbruck"))));
         onView(withId(R.id.txtview_description_input)).check(matches(withText("Playing footbal in Innsbruck")));
         onView(withId(R.id.btn_join)).perform(click());
         Thread.sleep(2000);
         onView(withText("You are already member of this group :-)")).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-
+        Thread.sleep(1000);
     }
 
     @Test
@@ -224,6 +230,7 @@ public class GroupOverviewInstrumentedTest {
         onData(allOf(is(instanceOf(String.class)), is("Slacking Graz"))).perform(click());
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("Slacking Graz"))));
     }
+
 
     @Test
     public void testHandlerInsertDeleteGroupFilter() throws Exception {

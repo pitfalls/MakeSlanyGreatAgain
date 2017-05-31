@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import at.sw2017.xp4.hobit.requests.GetHobbiesDestinationRequest;
 import at.sw2017.xp4.hobit.requests.GetUserGroupsRequest;
 
 public class HobbyGroupListActivity extends Activity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -67,9 +68,9 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
                     if (success) {
 
-                        final JSONArray allHobbies = jsonResponse.getJSONArray("Hobbies");
-                        final JSONArray allNames = jsonResponse.getJSONArray("Names");
-                        final JSONArray allIds = jsonResponse.getJSONArray("GroupIDs");
+                        final JSONArray allHobbies = jsonResponse.getJSONArray("hobby");
+                        final JSONArray allNames = jsonResponse.getJSONArray("group");
+                        final JSONArray allIds = jsonResponse.getJSONArray("id");
 
 
 
@@ -122,7 +123,7 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
                         .show();
             }
         };
-        GetUserGroupsRequest getUserGroupsRequest = new GetUserGroupsRequest(listener, errorListener);
+        GetHobbiesDestinationRequest getUserGroupsRequest = new GetHobbiesDestinationRequest(listener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(HobbyGroupListActivity.this);
         queue.add(getUserGroupsRequest);
 
