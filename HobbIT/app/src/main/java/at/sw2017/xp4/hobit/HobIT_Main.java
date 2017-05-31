@@ -248,9 +248,9 @@ public class HobIT_Main extends AppCompatActivity
         else if (id == R.id.group_creation) {
             Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
+        //} else if (id == R.id.nav_share) { // if we wannt to add something to the sidebar use this
 
-        } else if (id == R.id.nav_send) {
+        //} else if (id == R.id.nav_send) { // if we wannt to add something to the sidebar use this
 
         }
 
