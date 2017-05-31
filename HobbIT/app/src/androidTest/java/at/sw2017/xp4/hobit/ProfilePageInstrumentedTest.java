@@ -51,14 +51,6 @@ public class ProfilePageInstrumentedTest {
             new ActivityTestRule<>(EditProfileActivity.class);
 
     @Test
-    public void useAppContext() throws Exception {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("at.sw2017.xp4.hobit", appContext.getPackageName());
-    }
-
-    @Test
     public void changeProperties() throws Exception {
         Globals.getInstance().setUserID("2");
         mActivityRule.getActivity().update();

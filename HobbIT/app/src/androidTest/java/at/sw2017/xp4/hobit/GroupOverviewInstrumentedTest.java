@@ -1,7 +1,9 @@
 
 package at.sw2017.xp4.hobit;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteOutOfMemoryException;
+import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewAssertion;
@@ -16,6 +18,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.security.acl.Group;
 
 import static android.R.attr.id;
@@ -45,6 +50,22 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(AndroidJUnit4.class)
 public class GroupOverviewInstrumentedTest {
+
+    // from https://letsno.wordpress.com/2016/03/29/automating-offline-scenarios-using-android-espresso/
+    // setMobileData(main.getActivity().getApplicationContext(), false); AUSSCHALTEN
+    // setMobileData(main.getActivity().getApplicationContext(), true);  EINSCHALTEN
+    protected void setMobileData(Context context, boolean enabled) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException
+    {
+        final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final Class conmanClass = Class.forName(conman.getClass().getName());
+        final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+        iConnectivityManagerField.setAccessible(true);
+        final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+        final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
+        final Method setMobilDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+        setMobilDataEnabledMethod.setAccessible(true);
+        setMobilDataEnabledMethod.invoke(iConnectivityManager, enabled);
+    }
 
     @Rule
     public ActivityTestRule<GroupOverview> mActivityRule =
@@ -186,8 +207,6 @@ public class GroupOverviewInstrumentedTest {
 
     @Test
     public void testHandlerInsertDeleteGroupFilter() throws Exception {
-        System.out.println("GroupOverviewInstrumentedTest.testHandlerInsertDeleteGroupFilter");
-        //get Data from DB
         Thread.sleep(3500);
 
         onView(withId(R.id.txtGroupText)).perform(replaceText(" "));
@@ -208,7 +227,6 @@ public class GroupOverviewInstrumentedTest {
 
     @Test
     public void testEmptyValues() throws Exception {
-        System.out.println("GroupOverviewInstrumentedTest.testEmptyValues");
         Thread.sleep(3500);
 
         onView(withId(R.id.txtview_location_input)).perform(replaceText("shitshitshit"));
@@ -232,7 +250,6 @@ public class GroupOverviewInstrumentedTest {
 
     @Test
     public void testInputLocationChooseSpinners() throws Exception {
-        System.out.println("GroupOverviewInstrumentedTest.testInputLocationChooseSpinners");
         Thread.sleep(3500);
 
         onView(withId(R.id.txtview_location_input)).perform(replaceText("Wien"));
@@ -253,7 +270,6 @@ public class GroupOverviewInstrumentedTest {
 
     @Test
     public void testManyInputChooseSpinners() throws Exception {
-        System.out.println("GroupOverviewInstrumentedTest.testInputLocationChooseSpinners");
         Thread.sleep(3500);
 
         onView(withId(R.id.txtview_location_input)).perform(replaceText("Wien"));
@@ -282,4 +298,19 @@ public class GroupOverviewInstrumentedTest {
         onView(withId(R.id.spinnerGroup)).check(matches(withSpinnerText(containsString("Trees"))));
         Thread.sleep(500);
     }
+
+
+    @Test
+    public void testDisabledNetwork() throws Exception {
+
+        Thread.sleep(3500);
+        //setMobileData(mActivityRule.getActivity().getApplicationContext(), false);
+
+        Thread.sleep(3500);
+
+
+    }
+
+
+
 }
