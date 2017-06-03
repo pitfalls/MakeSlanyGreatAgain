@@ -22,13 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import at.sw2017.xp4.hobit.requests.GetAllHobbiesRequest;
 import at.sw2017.xp4.hobit.requests.GetAllLocationsRequest;
-import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
-import at.sw2017.xp4.hobit.requests.GetUserRequest;
 import at.sw2017.xp4.hobit.requests.GroupCreationRequest;
 
 public class GroupCreation extends AppCompatActivity {
@@ -69,7 +64,7 @@ public class GroupCreation extends AppCompatActivity {
                         adapter.add(hobbies.get(i).toString());
                     }
 
-                    Spinner spinner = (Spinner)findViewById(R.id.spinner_hobby);
+                    Spinner spinner = (Spinner)findViewById(R.id.spinner_hobby_groupCreation);
 
                     spinner.setAdapter(adapter);
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,7 +121,7 @@ public class GroupCreation extends AppCompatActivity {
                             adapter.add(hobbies.get(i).toString());
                         }
 
-                        Spinner spinner = (Spinner)findViewById(R.id.spinner_location);
+                        Spinner spinner = (Spinner)findViewById(R.id.spinner_location_GroupCreation);
 
                         spinner.setAdapter(adapter);
                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

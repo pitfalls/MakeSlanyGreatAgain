@@ -4,6 +4,14 @@ tasks.withType(Test) {
     ignoreFailures = true
 }
 
+//if in start command "--continue" was added, then apply ignoring for android test fails
+/*
+gradle.taskGraph.whenReady { graph ->
+    if (gradle.startParameter.continueOnFailure) {
+        graph.allTasks.findAll { it.name ==~ /connected.*AndroidTest/ }*.ignoreFailures = true
+    }
+}
+*/
 buildscript {
     repositories {
         jcenter()
