@@ -72,6 +72,24 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
         appCompatCheckedTextView.perform(click());
 
+        //*********************
+
+        ViewInteraction appCompatEditText66 = onView(
+                allOf(withId(R.id.txtview_location_input), isDisplayed()));
+        appCompatEditText66.perform(replaceText("FADHJ"), closeSoftKeyboard());
+        Thread.sleep(1000);
+        closeSoftKeyboard();
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
+        ViewInteraction appCompatEditText67 = onView(
+                allOf(withId(R.id.txtGroupText), isDisplayed()));
+        appCompatEditText67.perform(replaceText("FADHJ"), closeSoftKeyboard());
+        Thread.sleep(1000);
+        closeSoftKeyboard();
+        onView(withId(R.id.txtGroupText)).perform(replaceText(""));
+
+        //*********************
+
+
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
         appCompatButton2.perform(click());
@@ -121,37 +139,7 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.txtview_location_input), isDisplayed()));
         appCompatEditText6.perform(replaceText("FADHJ"), closeSoftKeyboard());
 
-        Thread.sleep(500);
-
-       /* ViewInteraction appCompatSpinner4 = onView(
-                allOf(withId(R.id.spinnerHobbies), isDisplayed()));
-        appCompatSpinner4.perform(click());
-*/
-        // Thread.sleep(2500);
-
-      /*  ViewInteraction appCompatSpinner5 = onView(
-                allOf(withId(R.id.spinnerHobbies), isDisplayed()));
-        appCompatSpinner5.perform(click());
-
-        Thread.sleep(2500);*/
-//
-//        ViewInteraction appCompatSpinner6 = onView(
-//                allOf(withId(R.id.spinnerGroup), isDisplayed()));
-//        appCompatSpinner6.perform(click());
-//
-//        ViewInteraction appCompatSpinner7 = onView(
-//                allOf(withId(R.id.spinnerLocation), isDisplayed()));
-//        appCompatSpinner7.perform(click());
-
-     /*   ViewInteraction appCompatEditText5_ = onView(
-                allOf(withId(R.id.txtview_location_input), isDisplayed()));
-        appCompatEditText5_.perform(click());
-
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.txtview_location_input), withText("FADHJ"), isDisplayed()));
-        appCompatEditText7.perform(click());
-*/
-        Thread.sleep(500);
+        Thread.sleep(1000);
 
         closeSoftKeyboard();
 
@@ -287,9 +275,33 @@ public class GroupOverviewInstrumentedTest {
 
         Thread.sleep(500);
 
-        ViewInteraction appCompatSpinner18 = onView(
+        /***********************/
+
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
+        onView(withId(R.id.txtGroupText)).perform(replaceText(""));
+
+        ViewInteraction appCompatEditText68 = onView(
+                allOf(withId(R.id.txtview_location_input), isDisplayed()));
+        appCompatEditText68.perform(replaceText("FADHJ"), closeSoftKeyboard());
+        Thread.sleep(1000);
+        closeSoftKeyboard();
+
+        onView(withId(R.id.txtview_location_input)).perform(replaceText(""));
+
+        pressBack();
+
+       /* ViewInteraction appCompatEditText69 = onView(
+                allOf(withId(R.id.txtGroupText), isDisplayed()));
+        appCompatEditText69.perform(replaceText("Cy"), closeSoftKeyboard());
+        Thread.sleep(1000);
+
+           ViewInteraction appCompatSpinner18 = onView(
                 allOf(withId(R.id.spinnerGroup), isDisplayed()));
-        appCompatSpinner18.perform(click());
+        appCompatSpinner18.perform(click());*/
+
+     //   onView(withId(R.id.txtGroupText)).perform(replaceText(""));
+
+        /***********************/
 
 
     }

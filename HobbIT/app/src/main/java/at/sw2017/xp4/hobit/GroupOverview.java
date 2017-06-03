@@ -119,16 +119,15 @@ public class GroupOverview extends AppCompatActivity {
 
         if (groupFilter.equals(""))
         {
-            for(int iter = 0; iter < spinnerArray[0].length; iter++)
-            {
-                // [1] location
-                if (spinnerArray[1][iter].contains(locationFilter))
-                {
-                    AddToSpinner(iter);
-                    if (!idSet)
-                    {
-                        idSet = true;
-                        idPosition = iter;
+            if(spinnerArray != null && spinnerArray[0] != null) {
+                for (int iter = 0; iter < spinnerArray[0].length; iter++) {
+                    // [1] location
+                    if (spinnerArray[1][iter].contains(locationFilter)) {
+                        AddToSpinner(iter);
+                        if (!idSet) {
+                            idSet = true;
+                            idPosition = iter;
+                        }
                     }
                 }
             }
@@ -164,10 +163,18 @@ public class GroupOverview extends AppCompatActivity {
             }
         }
 
-        UpdateSpinner();
+        try{
 
-        currentId = spinnerArray[4][idPosition];
-        descriptionView.setText(spinnerArray[3][idPosition]);
+            UpdateSpinner();
+
+            currentId = spinnerArray[4][idPosition];
+            descriptionView.setText(spinnerArray[3][idPosition]);
+        }
+        catch(Exception e)
+        {
+
+        }
+
 
         if (groupList.isEmpty())
         {
@@ -180,14 +187,18 @@ public class GroupOverview extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     void UpdateSpinner()
     {
-        setAdapterContent(hobbyList);
-        spinnerHobby.setAdapter(adapter);
+        if(adapter != null)
+        {
 
-        setAdapterContent(locationList);
-        spinnerLocation.setAdapter(adapter);
+            setAdapterContent(hobbyList);
+            spinnerHobby.setAdapter(adapter);
 
-        setAdapterContent(groupList);
-        spinnerGroup.setAdapter(adapter);
+            setAdapterContent(locationList);
+            spinnerLocation.setAdapter(adapter);
+
+            setAdapterContent(groupList);
+            spinnerGroup.setAdapter(adapter);
+        }
 
     }
 

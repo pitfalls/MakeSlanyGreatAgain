@@ -40,6 +40,8 @@ public class ProfilePageHobbiesInstrumentedTest {
             e.printStackTrace();
         }
 
+        Thread.sleep(5000);
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
         appCompatEditText.perform(click());

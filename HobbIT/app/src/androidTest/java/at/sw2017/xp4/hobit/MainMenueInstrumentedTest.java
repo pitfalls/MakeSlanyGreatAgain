@@ -42,21 +42,99 @@ public class MainMenueInstrumentedTest {
             e.printStackTrace();
         }
 
+        /****************************************/
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(3000);
+
+
+        pressBack();
+
+        ViewInteraction appCompatButton10 = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton10.perform(click());
+
+        Thread.sleep(1900);
+
+        ViewInteraction appCompatButton33 = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton33.perform(click());
+
+        Thread.sleep(1900);
+
+        onView(withText("OK")).perform(click());
+
+        Thread.sleep(1500);
+
+       /* ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.nickName), isDisplayed()));
+        appCompatEditText.perform(click());*/
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.nickName), isDisplayed()));
+        appCompatEditText2.perform(replaceText("Test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.firstName), isDisplayed()));
+        appCompatEditText3.perform(replaceText("Test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.lastName), isDisplayed()));
+        appCompatEditText4.perform(replaceText("Test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.email), isDisplayed()));
+        appCompatEditText5.perform(replaceText("test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText6 = onView(
+                allOf(withId(R.id.location), isDisplayed()));
+        appCompatEditText6.perform(replaceText("Test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText7 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText7.perform(replaceText("test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText8 = onView(
+                allOf(withId(R.id.passwordCheck), isDisplayed()));
+        appCompatEditText8.perform(replaceText("test1"), closeSoftKeyboard());
+
+        Thread.sleep(500);
+
+        //pressBack();
+
+        ViewInteraction appCompatButton1 = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton1.perform(click());
+
+         Thread.sleep(2900);
+
+        onView(withText("OK")).perform(click());
+
+        Thread.sleep(1500);
+
+        pressBack();
+
+        /****************************************/
+
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
         appCompatEditText.perform(click());
 
-        ViewInteraction appCompatEditText2 = onView(
+        ViewInteraction appCompatEditText20 = onView(
                 allOf(withId(R.id.username), isDisplayed()));
-        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+        appCompatEditText20.perform(replaceText("test"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText3 = onView(
+        ViewInteraction appCompatEditText30 = onView(
                 allOf(withId(R.id.password), isDisplayed()));
-        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+        appCompatEditText30.perform(replaceText("test"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton = onView(
+        ViewInteraction appCompatButton0 = onView(
                 allOf(withId(R.id.login), withText("Login"), isDisplayed()));
-        appCompatButton.perform(click());
+        appCompatButton0.perform(click());
 
         Thread.sleep(3500);
 

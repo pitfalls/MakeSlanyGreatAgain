@@ -123,6 +123,7 @@ public class EditProfileActivity extends AppCompatActivity {
         queue.add(getUserRequest);
     }
 
+    /* DA STIRBT ER SEHR OFT BEI DER COVERAGE!!*/ //TODO----------------------------------------------------------------------------------
     private void updateUser() {
         Response.Listener<String> updateUserResponseListener = new Response.Listener<String>() {
             @Override
@@ -138,6 +139,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 .create()
                                 .show();
                     }
+                    //--------------------------------------------------------------------------------------------------------------------
 
                 } catch (JSONException e) {
                     e.printStackTrace();

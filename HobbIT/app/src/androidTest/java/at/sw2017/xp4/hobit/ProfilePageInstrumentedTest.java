@@ -10,6 +10,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.LargeTest;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ import static org.junit.Assert.*;
  * Created by andy on 22.03.2017.
  */
 
+@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class ProfilePageInstrumentedTest {
 

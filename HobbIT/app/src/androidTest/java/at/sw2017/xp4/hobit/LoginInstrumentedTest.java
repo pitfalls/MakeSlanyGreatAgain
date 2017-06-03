@@ -3,11 +3,13 @@ package at.sw2017.xp4.hobit;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.test.suitebuilder.annotation.LargeTest;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import com.facebook.login.LoginManager;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -29,6 +32,8 @@ import static org.junit.Assert.assertEquals;
  * Created by Gerd on 17.05.2017.
  */
 
+@LargeTest
+@RunWith(AndroidJUnit4.class)
 public class LoginInstrumentedTest {
 
     @Rule
