@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +30,15 @@ public class RegisterUser extends AppCompatActivity {
     private EditText location;
     private EditText password;
     private EditText passwordCheck;
+
+
+    public void printDebugToast (CharSequence text )
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +91,12 @@ public class RegisterUser extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUser.this);
+                              /*  AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUser.this);
                                 builder.setMessage("Nice, you are now registered!")
                                         .setNegativeButton("OK", null)
                                         .create()
-                                        .show();
+                                        .show();*/
+                                printDebugToast("Nice, you are now registered!");
                                 Globals.getInstance().setUserID(jsonResponse.getString("UserID"));
                                 Intent login = new Intent(RegisterUser.this, HobIT_Main.class);
                                 startActivityForResult(login, 1);

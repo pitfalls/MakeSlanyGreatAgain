@@ -17,6 +17,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.Random;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
@@ -25,6 +27,7 @@ import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -132,6 +135,17 @@ public class MainMenueInstrumentedTest {
     }
 
 
+    //From: https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
+
+    String randomString( int len ){
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
+    }
+
     //****************************************************************************************************
     //****************************************************************************************************
     //****************************************************************************************************
@@ -143,7 +157,7 @@ public class MainMenueInstrumentedTest {
     public ActivityTestRule<HobbiT_Main_Startscreen> mActivityTestRule = new ActivityTestRule<>(HobbiT_Main_Startscreen.class);
 
     @Test
-    public  void mainMenueInstrumentedTest() throws InterruptedException {
+    public  void registerTestAndRandomRegister() throws InterruptedException {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -156,7 +170,7 @@ public class MainMenueInstrumentedTest {
         /******************************************************************************************/ // REGISTER TEST
 
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));                 //Empty Strings
         appCompatButton.perform(click());
 
         Thread.sleep(3000);
@@ -180,6 +194,7 @@ public class MainMenueInstrumentedTest {
 
         Thread.sleep(1500);
 
+        //------------------------------------------------------------------------------------------ TestStrings
        /* ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.nickName), isDisplayed()));
         appCompatEditText.perform(click());*/
@@ -220,32 +235,83 @@ public class MainMenueInstrumentedTest {
                 allOf(withId(R.id.register), withText("Register"), isDisplayed()));
         appCompatButton1.perform(click());
 
-         Thread.sleep(2900);
+        Thread.sleep(2900);
 
         onView(withText("OK")).perform(click());
 
         Thread.sleep(1500);
 
-        pressBack();
 
+        //------------------------------------------------------------------------------------------ Random User Test
+
+        appCompatEditText2 = onView(
+                allOf(withId(R.id.nickName), isDisplayed()));
+        appCompatEditText2.perform(replaceText(randomString(6)), closeSoftKeyboard());
+
+        appCompatEditText3 = onView(
+                allOf(withId(R.id.firstName), isDisplayed()));
+        appCompatEditText3.perform(replaceText(randomString(6)), closeSoftKeyboard());
+
+        appCompatEditText4 = onView(
+                allOf(withId(R.id.lastName), isDisplayed()));
+        appCompatEditText4.perform(replaceText(randomString(6)), closeSoftKeyboard());
+
+        appCompatEditText5 = onView(
+                allOf(withId(R.id.email), isDisplayed()));
+        appCompatEditText5.perform(replaceText(randomString(6)), closeSoftKeyboard());
+
+        appCompatEditText6 = onView(
+                allOf(withId(R.id.location), isDisplayed()));
+        appCompatEditText6.perform(replaceText(randomString(6)), closeSoftKeyboard());
+
+        String pw = randomString(6);
+
+        appCompatEditText7 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText7.perform(replaceText(pw), closeSoftKeyboard());
+
+        appCompatEditText8 = onView(
+                allOf(withId(R.id.passwordCheck), isDisplayed()));
+        appCompatEditText8.perform(replaceText(pw), closeSoftKeyboard());
+
+        Thread.sleep(500);
+
+        appCompatButton1 = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton1.perform(click());
+
+        Thread.sleep(2900);
+
+        //  onView(withText("OK")).perform(click());  MSG mit Ok kommt nur kurz dann geht weiter zum Starndardfenster.... lil Bug ;p
+
+        //Thread.sleep(1500);
+
+        //------------------------------------------------------------------------------------------ Ende
+
+       // pressBack();
+    }
         /******************************************************************************************/ //MAIN
 
+    @Test
+    public  void mainMenueTestFullVersion() throws InterruptedException {
+
+        Thread.sleep(5000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
         appCompatEditText.perform(click());
 
-        ViewInteraction appCompatEditText20 = onView(
+        ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.username), isDisplayed()));
-        appCompatEditText20.perform(replaceText("test"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText30 = onView(
+        ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.password), isDisplayed()));
-        appCompatEditText30.perform(replaceText("test"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton0 = onView(
+        ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.login), withText("Login"), isDisplayed()));
-        appCompatButton0.perform(click());
+        appCompatButton.perform(click());
 
         Thread.sleep(3500);
 
@@ -335,6 +401,42 @@ public class MainMenueInstrumentedTest {
         appCompatCheckedTextView3.perform(click());
 
         pressBack();
+
+    }
+
+    @Test
+    public void offlineResponderTestsRegister() throws InterruptedException {
+
+        //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
+
+        setAirplaneMode(ON);
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+
+        Thread.sleep(1500);
+
+        ViewInteraction appCompatButton7 = onView(
+                allOf(withId(android.R.id.button2), withText("Retry")));
+        appCompatButton7.perform(scrollTo(), click());
+
+        setAirplaneMode(OFF);
+
+        Thread.sleep(4000);
 
     }
 

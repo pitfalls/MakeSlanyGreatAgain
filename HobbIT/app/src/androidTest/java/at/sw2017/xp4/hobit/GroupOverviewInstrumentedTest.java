@@ -416,7 +416,6 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.login), withText("Login"), isDisplayed()));
         appCompatButton.perform(click());
 
-
         Thread.sleep(1500);
 
         ViewInteraction appCompatButton7 = onView(
@@ -425,6 +424,7 @@ public class GroupOverviewInstrumentedTest {
 
 
         setAirplaneMode(OFF);
+        Thread.sleep(4000);
 
     }
 }
