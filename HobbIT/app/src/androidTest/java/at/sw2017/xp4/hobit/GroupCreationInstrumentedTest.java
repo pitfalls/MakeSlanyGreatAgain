@@ -58,11 +58,14 @@ public class GroupCreationInstrumentedTest {
         appCompatButton.perform(click());
 
         Thread.sleep(3500);
+        closeSoftKeyboard();
+        Thread.sleep(3500);
 
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
+
         appCompatImageButton.perform(click());
 
         ViewInteraction appCompatCheckedTextView = onView(

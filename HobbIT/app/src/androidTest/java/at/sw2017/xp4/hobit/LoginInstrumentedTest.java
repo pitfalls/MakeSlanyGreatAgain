@@ -36,7 +36,7 @@ public class LoginInstrumentedTest {
             new ActivityTestRule<>(FacebookLogin.class);
 
     @Test
-    public void changeProperties() throws Exception {
+    public void changePropertiesLoginInstTest() throws Exception {
         onView(withId(R.id.username)).perform(replaceText("john.doe@testuser.com"));
         onView(withId(R.id.password)).perform(replaceText("JohnDoe"));
 
@@ -119,8 +119,4 @@ public class LoginInstrumentedTest {
     }
 */
 
-    @Test
-    public void registerTest() throws Exception {
-        onView(withId(R.id.register)).perform(click());
-    }
 }

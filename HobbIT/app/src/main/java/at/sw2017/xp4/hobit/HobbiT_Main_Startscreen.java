@@ -1,5 +1,6 @@
 package at.sw2017.xp4.hobit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ public class HobbiT_Main_Startscreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent login2 = new Intent(HobbiT_Main_Startscreen.this, FacebookLogin.class);
-                startActivityForResult(login2, 1);
+                //if(!(ourInstance).isFinishing()) {
+                    Intent login2 = new Intent(HobbiT_Main_Startscreen.this, FacebookLogin.class);
+                    startActivityForResult(login2, 1);
+               // }
             }
         }, 5000);
     }

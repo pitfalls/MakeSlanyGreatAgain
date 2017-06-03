@@ -32,7 +32,7 @@ public class MainMenueInstrumentedTest {
     public ActivityTestRule<HobbiT_Main_Startscreen> mActivityTestRule = new ActivityTestRule<>(HobbiT_Main_Startscreen.class);
 
     @Test
-    public void mainMenueInstrumentedTest() throws InterruptedException {
+    public  void mainMenueInstrumentedTest() throws InterruptedException {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -107,7 +107,13 @@ public class MainMenueInstrumentedTest {
         pressBack();
         Thread.sleep(4000);
 
-        appCompatImageButton2.perform(click());
+        ViewInteraction appCompatImageButton3 = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        withParent(withId(R.id.toolbar)),
+                        isDisplayed()));
+        appCompatImageButton3.perform(click());
+
+        //appCompatImageButton2.perform(click());
 
         Thread.sleep(1500);
 
@@ -115,18 +121,25 @@ public class MainMenueInstrumentedTest {
                 allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
         appCompatCheckedTextView2.perform(click());
 
-        ViewInteraction appCompatImageButton4 = onView(
-                allOf(withContentDescription("Nach oben"),
-                        withParent(allOf(withId(R.id.action_bar),
-                                withParent(withId(R.id.action_bar_container)))),
-                        isDisplayed()));
-        appCompatImageButton4.perform(click());
+//        ViewInteraction appCompatImageButton4 = onView(
+//                allOf(withContentDescription("Nach oben"),
+//                        withParent(allOf(withId(R.id.action_bar),
+//                                withParent(withId(R.id.action_bar_container)))),
+//                        isDisplayed()));
 
-        ViewInteraction appCompatImageButton5 = onView(
+     //   appCompatImageButton4.perform(click());
+
+        Thread.sleep(2000);
+        pressBack();
+        Thread.sleep(2000);
+
+        ViewInteraction appCompatImageButton4 = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
-        appCompatImageButton5.perform(click());
+        appCompatImageButton4.perform(click());
+
+      //  appCompatImageButton2.perform(click());
 
         ViewInteraction appCompatCheckedTextView3 = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Creation"), isDisplayed()));

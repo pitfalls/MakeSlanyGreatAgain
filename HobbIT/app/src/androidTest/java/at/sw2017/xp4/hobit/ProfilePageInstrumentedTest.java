@@ -51,7 +51,7 @@ public class ProfilePageInstrumentedTest {
             new ActivityTestRule<>(EditProfileActivity.class);
 
     @Test
-    public void changeProperties() throws Exception {
+    public void changePropertiesProfilPageInstrTest() throws Exception {
         Globals.getInstance().setUserID("2");
         mActivityRule.getActivity().update();
         Thread.sleep(4000);
@@ -69,7 +69,7 @@ public class ProfilePageInstrumentedTest {
 
         Globals.getInstance().setUserID("fb103863606870788");
         mActivityRule.getActivity().update();
-        Thread.sleep(3000);
+        Thread.sleep(6500);
 
         onView(withId(R.id.editTextProfileNickname)).check(matches(withText("SlanyTest")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("Slany")));
@@ -101,7 +101,7 @@ public class ProfilePageInstrumentedTest {
         Globals.getInstance().setUserID("test00FAIL");
         mActivityRule.getActivity().update();
 
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
        /* onView(withId(R.id.editTextProfileNickname)).check(matches(withText("")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("")));

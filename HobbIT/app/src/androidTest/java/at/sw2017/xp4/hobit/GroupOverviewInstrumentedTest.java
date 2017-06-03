@@ -42,6 +42,7 @@ public class GroupOverviewInstrumentedTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        Thread.sleep(5000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
@@ -75,11 +76,14 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
         appCompatButton2.perform(click());
 
-        Thread.sleep(3500);
+        Thread.sleep(5000);
 
+        //Failt hin und wieder
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(android.R.id.button2), withText("Ok")));
         appCompatButton3.perform(scrollTo(), click());
+
+        //onView(withText("OK")).perform(click());
 
         ViewInteraction appCompatSpinner = onView(
                 allOf(withId(R.id.spinnerHobbies), isDisplayed()));
@@ -214,7 +218,9 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
         appCompatButton4.perform(click());
 
-        Thread.sleep(2500);
+        Thread.sleep(5000);
+
+      //  onView(withText("OK")).perform(click());
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(android.R.id.button2), withText("Ok")));
