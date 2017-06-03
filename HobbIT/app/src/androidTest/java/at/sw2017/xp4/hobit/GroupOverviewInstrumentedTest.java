@@ -1,15 +1,24 @@
 package at.sw2017.xp4.hobit;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+import android.util.Log;
 import android.widget.Spinner;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.IOException;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
@@ -22,12 +31,116 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class GroupOverviewInstrumentedTest {
+
+    // Von: https://stackoverflow.com/questions/25674655/how-to-turn-on-off-airplane-mode-even-on-new-android-versions-and-even-with-ro
+    //****************************************************************************************************
+    //****************************************************************************************************
+
+    public boolean isNetworkAvailable(Context contextValue) {
+        Context context = contextValue;
+        ConnectivityManager connectivity = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivity != null) {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
+    private void executeCommandWithoutWait(Context context, String option, String command) {
+        boolean success = false;
+        String su = "su";
+        for (int i = 0; i < 3; i++) {
+            // "su" command executed successfully.
+            if (success) {
+                // Stop executing alternative su commands below.
+                break;
+            }
+            if (i == 1) {
+                su = "/system/xbin/su";
+            } else if (i == 2) {
+                su = "/system/bin/su";
+            }
+            try {
+                // execute command
+                Runtime.getRuntime().exec(new String[]{su, option, command});
+            } catch (IOException e) {
+                Log.e("", "su command has failed due to: " + e.fillInStackTrace());
+            }
+        }
+    }
+
+    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
+    private boolean isFlightModeEnabled(Context context) {
+        boolean mode = false;
+        // API 17 onwards
+        mode = Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+        return mode;
+    }
+
+    private final String COMMAND_FLIGHT_MODE_1 = "settings put global airplane_mode_on";
+    private final String COMMAND_FLIGHT_MODE_2 = "am broadcast -a android.intent.action.AIRPLANE_MODE --ez state";
+
+    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
+    public void setFlightMode(Context context, int mode) {
+        // API 17 and greater :)
+        // NEEDS ROOT ACCESS!!!!!! SU Abfrage wird gemacht.. dann nochmals starten..
+       // int enabled = isFlightModeEnabled(context) ? 0 : 1;
+        // Set Airplane / Flight mode using su commands.
+        String command = COMMAND_FLIGHT_MODE_1 + " " + mode;
+        executeCommandWithoutWait(context, "-c", command);
+        command = COMMAND_FLIGHT_MODE_2 + " " + mode;
+        executeCommandWithoutWait(context, "-c", command);
+
+        //--------------------------------------------------- flightmode set
+
+      /*  ConnectivityManager mgr =  (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mgr.setAirplaneMode(true);*/
+
+    }
+
+
+    static final boolean ON = true;
+    static final boolean OFF = false;
+    @SuppressLint("NewApi")
+    public void setAirplaneMode(boolean mode) throws InterruptedException {
+        Thread.sleep(1500);
+
+        if(mode)
+        {
+            setFlightMode(mActivityTestRule.getActivity(), 1);
+            Thread.sleep(7500);
+        }
+        else {
+            setFlightMode(mActivityTestRule.getActivity(), 0);
+            Thread.sleep(7500);
+        }
+    }
+
+
+    //****************************************************************************************************
+    //****************************************************************************************************
+    //****************************************************************************************************
+    //****************************************************************************************************
+    //****************************************************************************************************
+    //****************************************************************************************************
 
     @Rule
     public ActivityTestRule<HobbiT_Main_Startscreen> mActivityTestRule = new ActivityTestRule<>(HobbiT_Main_Startscreen.class);
@@ -208,31 +321,13 @@ public class GroupOverviewInstrumentedTest {
 
         Thread.sleep(5000);
 
-      //  onView(withText("OK")).perform(click());
-
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(android.R.id.button2), withText("Ok")));
         appCompatButton5.perform(scrollTo(), click());
 
-        /*ViewInteraction appCompatEditText12 = onView(
-                allOf(withId(R.id.txtview_location_input), withText("Salz"), isDisplayed()));
-        appCompatEditText12.perform(replaceText("Salz7"), closeSoftKeyboard());*/
-
         onView(withId(R.id.txtview_location_input)).perform(replaceText("Salz7"));
 
-       /* ViewInteraction appCompatSpinner15 = onView(
-                allOf(withId(R.id.spinnerHobbies), isDisplayed()));
-        appCompatSpinner15.perform(click());*/
-
         Thread.sleep(500);
-
-   /*     ViewInteraction appCompatSpinner16 = onView(
-                allOf(withId(R.id.spinnerLocation), isDisplayed()));
-        appCompatSpinner16.perform(click());
-
-        ViewInteraction appCompatSpinner17 = onView(
-                allOf(withId(R.id.spinnerGroup), isDisplayed()));
-        appCompatSpinner17.perform(click());*/
 
         ViewInteraction appCompatButton6 = onView(
                 allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
@@ -250,15 +345,7 @@ public class GroupOverviewInstrumentedTest {
 
         onView(withId(R.id.txtview_location_input)).perform(replaceText("Salz"));
 
-   /*     ViewInteraction appCompatEditText14 = onView(
-                allOf(withId(R.id.txtview_location_input), withText("Salz7"), isDisplayed()));
-        appCompatEditText14.perform(replaceText("Salz"), closeSoftKeyboard());
-*/
         Thread.sleep(500);
-
-   /*     ViewInteraction appCompatEditText15 = onView(
-                allOf(withId(R.id.txtGroupText), withText("Cyc"), isDisplayed()));
-        appCompatEditText15.perform(replaceText("Cyc6"), closeSoftKeyboard());*/
 
         onView(withId(R.id.txtGroupText)).perform(replaceText("Cyc6"));
 
@@ -299,11 +386,45 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.spinnerGroup), isDisplayed()));
         appCompatSpinner18.perform(click());*/
 
-     //   onView(withId(R.id.txtGroupText)).perform(replaceText(""));
+        //   onView(withId(R.id.txtGroupText)).perform(replaceText(""));
 
         /***********************/
 
 
     }
 
+    @Test
+    public void offlineResponderTests() throws InterruptedException {
+
+      //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
+
+        setAirplaneMode(ON);
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+
+        Thread.sleep(1500);
+
+        ViewInteraction appCompatButton7 = onView(
+                allOf(withId(android.R.id.button2), withText("Retry")));
+        appCompatButton7.perform(scrollTo(), click());
+
+
+        setAirplaneMode(OFF);
+
+    }
 }
