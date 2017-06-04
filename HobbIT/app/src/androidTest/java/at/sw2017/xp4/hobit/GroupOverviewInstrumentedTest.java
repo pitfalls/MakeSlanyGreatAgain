@@ -126,11 +126,11 @@ public class GroupOverviewInstrumentedTest {
         if(mode)
         {
             setFlightMode(mActivityTestRule.getActivity(), 1);
-            Thread.sleep(7500);
+            Thread.sleep(10000);
         }
         else {
             setFlightMode(mActivityTestRule.getActivity(), 0);
-            Thread.sleep(7500);
+            Thread.sleep(10000);
         }
     }
 
@@ -180,6 +180,7 @@ public class GroupOverviewInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
         appCompatImageButton.perform(click());
+        Thread.sleep(500);
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
@@ -395,6 +396,11 @@ public class GroupOverviewInstrumentedTest {
 
     @Test
     public void offlineResponderTests() throws InterruptedException {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
       //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
 
@@ -419,10 +425,10 @@ public class GroupOverviewInstrumentedTest {
 
         Thread.sleep(1500);
 
-        ViewInteraction appCompatButton7 = onView(
+        /*ViewInteraction appCompatButton7 = onView(
                 allOf(withId(android.R.id.button2), withText("Retry")));
         appCompatButton7.perform(scrollTo(), click());
-
+*/
         setAirplaneMode(OFF);
 
         Thread.sleep(4000);

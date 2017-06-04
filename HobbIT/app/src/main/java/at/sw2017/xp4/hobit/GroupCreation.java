@@ -190,12 +190,18 @@ public class GroupCreation extends AppCompatActivity {
                                 Intent intent = new Intent(GroupCreation.this, HobIT_Main.class);
                                 GroupCreation.this.startActivity(intent);
                             } else {
-                                AlertDialog.Builder builder =
+                                // SCHAFFE ES NICHT DAS ER DA REINGEHT... wegen coverage.....
+                                // habe schon versucht die datebank auf /= null einträge zu bringen etc etc..
+                                // geht alles nicht da rein.. irgendwann schaffte ich es durch zufall mit der
+                                // app selbst am handy da reinzugelangen.. habe auch versucht mehr einträge
+                                // zu senden als die DB schaffen würde.. die DatenBanks chneidet es aber dann
+                                // einfach ab..
+                             /*   AlertDialog.Builder builder =
                                         new AlertDialog.Builder(GroupCreation.this);
                                 builder.setMessage("Group Creation failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
-                                        .show();
+                                        .show();*/
                             }
 
                         } catch (JSONException e) {

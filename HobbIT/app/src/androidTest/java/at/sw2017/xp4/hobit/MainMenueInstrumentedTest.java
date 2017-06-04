@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
@@ -33,6 +34,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -126,13 +128,27 @@ public class MainMenueInstrumentedTest {
         if(mode)
         {
             setFlightMode(mActivityTestRule.getActivity(), 1);
-            Thread.sleep(7500);
+            Thread.sleep(10000);
         }
         else {
             setFlightMode(mActivityTestRule.getActivity(), 0);
-            Thread.sleep(7500);
+            Thread.sleep(10000);
         }
     }
+/*
+    public void setWlanMode(boolean mode)
+    {
+        if(mode) {
+            WifiManager wifiManager = (WifiManager)this.mActivityTestRule.getActivity().getApplicationContext(mActivityTestRule.getActivity().WIFI_SERVICE);
+            wifiManager.setWifiEnabled(true);
+        }
+        else
+        {
+            WifiManager wifiManager = (WifiManager)this.mActivityTestRule.getActivity().getApplicationContext(Context.WIFI_SERVICE);
+            wifiManager.setWifiEnabled(false);
+        }
+
+    }*/
 
 
     //From: https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
@@ -295,6 +311,12 @@ public class MainMenueInstrumentedTest {
     @Test
     public  void mainMenueTestFullVersion() throws InterruptedException {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         Thread.sleep(5000);
 
         ViewInteraction appCompatEditText = onView(
@@ -343,6 +365,7 @@ public class MainMenueInstrumentedTest {
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
+        Thread.sleep(500);
         pressBack();
 
         ViewInteraction appCompatImageButton2 = onView(
@@ -350,6 +373,7 @@ public class MainMenueInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
         appCompatImageButton2.perform(click());
+        Thread.sleep(500);
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Join Group"), isDisplayed()));
@@ -393,7 +417,7 @@ public class MainMenueInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
         appCompatImageButton4.perform(click());
-
+        Thread.sleep(500);
       //  appCompatImageButton2.perform(click());
 
         ViewInteraction appCompatCheckedTextView3 = onView(
@@ -407,9 +431,15 @@ public class MainMenueInstrumentedTest {
     @Test
     public void offlineResponderTestsRegister() throws InterruptedException {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
 
         setAirplaneMode(ON);
+        assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
@@ -439,5 +469,99 @@ public class MainMenueInstrumentedTest {
         Thread.sleep(4000);
 
     }
+
+
+    @Test
+    public void offlineRegistration() throws InterruptedException {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        setAirplaneMode(ON);
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.nickName), isDisplayed()));
+        appCompatEditText2.perform(replaceText("Test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.firstName), isDisplayed()));
+        appCompatEditText3.perform(replaceText("Test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.lastName), isDisplayed()));
+        appCompatEditText4.perform(replaceText("Test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.email), isDisplayed()));
+        appCompatEditText5.perform(replaceText("test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText6 = onView(
+                allOf(withId(R.id.location), isDisplayed()));
+        appCompatEditText6.perform(replaceText("Test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText7 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText7.perform(replaceText("test1"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText8 = onView(
+                allOf(withId(R.id.passwordCheck), isDisplayed()));
+        appCompatEditText8.perform(replaceText("test1"), closeSoftKeyboard());
+
+        Thread.sleep(500);
+
+        ViewInteraction appCompatButton10 = onView(
+                allOf(withId(R.id.register), withText("Register"), isDisplayed()));
+        appCompatButton10.perform(click());
+
+        setAirplaneMode(OFF);
+
+    }
+    @Test
+    public void offlineUpdateEditProfile() throws InterruptedException {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(3500);
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+
+        setAirplaneMode(ON);
+
+        ViewInteraction appCompatTextView2 = onView(
+                allOf(withId(R.id.title), withText("Edit Profile"), isDisplayed()));
+        appCompatTextView2.perform(click());
+
+        pressBack();
+
+        setAirplaneMode(OFF);
+        pressBack();
+
+    }
+
 
 }

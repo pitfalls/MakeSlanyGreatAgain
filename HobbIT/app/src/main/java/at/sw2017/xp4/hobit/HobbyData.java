@@ -30,7 +30,4 @@ public class HobbyData {
         return groupList;
     }
 
-    public void setGroupList(ArrayList<GroupData> groupList) {
-        this.groupList = groupList;
-    }
 }

@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import at.sw2017.xp4.hobit.requests.GetHobbiesDestinationRequest;
-import at.sw2017.xp4.hobit.requests.GetUserGroupsRequest;
 
 public class HobbyGroupListActivity extends Activity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
@@ -123,6 +122,7 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
                         .show();
             }
         };
+
         GetHobbiesDestinationRequest getUserGroupsRequest = new GetHobbiesDestinationRequest(listener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(HobbyGroupListActivity.this);
         queue.add(getUserGroupsRequest);

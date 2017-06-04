@@ -169,6 +169,12 @@ public class GroupOverview extends AppCompatActivity {
 
             currentId = spinnerArray[4][idPosition];
             descriptionView.setText(spinnerArray[3][idPosition]);
+
+            if (groupList.isEmpty())
+            {
+                currentId = "";
+                descriptionView.setText("");
+            }
         }
         catch(Exception e)
         {
@@ -176,11 +182,6 @@ public class GroupOverview extends AppCompatActivity {
         }
 
 
-        if (groupList.isEmpty())
-        {
-            currentId = "";
-            descriptionView.setText("");
-        }
 
     }
 
@@ -415,7 +416,7 @@ public class GroupOverview extends AppCompatActivity {
                     //----------------------------------------------------------------------------------
 
                 } catch (JSONException e) {
-                    printDebugToast("ALLES SCHEIẞE");
+                  //  printDebugToast("ALLES SCHEIẞE");
                     e.printStackTrace();
                 }
 

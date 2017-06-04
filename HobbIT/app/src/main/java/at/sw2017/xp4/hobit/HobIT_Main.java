@@ -125,6 +125,9 @@ public class HobIT_Main extends AppCompatActivity
 
                 Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
                 startActivity(newIntent);
+
+                //TODO Hier noch das von der groupoverview einfügen
+
             }
         });
     }
