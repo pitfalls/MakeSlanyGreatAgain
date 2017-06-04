@@ -416,14 +416,15 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.login), withText("Login"), isDisplayed()));
         appCompatButton.perform(click());
 
+
         Thread.sleep(1500);
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(android.R.id.button2), withText("Retry")));
         appCompatButton7.perform(scrollTo(), click());
 
-
         setAirplaneMode(OFF);
+
         Thread.sleep(4000);
 
     }
