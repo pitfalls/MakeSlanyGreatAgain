@@ -192,7 +192,7 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(500);
+        Thread.sleep(2500);
 
         appCompatImageButton.perform(click());
 
@@ -212,7 +212,7 @@ public class GroupCreationInstrumentedTest {
 
         Thread.sleep(3500);
 
-         appCompatImageButton = onView(
+        appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
@@ -350,7 +350,7 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(500);
+        Thread.sleep(2500);
 
         appCompatImageButton.perform(click());
 

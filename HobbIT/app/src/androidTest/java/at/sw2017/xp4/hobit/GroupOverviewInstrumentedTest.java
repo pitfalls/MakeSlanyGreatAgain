@@ -179,8 +179,8 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
+        Thread.sleep(1500);
         appCompatImageButton.perform(click());
-        Thread.sleep(500);
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
@@ -405,6 +405,8 @@ public class GroupOverviewInstrumentedTest {
       //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
 
         setAirplaneMode(ON);
+
+        //  assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));

@@ -12,7 +12,13 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,12 +36,14 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -253,10 +261,11 @@ public class MainMenueInstrumentedTest {
 
         Thread.sleep(2900);
 
-        onView(withText("OK")).perform(click());
-
+        //onView(withText("OK")).perform(click());
+        pressBack();
         Thread.sleep(1500);
 
+       // mActivityTestRule.getClass().update();
 
         //------------------------------------------------------------------------------------------ Random User Test
 
@@ -429,6 +438,127 @@ public class MainMenueInstrumentedTest {
     }
 
     @Test
+    public void joinGroupAndMainScreenInstrumentedTest() throws InterruptedException {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(4000);
+
+        pressBack();
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton2.perform(click());
+
+        Thread.sleep(4000);
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(android.R.id.text1), withText("House & garden"),
+                        childAtPosition(
+                                allOf(withId(R.id.ListViewGroups),
+                                        withParent(withId(R.id.main_view))),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        pressBack();
+
+        Thread.sleep(3000);
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        withParent(withId(R.id.toolbar)),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        Thread.sleep(3000);
+
+        ViewInteraction appCompatCheckedTextView = onView(
+                allOf(withId(R.id.design_menu_item_text), withText("Join Group"), isDisplayed()));
+        appCompatCheckedTextView.perform(click());
+
+        Thread.sleep(3000);
+
+        ViewInteraction searchAutoComplete = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+
+        Thread.sleep(2000);
+        searchAutoComplete.perform(replaceText("fl"), closeSoftKeyboard());
+        Thread.sleep(4000);
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.name), withText("Flowerpower"),
+                        withParent(childAtPosition(
+                                withId(R.id.expandableList),
+                                1)),
+                        isDisplayed()));
+        textView.perform(click());
+
+        Thread.sleep(3000);
+
+        pressBack();
+
+        Thread.sleep(1500);
+
+        ViewInteraction searchAutoComplete2 = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("fl"),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+
+        Thread.sleep(2000);
+        searchAutoComplete.perform(replaceText("bfl"), closeSoftKeyboard());
+        searchAutoComplete.perform(replaceText("b"), closeSoftKeyboard());
+
+        Thread.sleep(4000);
+
+        ViewInteraction imageView2 = onView(
+                allOf(withClassName(is("android.widget.ImageView")), withContentDescription("Abfrage löschen"),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+        imageView2.perform(click());
+
+        Thread.sleep(1500);
+
+        // textView.perform(click());
+
+        // Thread.sleep(1500);
+
+//        ViewInteraction appCompatButton3 = onView(
+//                allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
+//        appCompatButton3.perform(click());
+
+        Thread.sleep(1500);
+
+    }
+
+    @Test
     public void offlineResponderTestsRegister() throws InterruptedException {
 
         try {
@@ -522,6 +652,7 @@ public class MainMenueInstrumentedTest {
         setAirplaneMode(OFF);
 
     }
+
     @Test
     public void offlineUpdateEditProfile() throws InterruptedException {
         try {
@@ -563,5 +694,95 @@ public class MainMenueInstrumentedTest {
 
     }
 
+    @Test
+    public void offlineTestJoinGroup() throws InterruptedException {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(3500);
+        setAirplaneMode(ON);
+        assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
+        Thread.sleep(500);
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        withParent(withId(R.id.toolbar)),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        Thread.sleep(1500);
+
+        ViewInteraction appCompatCheckedTextView = onView(
+                allOf(withId(R.id.design_menu_item_text), withText("Join Group"), isDisplayed()));
+        appCompatCheckedTextView.perform(click());
+
+        Thread.sleep(1000);
+        pressBack();
+        Thread.sleep(1000);
+
+        ViewInteraction searchAutoComplete = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+
+        Thread.sleep(2500);
+        pressBack();
+        Thread.sleep(2000);
+        searchAutoComplete.perform(replaceText("fl"), closeSoftKeyboard());
+        Thread.sleep(4000);
+//
+//        Thread.sleep(1500);
+//
+//        ViewInteraction appCompatButton3 = onView(
+//                allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
+//        appCompatButton3.perform(click());
+
+
+        pressBack();
+
+        setAirplaneMode(OFF);
+        pressBack();
+
+    }
+
+
+    private static Matcher<View> childAtPosition(
+            final Matcher<View> parentMatcher, final int position) {
+
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup && parentMatcher.matches(parent)
+                        && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
 
 }

@@ -190,15 +190,22 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
     @Override
     public boolean onQueryTextChange(String query) {
-        listAdapter.filterData(query);
-        expandAll();
+       if(query != null && !query.isEmpty() && listAdapter != null)
+       {
+           listAdapter.filterData(query);
+           expandAll();
+       }
+
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        listAdapter.filterData(query);
-        expandAll();
+        if(query != null && !query.isEmpty() && listAdapter != null)
+        {
+            listAdapter.filterData(query);
+            expandAll();
+        }
         return false;
     }
 
