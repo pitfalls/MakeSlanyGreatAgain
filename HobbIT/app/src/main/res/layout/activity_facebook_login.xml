@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/all_hobby"
     tools:context="at.sw2017.xp4.hobit.FacebookLogin"
     android:weightSum="1">
 

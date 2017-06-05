@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/com_facebook_button_login_silver_background_color"
+    android:background="@drawable/football_ball"
     tools:context="at.sw2017.xp4.hobit.GroupCreation">
 
     <TextView

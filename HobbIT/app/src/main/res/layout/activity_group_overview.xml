@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_groups_overview"
+    android:background="@drawable/dribb_logo"
     tools:context="at.sw2017.xp4.hobit.GroupOverview">
 
     <TextView
