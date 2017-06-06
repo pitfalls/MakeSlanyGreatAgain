@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import at.sw2017.xp4.hobit.requests.GetHobbiesDestinationRequest;
-import at.sw2017.xp4.hobit.requests.GetUserGroupsRequest;
 
 public class HobbyGroupListActivity extends Activity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
@@ -117,12 +116,13 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HobbyGroupListActivity.this);
-                builder.setMessage("Connection failed")
+                builder.setMessage("Connection failed HGLA")
                         .setNegativeButton("Retry", null)
                         .create()
                         .show();
             }
         };
+
         GetHobbiesDestinationRequest getUserGroupsRequest = new GetHobbiesDestinationRequest(listener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(HobbyGroupListActivity.this);
         queue.add(getUserGroupsRequest);
@@ -183,22 +183,29 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
     @Override
     public boolean onClose() {
-        listAdapter.filterData("");
-        expandAll();
+       /* listAdapter.filterData("");
+        expandAll();*/
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String query) {
-        listAdapter.filterData(query);
-        expandAll();
+       if(query != null && !query.isEmpty() && listAdapter != null)
+       {
+           listAdapter.filterData(query);
+           expandAll();
+       }
+
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        listAdapter.filterData(query);
-        expandAll();
+        /*if(query != null && !query.isEmpty() && listAdapter != null)
+        {
+            listAdapter.filterData(query);
+            expandAll();
+        }*/
         return false;
     }
 

@@ -97,7 +97,7 @@ public class FacebookLogin extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FacebookLogin.this);
-                        builder.setMessage("Connection failed")
+                        builder.setMessage("Connection failed FBL")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
@@ -172,7 +172,7 @@ public class FacebookLogin extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FacebookLogin.this);
-                        builder.setMessage("Connection failed")
+                        builder.setMessage("Connection failed FPL2")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();

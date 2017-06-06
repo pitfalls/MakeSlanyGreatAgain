@@ -1,7 +1,7 @@
 package at.sw2017.xp4.hobit;
 
 /**
- * Created by Michaela on 10.05.2017.
+ * Created by Fräulein Michaela on 10.05.2017.
  */
 
 import java.text.NumberFormat;
@@ -10,12 +10,16 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
 
@@ -36,6 +40,14 @@ public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
         this.originalList.addAll(hobbyList);
 
  //       this.packageContext = packageContext;
+    }
+
+    public void printDebugToast (CharSequence text )
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast save_toast = Toast.makeText(context, text, duration);
+        save_toast.show();
     }
 
     @Override
@@ -65,12 +77,19 @@ public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
         View.OnClickListener clickListen = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*int duration = Toast.LENGTH_SHORT;
+               /* int duration = Toast.LENGTH_SHORT;
                 String text = "test on click output Name:" + group.getName() + " ID:" + group.getId();
-                Toast save_toast = Toast.makeText(appContext, text, duration);
+                Toast save_toast = Toast.makeText(HobbyGroupListAdapter.class, text, duration);
                 save_toast.show();*/
+              //  String text = "test on click output Name:" + group.getName() ;
+
+              //  printDebugToast(text);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Group", group.getName());
 
                 Intent intent = new Intent(context, GroupOverview.class);
+                intent.putExtras(bundle);
                 // pass group data details to next activity
                 de.greenrobot.event.EventBus.getDefault().postSticky(group);
 

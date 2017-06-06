@@ -55,17 +55,20 @@ public class GroupOverview extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     Spinner spinnerHobby, spinnerLocation, spinnerGroup;
     EditText groupInput,locationInput;
+    Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_overview);
+        b = getIntent().getExtras();
+
 
         setTitle("<GroupName>");
         setOnClickListeners();
-        setOnClickListeners();
 
         getObjectFromEventQueue();
+
     }
 
     private void getObjectFromEventQueue ()
@@ -108,8 +111,11 @@ public class GroupOverview extends AppCompatActivity {
 
             UpdateSpinner();
 
-            currentId = spinnerArray[4][0];
-            descriptionView.setText(spinnerArray[3][0]);
+            if(spinnerArray != null)
+            {
+                currentId = spinnerArray[4][0];
+                descriptionView.setText(spinnerArray[3][0]);
+            }
 
             return;
         }
@@ -119,16 +125,15 @@ public class GroupOverview extends AppCompatActivity {
 
         if (groupFilter.equals(""))
         {
-            for(int iter = 0; iter < spinnerArray[0].length; iter++)
-            {
-                // [1] location
-                if (spinnerArray[1][iter].contains(locationFilter))
-                {
-                    AddToSpinner(iter);
-                    if (!idSet)
-                    {
-                        idSet = true;
-                        idPosition = iter;
+            if(spinnerArray != null && spinnerArray[0] != null) {
+                for (int iter = 0; iter < spinnerArray[0].length; iter++) {
+                    // [1] location
+                    if (spinnerArray[1][iter].contains(locationFilter)) {
+                        AddToSpinner(iter);
+                        if (!idSet) {
+                            idSet = true;
+                            idPosition = iter;
+                        }
                     }
                 }
             }
@@ -136,6 +141,7 @@ public class GroupOverview extends AppCompatActivity {
         }
         else if(locationFilter.equals(""))
         {
+            if(spinnerArray != null && spinnerArray[0] != null) {
             for(int iter = 0; iter < spinnerArray[0].length; iter++)
             {
                 // [2] group
@@ -148,6 +154,7 @@ public class GroupOverview extends AppCompatActivity {
                         idPosition = iter;
                     }
                 }
+            }
             }
         }
             else
@@ -164,30 +171,43 @@ public class GroupOverview extends AppCompatActivity {
             }
         }
 
-        UpdateSpinner();
+        try{
 
-        currentId = spinnerArray[4][idPosition];
-        descriptionView.setText(spinnerArray[3][idPosition]);
+            UpdateSpinner();
 
-        if (groupList.isEmpty())
-        {
-            currentId = "";
-            descriptionView.setText("");
+            currentId = spinnerArray[4][idPosition];
+            descriptionView.setText(spinnerArray[3][idPosition]);
+
+            if (groupList.isEmpty())
+            {
+                currentId = "";
+                descriptionView.setText("");
+            }
         }
+        catch(Exception e)
+        {
+
+        }
+
+
 
     }
 
     //----------------------------------------------------------------------------------------------
     void UpdateSpinner()
     {
-        setAdapterContent(hobbyList);
-        spinnerHobby.setAdapter(adapter);
+        if(adapter != null)
+        {
 
-        setAdapterContent(locationList);
-        spinnerLocation.setAdapter(adapter);
+            setAdapterContent(hobbyList);
+            spinnerHobby.setAdapter(adapter);
 
-        setAdapterContent(groupList);
-        spinnerGroup.setAdapter(adapter);
+            setAdapterContent(locationList);
+            spinnerLocation.setAdapter(adapter);
+
+            setAdapterContent(groupList);
+            spinnerGroup.setAdapter(adapter);
+        }
 
     }
 
@@ -291,14 +311,15 @@ public class GroupOverview extends AppCompatActivity {
             }
         };
 
+        // Kommt nie?
         final Response.ErrorListener joinErrorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+             /*   AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
                 builder.setMessage("you are not good enough to join!! ;-)")
                         .setNegativeButton("Retry", null)
                         .create()
-                        .show();
+                        .show();*/
             }
         };
 
@@ -355,6 +376,8 @@ public class GroupOverview extends AppCompatActivity {
                     }
 
 
+
+
                     descriptionView = (TextView) findViewById(R.id.txtview_description_input);
 
                     spinnerHobby = (Spinner) findViewById(R.id.spinnerHobbies);
@@ -398,13 +421,22 @@ public class GroupOverview extends AppCompatActivity {
 
                     descriptionView.setText(spinnerArray[3][0]);
 
+                    // wir haben was von einer anderen Intent bekommen
+                    if (b != null)
+                    {
+                        //    groupInput.setText(b.getString("Group") + " ", TextView.BufferType.EDITABLE);
+                        groupInput.setText(b.getString("Group"), TextView.BufferType.EDITABLE);
+                        HandleSpinnercontent(b.getString("Group"), "");
+
+                    }
+
                   //  printDebugToast("Juuunge fetish!");
 
                     //----------------------------------------------------------------------------------
                     //----------------------------------------------------------------------------------
 
                 } catch (JSONException e) {
-                    printDebugToast("ALLES SCHEIẞE");
+                  //  printDebugToast("ALLES SCHEIẞE");
                     e.printStackTrace();
                 }
 
@@ -439,7 +471,7 @@ public class GroupOverview extends AppCompatActivity {
                 if (currentId.isEmpty())
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
-                    builder.setMessage("No Group was selected :) punk - testId: ")
+                    builder.setMessage("No Group was selected :) punk - testId: empty")
                             .setNegativeButton("Retry", null)
                             .create()
                             .show();

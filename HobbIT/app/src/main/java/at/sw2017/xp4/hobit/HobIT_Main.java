@@ -80,7 +80,7 @@ public class HobIT_Main extends AppCompatActivity
                 }
                 catch (JSONException e)
                 {
-                    printDebugToast("Probleme");
+                  //  printDebugToast("Probleme");
                     e.printStackTrace();
                 }
             }
@@ -125,6 +125,9 @@ public class HobIT_Main extends AppCompatActivity
 
                 Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
                 startActivity(newIntent);
+
+                //TODO Hier noch das von der groupoverview einfügen
+
             }
         });
     }
@@ -149,8 +152,8 @@ public class HobIT_Main extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               /* Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Milos on 26.4.2017.
+ * Created by Herr Milos on 26.4.2017.
  */
 
 public class GroupCreationRequest extends StringRequest{
