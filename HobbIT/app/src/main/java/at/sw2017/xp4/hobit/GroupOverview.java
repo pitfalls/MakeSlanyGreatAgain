@@ -55,17 +55,20 @@ public class GroupOverview extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     Spinner spinnerHobby, spinnerLocation, spinnerGroup;
     EditText groupInput,locationInput;
+    Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_overview);
+        b = getIntent().getExtras();
+
 
         setTitle("<GroupName>");
         setOnClickListeners();
-        setOnClickListeners();
 
         getObjectFromEventQueue();
+
     }
 
     private void getObjectFromEventQueue ()
@@ -138,6 +141,7 @@ public class GroupOverview extends AppCompatActivity {
         }
         else if(locationFilter.equals(""))
         {
+            if(spinnerArray != null && spinnerArray[0] != null) {
             for(int iter = 0; iter < spinnerArray[0].length; iter++)
             {
                 // [2] group
@@ -150,6 +154,7 @@ public class GroupOverview extends AppCompatActivity {
                         idPosition = iter;
                     }
                 }
+            }
             }
         }
             else
@@ -371,6 +376,8 @@ public class GroupOverview extends AppCompatActivity {
                     }
 
 
+
+
                     descriptionView = (TextView) findViewById(R.id.txtview_description_input);
 
                     spinnerHobby = (Spinner) findViewById(R.id.spinnerHobbies);
@@ -413,6 +420,15 @@ public class GroupOverview extends AppCompatActivity {
                     currentId = spinnerArray[4][0];
 
                     descriptionView.setText(spinnerArray[3][0]);
+
+                    // wir haben was von einer anderen Intent bekommen
+                    if (b != null)
+                    {
+                        //    groupInput.setText(b.getString("Group") + " ", TextView.BufferType.EDITABLE);
+                        groupInput.setText(b.getString("Group"), TextView.BufferType.EDITABLE);
+                        HandleSpinnercontent(b.getString("Group"), "");
+
+                    }
 
                   //  printDebugToast("Juuunge fetish!");
 

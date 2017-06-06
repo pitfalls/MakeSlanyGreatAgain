@@ -227,7 +227,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Type in your Group"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:maxLength="20"
         app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintLeft_toRightOf="@+id/textView4"
