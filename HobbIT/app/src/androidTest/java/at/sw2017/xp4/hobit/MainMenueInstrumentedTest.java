@@ -555,47 +555,47 @@ public class MainMenueInstrumentedTest {
 //
 //    }
 
-    @Test
-    public void offlineResponderTestsRegister() throws InterruptedException {
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
-
-        setWlanMode(ON);
-        assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
-
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.username), isDisplayed()));
-        appCompatEditText.perform(click());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.username), isDisplayed()));
-        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.password), isDisplayed()));
-        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
-        appCompatButton.perform(click());
-
-
-        Thread.sleep(1500);
-
-        ViewInteraction appCompatButton7 = onView(
-                allOf(withId(android.R.id.button2), withText("Retry")));
-        appCompatButton7.perform(scrollTo(), click());
-
-        setWlanMode(OFF);
-
-        Thread.sleep(4000);
-
-    }
+//    @Test
+//    public void offlineResponderTestsRegister() throws InterruptedException {
+//
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
+//
+//        setWlanMode(ON);
+//        assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
+//
+//        ViewInteraction appCompatEditText = onView(
+//                allOf(withId(R.id.username), isDisplayed()));
+//        appCompatEditText.perform(click());
+//
+//        ViewInteraction appCompatEditText2 = onView(
+//                allOf(withId(R.id.username), isDisplayed()));
+//        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+//
+//        ViewInteraction appCompatEditText3 = onView(
+//                allOf(withId(R.id.password), isDisplayed()));
+//        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+//
+//        ViewInteraction appCompatButton = onView(
+//                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+//        appCompatButton.perform(click());
+//
+//
+//        Thread.sleep(1500);
+//
+//        ViewInteraction appCompatButton7 = onView(
+//                allOf(withId(android.R.id.button2), withText("Retry")));
+//        appCompatButton7.perform(scrollTo(), click());
+//
+//        setWlanMode(OFF);
+//
+//        Thread.sleep(4000);
+//
+//    }
 
 
     @Test

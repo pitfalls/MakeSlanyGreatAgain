@@ -315,11 +315,11 @@ public class GroupOverview extends AppCompatActivity {
         final Response.ErrorListener joinErrorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+             /*   AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
                 builder.setMessage("you are not good enough to join!! ;-)")
                         .setNegativeButton("Retry", null)
                         .create()
-                        .show();
+                        .show();*/
             }
         };
 

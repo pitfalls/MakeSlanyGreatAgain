@@ -183,8 +183,8 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
     @Override
     public boolean onClose() {
-        listAdapter.filterData("");
-        expandAll();
+       /* listAdapter.filterData("");
+        expandAll();*/
         return false;
     }
 
@@ -201,11 +201,11 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        if(query != null && !query.isEmpty() && listAdapter != null)
+        /*if(query != null && !query.isEmpty() && listAdapter != null)
         {
             listAdapter.filterData(query);
             expandAll();
-        }
+        }*/
         return false;
     }
 

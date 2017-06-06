@@ -33,12 +33,14 @@ import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
@@ -368,6 +370,50 @@ public class ProfilePageHobbiesInstrumentedTest {
             }
         };
     }
+
+    @Test
+    public void offlineResponderTestsRegister() throws InterruptedException {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
+
+        setWlanMode(ON);
+        assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+
+        Thread.sleep(1500);
+
+        ViewInteraction appCompatButton7 = onView(
+                allOf(withId(android.R.id.button2), withText("Retry")));
+        appCompatButton7.perform(scrollTo(), click());
+
+        setWlanMode(OFF);
+
+        Thread.sleep(4000);
+
+    }
+
+
     @Test
     public void joinGroupAndMainScreenInstrumentedTest() throws InterruptedException {
         // Added a sleep statement to match the app's execution delay.

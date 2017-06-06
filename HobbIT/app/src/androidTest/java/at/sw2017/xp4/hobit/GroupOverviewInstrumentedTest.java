@@ -182,7 +182,7 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.login), withText("Login"), isDisplayed()));
         appCompatButton.perform(click());
 
-        Thread.sleep(3500);
+        Thread.sleep(2800);
 
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
@@ -462,9 +462,9 @@ public class GroupOverviewInstrumentedTest {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.login), withText("Login"), isDisplayed()));
         appCompatButton.perform(click());
-
         Thread.sleep(3500);
-
+        setWlanMode(ON);
+        Thread.sleep(2500);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(withId(R.id.toolbar)),
@@ -472,7 +472,7 @@ public class GroupOverviewInstrumentedTest {
         appCompatImageButton.perform(click());
         Thread.sleep(2000);
 
-        setWlanMode(ON);
+
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
