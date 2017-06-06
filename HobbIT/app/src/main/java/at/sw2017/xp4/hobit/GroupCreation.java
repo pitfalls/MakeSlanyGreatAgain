@@ -90,7 +90,7 @@ public class GroupCreation extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                builder.setMessage("Connection failed")
+                builder.setMessage("Connection failed GC")
                         .setNegativeButton("OK", null)
                         .create()
                         .show();
@@ -147,7 +147,7 @@ public class GroupCreation extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
             AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-            builder.setMessage("Connection failed")
+            builder.setMessage("Connection failed GC 2")
                     .setNegativeButton("OK", null)
                     .create()
                     .show();
@@ -214,7 +214,7 @@ public class GroupCreation extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(GroupCreation.this);
-                        builder.setMessage("Connection failed")
+                        builder.setMessage("Connection failed GC3")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.test.espresso.ViewInteraction;
@@ -126,12 +127,21 @@ public class GroupOverviewInstrumentedTest {
         if(mode)
         {
             setFlightMode(mActivityTestRule.getActivity(), 1);
-            Thread.sleep(10000);
+            Thread.sleep(7500);
         }
         else {
             setFlightMode(mActivityTestRule.getActivity(), 0);
-            Thread.sleep(10000);
+            Thread.sleep(7500);
         }
+    }
+
+    @SuppressLint("NewApi")
+    public void setWlanMode(boolean mode) throws InterruptedException {
+        Thread.sleep(1500);
+
+        @SuppressLint("WifiManagerLeak") WifiManager wifi = (WifiManager) mActivityTestRule.getActivity().getSystemService(Context.WIFI_SERVICE);
+        wifi.setWifiEnabled(!mode); // true or false to activate/deactivate wifi
+        Thread.sleep(3500);
     }
 
 
@@ -155,7 +165,6 @@ public class GroupOverviewInstrumentedTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Thread.sleep(5000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
@@ -179,8 +188,9 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
-        Thread.sleep(1500);
         appCompatImageButton.perform(click());
+
+        Thread.sleep(2500);
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
@@ -208,7 +218,7 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
         appCompatButton2.perform(click());
 
-        Thread.sleep(5000);
+        Thread.sleep(4500);
 
         //Failt hin und wieder
         ViewInteraction appCompatButton3 = onView(
@@ -320,7 +330,7 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
         appCompatButton4.perform(click());
 
-        Thread.sleep(5000);
+        Thread.sleep(4500);
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(android.R.id.button2), withText("Ok")));
@@ -378,17 +388,6 @@ public class GroupOverviewInstrumentedTest {
 
         pressBack();
 
-       /* ViewInteraction appCompatEditText69 = onView(
-                allOf(withId(R.id.txtGroupText), isDisplayed()));
-        appCompatEditText69.perform(replaceText("Cy"), closeSoftKeyboard());
-        Thread.sleep(1000);
-
-           ViewInteraction appCompatSpinner18 = onView(
-                allOf(withId(R.id.spinnerGroup), isDisplayed()));
-        appCompatSpinner18.perform(click());*/
-
-        //   onView(withId(R.id.txtGroupText)).perform(replaceText(""));
-
         /***********************/
 
 
@@ -404,7 +403,7 @@ public class GroupOverviewInstrumentedTest {
 
       //  assertEquals(true, isNetworkAvailable(mActivityTestRule.getActivity()));
 
-        setAirplaneMode(ON);
+        setWlanMode(ON);
 
         //  assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
 
@@ -431,9 +430,57 @@ public class GroupOverviewInstrumentedTest {
                 allOf(withId(android.R.id.button2), withText("Retry")));
         appCompatButton7.perform(scrollTo(), click());
 */
-        setAirplaneMode(OFF);
+        setWlanMode(OFF);
 
         Thread.sleep(4000);
 
     }
+
+    @Test
+    public void connectionFailTestGroupOverview() throws InterruptedException {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(3500);
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        withParent(withId(R.id.toolbar)),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+        Thread.sleep(2000);
+
+        setWlanMode(ON);
+
+        ViewInteraction appCompatCheckedTextView = onView(
+                allOf(withId(R.id.design_menu_item_text), withText("Group Overview"), isDisplayed()));
+        appCompatCheckedTextView.perform(click());
+
+        setWlanMode(OFF);
+        Thread.sleep(2000);
+        //*********************
+    }
+
 }

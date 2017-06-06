@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.security.SecureRandom;
 
 import static android.app.PendingIntent.getActivity;
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.Espresso.pressBack;
@@ -46,6 +48,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withContentDesc
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.endsWith;
 import static org.junit.Assert.*;
 
 /**
@@ -150,14 +153,22 @@ public class ProfilePageInstrumentedTest {
         if(mode)
         {
             setFlightMode(mActivityRule.getActivity(), 1);
-            Thread.sleep(10000);
+            Thread.sleep(7500);
         }
         else {
             setFlightMode(mActivityRule.getActivity(), 0);
-            Thread.sleep(10000);
+            Thread.sleep(7500);
         }
     }
 
+    @SuppressLint("NewApi")
+    public void setWlanMode(boolean mode) throws InterruptedException {
+        Thread.sleep(1500);
+
+        @SuppressLint("WifiManagerLeak") WifiManager wifi = (WifiManager) mActivityRule.getActivity().getSystemService(Context.WIFI_SERVICE);
+        wifi.setWifiEnabled(!mode); // true or false to activate/deactivate wifi
+        Thread.sleep(3500);
+    }
 
 
     //From: https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
@@ -214,7 +225,7 @@ public class ProfilePageInstrumentedTest {
 
         Globals.getInstance().setUserID("2");
         mActivityRule.getActivity().update();
-        Thread.sleep(3000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.editTextProfileNickname)).check(matches(withText("Il Dottore")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("Valentino")));
@@ -237,8 +248,6 @@ public class ProfilePageInstrumentedTest {
         Globals.getInstance().setUserID("test00FAIL");
         mActivityRule.getActivity().update();
 
-        Thread.sleep(5000);
-
        /* onView(withId(R.id.editTextProfileNickname)).check(matches(withText("")));
         onView(withId(R.id.editTextProfileForename)).check(matches(withText("")));
         onView(withId(R.id.editTextProfileSurename)).check(matches(withText("")));
@@ -260,6 +269,39 @@ public class ProfilePageInstrumentedTest {
         onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Italy"));
 
         onView(withId(R.id.ButtonSave)).perform(click());
+        Thread.sleep(500);
+
     }
+
+    @Test
+    public void connectionFailEditProfile() throws InterruptedException {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Globals.getInstance().setUserID("not_existing");
+        mActivityRule.getActivity().update();
+
+        Thread.sleep(3000);
+
+        onView(withId(R.id.editTextProfileNickname)).perform(replaceText("Il Dottore"));
+        onView(withId(R.id.editTextProfileForename)).perform(replaceText("Valentino"));
+        onView(withId(R.id.editTextProfileSurename)).perform(replaceText("Rossi"));
+        onView(withId(R.id.editTextProfileLocation)).perform(replaceText("Italy"));
+
+        setWlanMode(ON);
+
+        onView(withId(R.id.ButtonSave)).perform(click());
+
+        setWlanMode(OFF);
+
+    }
+
+
 
 }

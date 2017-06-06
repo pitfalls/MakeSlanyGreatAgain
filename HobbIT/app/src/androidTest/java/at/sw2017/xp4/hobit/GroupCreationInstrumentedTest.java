@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
@@ -36,7 +37,6 @@ import static org.hamcrest.Matchers.allOf;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class GroupCreationInstrumentedTest {
-
 
     // Von: https://stackoverflow.com/questions/25674655/how-to-turn-on-off-airplane-mode-even-on-new-android-versions-and-even-with-ro
     //****************************************************************************************************
@@ -133,7 +133,14 @@ public class GroupCreationInstrumentedTest {
         }
     }
 
+    @SuppressLint("NewApi")
+    public void setWlanMode(boolean mode) throws InterruptedException {
+        Thread.sleep(1500);
 
+        @SuppressLint("WifiManagerLeak") WifiManager wifi = (WifiManager) mActivityTestRule.getActivity().getSystemService(Context.WIFI_SERVICE);
+        wifi.setWifiEnabled(!mode); // true or false to activate/deactivate wifi
+        Thread.sleep(3500);
+    }
 
     //From: https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -192,9 +199,9 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(2500);
 
         appCompatImageButton.perform(click());
+        Thread.sleep(2500);
 
         Thread.sleep(500);
 
@@ -217,10 +224,8 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(500);
-
         appCompatImageButton.perform(click());
-        Thread.sleep(500);
+        Thread.sleep(2500);
 
          appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Creation"), isDisplayed()));
@@ -237,7 +242,10 @@ public class GroupCreationInstrumentedTest {
 
         ViewInteraction appCompatCheckedTextView2 = onView(
                 allOf(withId(android.R.id.text1), withText("Sports"), isDisplayed()));
+        Thread.sleep(1500);
         appCompatCheckedTextView2.perform(click());
+
+        Thread.sleep(1500);
 
         ViewInteraction appCompatSpinner2 = onView(
                 allOf(withId(R.id.spinner_location_GroupCreation), isDisplayed()));
@@ -282,7 +290,7 @@ public class GroupCreationInstrumentedTest {
         //****************************************************************************************** create random User
         appCompatSpinner.perform(click());
         appCompatCheckedTextView2.perform(click());
-
+        Thread.sleep(3000);
          appCompatSpinner2 = onView(
                 allOf(withId(R.id.spinner_location_GroupCreation), isDisplayed()));
         appCompatSpinner2.perform(click());
@@ -350,27 +358,27 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(2500);
-
         appCompatImageButton.perform(click());
+
+        Thread.sleep(2500);
 
         Thread.sleep(500);
 
 
         //-----------------------
-        setAirplaneMode(ON);
+        setWlanMode(ON);
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Creation"), isDisplayed()));
         appCompatCheckedTextView.perform(click());
 
-        setAirplaneMode(OFF);
+        setWlanMode(OFF);
 
         Thread.sleep(4000);
 
     }
 
     @Test
-    public void connectionFailTestSendNewGroup() throws InterruptedException {
+    public void connectionSendTestSendNewGroup() throws InterruptedException {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -405,11 +413,9 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(500);
-
         appCompatImageButton.perform(click());
 
-        Thread.sleep(500);
+        Thread.sleep(2500);
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Creation"), isDisplayed()));
@@ -422,6 +428,8 @@ public class GroupCreationInstrumentedTest {
                 allOf(withId(R.id.spinner_hobby_groupCreation), isDisplayed()));
         appCompatSpinner.perform(click());
 
+        Thread.sleep(3000);
+
         ViewInteraction appCompatCheckedTextView2 = onView(
                 allOf(withId(android.R.id.text1), withText("Sports"), isDisplayed()));
         appCompatCheckedTextView2.perform(click());
@@ -429,7 +437,7 @@ public class GroupCreationInstrumentedTest {
         ViewInteraction appCompatSpinner2 = onView(
                 allOf(withId(R.id.spinner_location_GroupCreation), isDisplayed()));
         appCompatSpinner2.perform(click());
-
+        Thread.sleep(3000);
         ViewInteraction appCompatCheckedTextView3 = onView(
                 allOf(withId(android.R.id.text1), withText("Wien"), isDisplayed()));
         appCompatCheckedTextView3.perform(click());
@@ -451,16 +459,15 @@ public class GroupCreationInstrumentedTest {
                 allOf(withId(R.id.editText_Description), isDisplayed()));
         appCompatEditText23.perform(replaceText(randomString(301)), closeSoftKeyboard());
 
-
-//
-//        setFlightMode(mActivityTestRule.getActivity(), 1);
-//        //assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
-
         ViewInteraction appCompatButton23 = onView(
                 allOf(withId(R.id.btn_save), withText("Save"), isDisplayed()));
         appCompatButton23.perform(click());
 
-      //  setAirplaneMode(OFF);
+        //***** Join auch gleich hier teste, Espresso ist nicht teterminisitisch! *****
+
+
+
+        //-----------------------------------------------------------------------------
 
         Thread.sleep(4000);
 
@@ -503,11 +510,9 @@ public class GroupCreationInstrumentedTest {
                         withParent(withId(R.id.toolbar)),
                         isDisplayed()));
 
-        Thread.sleep(500);
-
         appCompatImageButton.perform(click());
 
-        Thread.sleep(500);
+        Thread.sleep(1500);
 
         ViewInteraction appCompatCheckedTextView = onView(
                 allOf(withId(R.id.design_menu_item_text), withText("Group Creation"), isDisplayed()));
@@ -519,10 +524,13 @@ public class GroupCreationInstrumentedTest {
         ViewInteraction appCompatSpinner = onView(
                 allOf(withId(R.id.spinner_hobby_groupCreation), isDisplayed()));
         appCompatSpinner.perform(click());
+        Thread.sleep(3000);
 
         ViewInteraction appCompatCheckedTextView2 = onView(
                 allOf(withId(android.R.id.text1), withText("Sports"), isDisplayed()));
         appCompatCheckedTextView2.perform(click());
+
+        Thread.sleep(3000);
 
         ViewInteraction appCompatSpinner2 = onView(
                 allOf(withId(R.id.spinner_location_GroupCreation), isDisplayed()));
@@ -554,13 +562,13 @@ public class GroupCreationInstrumentedTest {
 //        setFlightMode(mActivityTestRule.getActivity(), 1);
 //        //assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
 
-        setAirplaneMode(ON);
+        setWlanMode(ON);
 
         ViewInteraction appCompatButton23 = onView(
                 allOf(withId(R.id.btn_save), withText("Save"), isDisplayed()));
         appCompatButton23.perform(click());
 
-          setAirplaneMode(OFF);
+        setWlanMode(OFF);
 
         Thread.sleep(4000);
 

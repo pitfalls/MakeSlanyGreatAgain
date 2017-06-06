@@ -118,7 +118,7 @@ public class RegisterUser extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUser.this);
-                        builder.setMessage("Connection failed")
+                        builder.setMessage("Connection failed RU")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();

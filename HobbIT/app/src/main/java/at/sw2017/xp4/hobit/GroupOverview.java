@@ -108,8 +108,11 @@ public class GroupOverview extends AppCompatActivity {
 
             UpdateSpinner();
 
-            currentId = spinnerArray[4][0];
-            descriptionView.setText(spinnerArray[3][0]);
+            if(spinnerArray != null)
+            {
+                currentId = spinnerArray[4][0];
+                descriptionView.setText(spinnerArray[3][0]);
+            }
 
             return;
         }
@@ -303,6 +306,7 @@ public class GroupOverview extends AppCompatActivity {
             }
         };
 
+        // Kommt nie?
         final Response.ErrorListener joinErrorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -451,7 +455,7 @@ public class GroupOverview extends AppCompatActivity {
                 if (currentId.isEmpty())
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
-                    builder.setMessage("No Group was selected :) punk - testId: ")
+                    builder.setMessage("No Group was selected :) punk - testId: empty")
                             .setNegativeButton("Retry", null)
                             .create()
                             .show();

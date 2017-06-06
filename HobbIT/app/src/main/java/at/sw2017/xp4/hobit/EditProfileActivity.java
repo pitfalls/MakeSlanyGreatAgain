@@ -109,7 +109,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
-                builder.setMessage("Connection failed")
+                builder.setMessage("Connection failed EPA")
                         .setNegativeButton("OK", null)
                         .create()
                         .show();
@@ -151,7 +151,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
-                builder.setMessage("Connection failed")
+                builder.setMessage("Connection failed EPA2")
                         .setNegativeButton("OK", null)
                         .create()
                         .show();

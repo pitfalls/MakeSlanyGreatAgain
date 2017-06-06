@@ -5,13 +5,20 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,19 +29,23 @@ import java.security.SecureRandom;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class ProfilePageHobbiesInstrumentedTest {
-
 
     // Von: https://stackoverflow.com/questions/25674655/how-to-turn-on-off-airplane-mode-even-on-new-android-versions-and-even-with-ro
     //****************************************************************************************************
@@ -123,15 +134,22 @@ public class ProfilePageHobbiesInstrumentedTest {
         if(mode)
         {
             setFlightMode(mActivityTestRule.getActivity(), 1);
-            Thread.sleep(10000);
+            Thread.sleep(7500);
         }
         else {
             setFlightMode(mActivityTestRule.getActivity(), 0);
-            Thread.sleep(10000);
+            Thread.sleep(7500);
         }
     }
 
+    @SuppressLint("NewApi")
+    public void setWlanMode(boolean mode) throws InterruptedException {
+        Thread.sleep(1500);
 
+        @SuppressLint("WifiManagerLeak") WifiManager wifi = (WifiManager) mActivityTestRule.getActivity().getSystemService(Context.WIFI_SERVICE);
+        wifi.setWifiEnabled(!mode); // true or false to activate/deactivate wifi
+        Thread.sleep(3500);
+    }
 
     //From: https://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -167,7 +185,6 @@ public class ProfilePageHobbiesInstrumentedTest {
             e.printStackTrace();
         }
 
-        Thread.sleep(5000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
@@ -293,8 +310,6 @@ public class ProfilePageHobbiesInstrumentedTest {
             e.printStackTrace();
         }
 
-        Thread.sleep(5000);
-
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username), isDisplayed()));
         appCompatEditText.perform(click());
@@ -311,7 +326,7 @@ public class ProfilePageHobbiesInstrumentedTest {
                 allOf(withId(R.id.login), withText(endsWith("Login")), isDisplayed()));
         appCompatButton.perform(click());
 
-        Thread.sleep(3500);
+        Thread.sleep(1000);
 
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
 
@@ -325,13 +340,196 @@ public class ProfilePageHobbiesInstrumentedTest {
 
         Thread.sleep(500);
 
-        setAirplaneMode(ON);
+        setWlanMode(ON);
 
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.cont_button), withText(endsWith("Continue")), isDisplayed()));
         appCompatButton3.perform(click());
 
-        setAirplaneMode(OFF);
+        setWlanMode(OFF);
+
+    }
+
+    private static Matcher<View> childAtPosition(
+            final Matcher<View> parentMatcher, final int position) {
+
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup && parentMatcher.matches(parent)
+                        && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+    @Test
+    public void joinGroupAndMainScreenInstrumentedTest() throws InterruptedException {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(4000);
+
+        pressBack();
+
+        Thread.sleep(2000);
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton2.perform(click());
+
+        Thread.sleep(4000);
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(android.R.id.text1), withText("House & garden"),
+                        childAtPosition(
+                                allOf(withId(R.id.ListViewGroups),
+                                        withParent(withId(R.id.main_view))),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        pressBack();
+
+        Thread.sleep(3000);
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
+                        withParent(withId(R.id.toolbar)),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        Thread.sleep(3000);
+
+        ViewInteraction appCompatCheckedTextView = onView(
+                allOf(withId(R.id.design_menu_item_text), withText("Join Group"), isDisplayed()));
+        appCompatCheckedTextView.perform(click());
+
+        Thread.sleep(3000);
+
+        ViewInteraction searchAutoComplete = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+
+        Thread.sleep(2000);
+        searchAutoComplete.perform(replaceText("fl"), closeSoftKeyboard());
+        Thread.sleep(4000);
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.name), withText("Flowerpower"),
+                        withParent(childAtPosition(
+                                withId(R.id.expandableList),
+                                1)),
+                        isDisplayed()));
+        textView.perform(click());
+
+        Thread.sleep(3000);
+
+        pressBack();
+
+        Thread.sleep(1500);
+
+        ViewInteraction searchAutoComplete2 = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("fl"),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+
+        Thread.sleep(2000);
+        searchAutoComplete.perform(replaceText("bfl"), closeSoftKeyboard());
+        searchAutoComplete.perform(replaceText("b"), closeSoftKeyboard());
+
+        Thread.sleep(4000);
+
+        ViewInteraction imageView2 = onView(
+                allOf(withClassName(is("android.widget.ImageView")), withContentDescription("Abfrage löschen"),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+        imageView2.perform(click());
+
+        Thread.sleep(1500);
+
+        // textView.perform(click());
+
+        // Thread.sleep(1500);
+
+//        ViewInteraction appCompatButton3 = onView(
+//                allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
+//        appCompatButton3.perform(click());
+
+        Thread.sleep(1500);
+
+    }
+
+
+    @Test
+    public void offlineUpdateEditProfile() throws InterruptedException {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        Thread.sleep(3500);
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+
+        setWlanMode(ON);
+
+        ViewInteraction appCompatTextView2 = onView(
+                allOf(withId(R.id.title), withText("Edit Profile"), isDisplayed()));
+        appCompatTextView2.perform(click());
+
+        pressBack();
+
+        setWlanMode(OFF);
+        pressBack();
 
     }
 

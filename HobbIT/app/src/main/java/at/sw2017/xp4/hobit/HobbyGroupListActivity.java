@@ -116,7 +116,7 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HobbyGroupListActivity.this);
-                builder.setMessage("Connection failed")
+                builder.setMessage("Connection failed HGLA")
                         .setNegativeButton("Retry", null)
                         .create()
                         .show();
