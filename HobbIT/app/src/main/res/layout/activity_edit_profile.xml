@@ -7,23 +7,20 @@
     tools:context="at.sw2017.xp4.hobit.EditProfileActivity">
 
     <EditText
-        android:id="@+id/editTextProfileSurename"
-        android:layout_width="179dp"
+        android:id="@+id/editTextProfileNickname"
+        android:layout_width="177dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="0dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Nickname"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:text="Surename"
-        app:layout_constraintBottom_toTopOf="@+id/editTextProfileForename"
-        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintHorizontal_bias="0.214"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/imageViewProfilePicture"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextProfileForename"
@@ -33,59 +30,47 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="0dp"
         android:ems="10"
+        android:hint="Forename"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:text="Forename"
-        app:layout_constraintBottom_toTopOf="@+id/editTextProfileNickname"
         app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/imageViewProfilePicture" />
+        app:layout_constraintRight_toLeftOf="@+id/imageViewProfilePicture"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfileNickname" />
 
     <EditText
-        android:id="@+id/editTextProfileNickname"
-        android:layout_width="177dp"
+        android:id="@+id/editTextProfileSurename"
+        android:layout_width="179dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Surename"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:text="Nickname"
-        app:layout_constraintBottom_toTopOf="@+id/editTextProfileLocation"
-        app:layout_constraintHorizontal_bias="0.214"
+        app:layout_constraintHorizontal_bias="0.23"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/imageViewProfilePicture" />
+        app:layout_constraintRight_toLeftOf="@+id/imageViewProfilePicture"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfileForename"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextProfileLocation"
         android:layout_width="350dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
+        android:hint="Location"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:text="Location"
-        app:layout_constraintBottom_toTopOf="@+id/editTextProfileDescription"
-        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfileSurename" />
 
-    <EditText
-        android:id="@+id/editTextProfileDescription"
-        android:layout_width="350dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Short description of person"
-        app:layout_constraintBottom_toTopOf="@+id/buttonEditInterests"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewProfilePicture"
@@ -101,28 +86,23 @@
 
     <Button
         android:id="@+id/buttonEditInterests"
-        android:layout_width="175dp"
+        android:layout_width="178dp"
         android:layout_height="41dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="Edit Interests"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/BackEditProfile"
+        android:id="@+id/ButtonSave"
         android:layout_width="178dp"
         android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Back"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/buttonEditInterests"
-        tools:layout_editor_absoluteY="461dp" />
+        android:layout_marginRight="8dp" />
 </android.support.constraint.ConstraintLayout>
