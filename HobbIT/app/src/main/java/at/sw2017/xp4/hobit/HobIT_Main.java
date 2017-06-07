@@ -56,12 +56,6 @@ public class HobIT_Main extends AppCompatActivity
 
     public ArrayList<String> User_Hobbys;
 
-    public String Name = "";
-    public String Description = "";
-    public String Hobby = "";
-    public String Location = "";
-
-
     public void toArrayList(JSONArray array) {
         if (array == null)
             return;
