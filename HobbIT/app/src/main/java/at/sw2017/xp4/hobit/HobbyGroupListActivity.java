@@ -181,6 +181,7 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
         }
     }
 
+    // Never used, but you cant delete it because its from an interface!
     @Override
     public boolean onClose() {
        /* listAdapter.filterData("");
@@ -199,6 +200,7 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
         return false;
     }
 
+    // Never used, but you cant delete it because its from an interface!
     @Override
     public boolean onQueryTextSubmit(String query) {
         /*if(query != null && !query.isEmpty() && listAdapter != null)

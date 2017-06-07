@@ -194,8 +194,8 @@ public class GroupCreation extends AppCompatActivity {
                                 // habe schon versucht die datebank auf /= null einträge zu bringen etc etc..
                                 // geht alles nicht da rein.. irgendwann schaffte ich es durch zufall mit der
                                 // app selbst am handy da reinzugelangen.. habe auch versucht mehr einträge
-                                // zu senden als die DB schaffen würde.. die DatenBanks chneidet es aber dann
-                                // einfach ab..
+                                // zu senden als die DB schaffen würde.. die DatenBank schneidet es aber dann
+                                // einfach ab.. -> Auskommentiert
                              /*   AlertDialog.Builder builder =
                                         new AlertDialog.Builder(GroupCreation.this);
                                 builder.setMessage("Group Creation failed")

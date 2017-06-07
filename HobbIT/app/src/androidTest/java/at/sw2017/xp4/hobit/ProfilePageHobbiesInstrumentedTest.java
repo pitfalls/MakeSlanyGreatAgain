@@ -525,14 +525,6 @@ public class ProfilePageHobbiesInstrumentedTest {
 
         Thread.sleep(1500);
 
-        // textView.perform(click());
-
-        // Thread.sleep(1500);
-
-//        ViewInteraction appCompatButton3 = onView(
-//                allOf(withId(R.id.btn_join), withText("Join"), isDisplayed()));
-//        appCompatButton3.perform(click());
-
         Thread.sleep(1500);
 
     }

@@ -311,7 +311,7 @@ public class GroupOverview extends AppCompatActivity {
             }
         };
 
-        // Kommt nie?
+        // Kommt nie? -> Auskommentiert für höhere CodeCoverage
         final Response.ErrorListener joinErrorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

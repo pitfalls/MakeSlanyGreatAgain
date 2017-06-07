@@ -23,9 +23,6 @@ public class HobbyData {
         return name;
     }
 
-    /*public void setName(String name) {
-        this.name = name;
-    }*/
     public ArrayList<GroupData> getGroupList() {
         return groupList;
     }

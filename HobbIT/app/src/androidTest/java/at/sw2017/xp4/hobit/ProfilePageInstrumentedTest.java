@@ -209,9 +209,6 @@ public class ProfilePageInstrumentedTest {
 
         Thread.sleep(3000);
 
-
-        //Failte sehr oft!! --> ersetzt mit dirty pressBack();
-       // onView(withText("OK")).perform(click());
         pressBack();
 
         Globals.getInstance().setUserID("fb103863606870788");

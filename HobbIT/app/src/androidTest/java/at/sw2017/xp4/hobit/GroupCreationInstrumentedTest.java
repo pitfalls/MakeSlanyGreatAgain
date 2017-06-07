@@ -557,11 +557,6 @@ public class GroupCreationInstrumentedTest {
                 allOf(withId(R.id.editText_Description), isDisplayed()));
         appCompatEditText23.perform(replaceText(randomString(301)), closeSoftKeyboard());
 
-
-//
-//        setFlightMode(mActivityTestRule.getActivity(), 1);
-//        //assertEquals(false, isNetworkAvailable(mActivityTestRule.getActivity()));
-
         setWlanMode(ON);
 
         ViewInteraction appCompatButton23 = onView(

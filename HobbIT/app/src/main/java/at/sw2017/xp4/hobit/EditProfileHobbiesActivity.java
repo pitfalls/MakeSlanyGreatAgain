@@ -99,11 +99,6 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
         }
 
         setOnClickListeners();
-//-----------------
-//-----------------
-//-----------------
-//-----------------
-//-----------------
 
         final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
             @Override
@@ -141,14 +136,6 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
         GetUserHobbieIDs getUserHobbieIDs = new GetUserHobbieIDs(GroupResponseListener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(EditProfileHobbiesActivity.this);
         queue.add(getUserHobbieIDs);
-
-
-
-//-------------------
-//-------------------
-//-------------------
-//-------------------
-//-------------------
 
 
     }
@@ -195,16 +182,6 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
 
                 RequestQueue queue = Volley.newRequestQueue(EditProfileHobbiesActivity.this);
                 queue.add(insertHobbiesToDB);
-
-
-                // This Perform action on click
-
-//                String Hobbies = "";
-//                for(int i = 0; i<=18; i++){
-//                    if(checkBoxes.get(i).isChecked())
-//                        Hobbies = Hobbies + hobbies.get(i) + "; ";
-//                }
-//                //finish parsing and sending to database when database is online
 
                 Intent intent = new Intent(view.getContext(), HobIT_Main.class);
                 startActivity(intent);
