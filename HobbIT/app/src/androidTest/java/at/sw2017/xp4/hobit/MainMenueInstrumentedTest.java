@@ -438,6 +438,42 @@ public class MainMenueInstrumentedTest {
     }
 
 
+    @Test
+    public void LogoutTest() {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.username), isDisplayed()));
+        appCompatEditText2.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.password), isDisplayed()));
+        appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("Logout"), isDisplayed()));
+        appCompatTextView.perform(click());
+
+    }
+
+
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
