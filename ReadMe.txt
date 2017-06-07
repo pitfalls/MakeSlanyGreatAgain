@@ -9,5 +9,7 @@ are able to deactivate the WLAN for deeper testing!
 Additional our webhoster is unstable during the day, but it is really well @night and at @morning :)
 (->FreeWebHoster)
 
+Testcoverage.zip with the achived 95% coverage is uploaded for backup :)
+
 Cheers
 TeamHobbit
