@@ -1,12 +1,10 @@
 package at.sw2017.xp4.hobit;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,13 +18,8 @@ import android.view.MenuItem;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import android.widget.Toast;
 
@@ -40,11 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import at.sw2017.xp4.hobit.requests.GetCurrentGroupRequest;
-import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
 import at.sw2017.xp4.hobit.requests.GetUserGroupsRequest;
 
 //TODO: Change login to logout if logged in
