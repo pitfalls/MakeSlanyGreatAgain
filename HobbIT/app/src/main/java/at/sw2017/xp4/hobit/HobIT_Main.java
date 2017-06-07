@@ -241,11 +241,11 @@ public class HobIT_Main extends AppCompatActivity
             Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.group_overview) {
+        /*else if (id == R.id.group_overview) {
             Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
             startActivity(intent);
 
-        }
+        }*/
         else if (id == R.id.group_creation) {
             Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
             startActivity(intent);
