@@ -387,7 +387,7 @@ public class MainMenueInstrumentedTest {
         appCompatEditText3.perform(replaceText("test"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login), withText("Login"), isDisplayed()));
+                allOf(withId(R.id.login), withText("Logout"), isDisplayed()));
         appCompatButton.perform(click());
 
         Thread.sleep(3500);

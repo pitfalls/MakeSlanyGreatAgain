@@ -176,8 +176,10 @@ public class HobIT_Main extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+
         } else {
             super.onBackPressed();
+
         }
     }
 
@@ -203,6 +205,7 @@ public class HobIT_Main extends AppCompatActivity
         } else if (id == R.id.action_login) {
             Intent login = new Intent(this, FacebookLogin.class);
             startActivityForResult(login, 1);
+            finish();
             return true;
         }
         else  if (id == R.id.action_edit_profile) {
