@@ -21,8 +21,6 @@ import android.widget.ArrayAdapter;
 
 import android.widget.ListView;
 
-import android.widget.Toast;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -49,28 +47,23 @@ public class HobIT_Main extends AppCompatActivity
         if (array == null)
             return;
 
-        if(User_Hobbys.size() == 0)
-        {
+        if (User_Hobbys.size() == 0) {
             for (int i = 0; i < array.length(); i++) {
                 User_Hobbys.add(array.optString(i));
             }
         }
     }
 
-    public void initListViewGroups()
-    {
+    public void initListViewGroups() {
         final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try
-                {
+                try {
                     JSONObject jsonResponse = new JSONObject(response);
                     final JSONArray allHobbies = jsonResponse.getJSONArray("Names");
                     toArrayList(allHobbies);
                     Globals.getInstance().setGlobal_array(User_Hobbys);
-                }
-                catch (JSONException e)
-                {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -103,21 +96,20 @@ public class HobIT_Main extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-            String itemValue = (String) ListViews.getItemAtPosition(position);
+                String itemValue = (String) ListViews.getItemAtPosition(position);
 
-            Bundle bundle = new Bundle();
-            bundle.putString("Group", itemValue);
-            Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
-            newIntent.putExtras(bundle);
-            startActivity(newIntent);
+                Bundle bundle = new Bundle();
+                bundle.putString("Group", itemValue);
+                Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
+                newIntent.putExtras(bundle);
+                startActivity(newIntent);
             }
         });
     }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         User_Hobbys = Globals.getInstance().getGlobal_array();
@@ -128,16 +120,6 @@ public class HobIT_Main extends AppCompatActivity
         /**--------------------------INIT BUTTON------------------**/
         initListViewGroups();
         /**--------------------END INIT BUTTON--------------------**/
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               /* Snackbar.make(view, "Replace with your .... action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -179,15 +161,13 @@ public class HobIT_Main extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //getSupportActionBar().
-
         //noinspection SimplifiableIfStatement
-         if (id == R.id.action_login) {
+        if (id == R.id.action_login) {
             Intent login = new Intent(this, FacebookLogin.class);
             startActivityForResult(login, 1);
+            finish();
             return true;
-        }
-        else  if (id == R.id.action_edit_profile) {
+        } else if (id == R.id.action_edit_profile) {
             Intent editProfileIntent = new Intent(this, EditProfileActivity.class);
             startActivity(editProfileIntent);
             return true;
@@ -200,40 +180,24 @@ public class HobIT_Main extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void printDebugToast (CharSequence text )
-    {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast save_toast = Toast.makeText(context, text, duration);
-        save_toast.show();
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        printDebugToast("nav item selected");
-
         if (id == R.id.join_group_sidebar_action) {
             // Handle the camera action
 
-
             Intent intent = new Intent(HobIT_Main.this, HobbyGroupListActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.group_overview) {
+        } else if (id == R.id.group_overview) {
             Intent intent = new Intent(HobIT_Main.this, GroupOverview.class);
             startActivity(intent);
 
-        }
-        else if (id == R.id.group_creation) {
+        } else if (id == R.id.group_creation) {
             Intent intent = new Intent(HobIT_Main.this, GroupCreation.class);
             startActivity(intent);
-        //} else if (id == R.id.nav_share) { // if we wannt to add something to the sidebar use this
-
-        //} else if (id == R.id.nav_send) { // if we wannt to add something to the sidebar use this
 
         }
 

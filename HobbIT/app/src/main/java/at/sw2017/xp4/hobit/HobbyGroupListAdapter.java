@@ -1,7 +1,7 @@
 package at.sw2017.xp4.hobit;
 
 /**
- * Created by Fräulein Michaela on 10.05.2017.
+ * Created by Michaela on 10.05.2017.
  */
 
 import java.text.NumberFormat;
@@ -27,27 +27,13 @@ public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
     private ArrayList<HobbyData> hobbyList;
     private ArrayList<HobbyData> originalList;
 
- //   private Context packageContext;
-
     public HobbyGroupListAdapter(Context context,
-                                 ArrayList<HobbyData> hobbyList )
-    //                     Context packageContext)
-    {
+                                 ArrayList<HobbyData> hobbyList) {
         this.context = context;
         this.hobbyList = new ArrayList<HobbyData>();
         this.hobbyList.addAll(hobbyList);
         this.originalList = new ArrayList<HobbyData>();
         this.originalList.addAll(hobbyList);
-
- //       this.packageContext = packageContext;
-    }
-
-    public void printDebugToast (CharSequence text )
-    {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast save_toast = Toast.makeText(context, text, duration);
-        save_toast.show();
     }
 
     @Override
@@ -77,13 +63,6 @@ public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
         View.OnClickListener clickListen = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* int duration = Toast.LENGTH_SHORT;
-                String text = "test on click output Name:" + group.getName() + " ID:" + group.getId();
-                Toast save_toast = Toast.makeText(HobbyGroupListAdapter.class, text, duration);
-                save_toast.show();*/
-              //  String text = "test on click output Name:" + group.getName() ;
-
-              //  printDebugToast(text);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("Group", group.getName());
@@ -93,12 +72,10 @@ public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
                 // pass group data details to next activity
                 de.greenrobot.event.EventBus.getDefault().postSticky(group);
 
-                //context.startActivityForResult(intent,0);
-
                 context.startActivity(intent);
             }
         };
-        item.setOnClickListener( clickListen );
+        item.setOnClickListener(clickListen);
 
         return view;
     }
@@ -152,38 +129,36 @@ public class HobbyGroupListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    public void filterData(String query){
+    public void filterData(String query) {
 
         query = query.toLowerCase();
         Log.v("HobbyGroupListAdapter", String.valueOf(hobbyList.size()));
         hobbyList.clear();
 
-        if(query.isEmpty()){
+        if (query.isEmpty()) {
             hobbyList.addAll(originalList);
-        }
-        else {
+        } else {
 
-            for(HobbyData hobby: originalList){
+            for (HobbyData hobby : originalList) {
 
                 ArrayList<GroupData> groupList = hobby.getGroupList();
                 ArrayList<GroupData> newList = new ArrayList<GroupData>();
-                for(GroupData group: groupList){
-                    if(group.getName().toLowerCase().contains(query) ||
-                            group.getName().toLowerCase().contains(query)){
+                for (GroupData group : groupList) {
+                    if (group.getName().toLowerCase().contains(query) ||
+                            group.getName().toLowerCase().contains(query)) {
                         newList.add(group);
                     }
                 }
-                if(newList.size() > 0){
-                    HobbyData nHobby = new HobbyData(hobby.getName(),newList);
-            hobbyList.add(nHobby);
-        }
-    }
+                if (newList.size() > 0) {
+                    HobbyData nHobby = new HobbyData(hobby.getName(), newList);
+                    hobbyList.add(nHobby);
+                }
+            }
         }
 
         Log.v("HobbyGroupListAdapter", String.valueOf(hobbyList.size()));
         notifyDataSetChanged();
 
     }
-
 
 }

@@ -48,7 +48,6 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
     public static final String HOBBY19 = "others";
 
     public ArrayList<Integer> User_Hobbys = new ArrayList<>();
-    Button Continue_button;
     private ArrayList<CheckBox> checkBoxes = new ArrayList<>();
     private ArrayList<Integer> checkedCheckboxes = new ArrayList<>();
     private ArrayList<String> hobbies = new ArrayList<>();
@@ -58,8 +57,7 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
         if (array == null)
             return;
 
-        if(User_Hobbys.size() == 0)
-        {
+        if (User_Hobbys.size() == 0) {
             for (int i = 0; i < array.length(); i++) {
                 User_Hobbys.add(Integer.valueOf(array.optString(i)));
             }
@@ -103,19 +101,16 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
         final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try
-                {
+                try {
                     JSONObject jsonResponse = new JSONObject(response);
                     final JSONArray allHobbies = jsonResponse.getJSONArray("HobbyIDs");
                     toArrayList(allHobbies);
 
-                    for (int hobby: User_Hobbys) {
-                        checkBoxes.get(hobby-1).setChecked(true);
+                    for (int hobby : User_Hobbys) {
+                        checkBoxes.get(hobby - 1).setChecked(true);
 
                     }
-                }
-                catch (JSONException e)
-                {
+                } catch (JSONException e) {
                     //   printDebugToast("Probleme");
                     e.printStackTrace();
                 }
@@ -140,7 +135,7 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
 
     }
 
-        private void setOnClickListeners() {
+    private void setOnClickListeners() {
 
 
         final Button contButton = (Button) findViewById(R.id.cont_button);
@@ -153,10 +148,9 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
                     String checkBoxName = "checkBox" + i;
                     int id = getResources().getIdentifier(checkBoxName, "id", R.class.getPackage().getName());
                     CheckBox checkBox = (CheckBox) findViewById(id);
-                    if(checkBox.isChecked())
+                    if (checkBox.isChecked())
                         checkedCheckboxes.add(i);
                 }
-
 
 
                 final Response.Listener<String> GroupResponseListener = new Response.Listener<String>() {
@@ -177,7 +171,7 @@ public class EditProfileHobbiesActivity extends AppCompatActivity {
                     }
                 };
 
-                InsertHobbiesToDB insertHobbiesToDB = new InsertHobbiesToDB(Globals.getInstance().getUserID(), checkedCheckboxes ,
+                InsertHobbiesToDB insertHobbiesToDB = new InsertHobbiesToDB(Globals.getInstance().getUserID(), checkedCheckboxes,
                         GroupResponseListener, errorListener);
 
                 RequestQueue queue = Volley.newRequestQueue(EditProfileHobbiesActivity.this);

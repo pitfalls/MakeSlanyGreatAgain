@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import at.sw2017.xp4.hobit.requests.LoginRequest;
 import at.sw2017.xp4.hobit.requests.RegistrationRequest;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class RegisterUser extends AppCompatActivity {
 
     private EditText nickName;
@@ -32,8 +34,7 @@ public class RegisterUser extends AppCompatActivity {
     private EditText passwordCheck;
 
 
-    public void printDebugToast (CharSequence text )
-    {
+    public void printDebugToast(CharSequence text) {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast save_toast = Toast.makeText(context, text, duration);
@@ -46,13 +47,13 @@ public class RegisterUser extends AppCompatActivity {
         setContentView(R.layout.activity_register_user);
 
 
-        nickName = (EditText)findViewById(R.id.nickName);
-        firstName = (EditText)findViewById(R.id.firstName);
-        lastName = (EditText)findViewById(R.id.lastName);
-        email = (EditText)findViewById(R.id.email);
-        location = (EditText)findViewById(R.id.location);
-        password = (EditText)findViewById(R.id.password);
-        passwordCheck = (EditText)findViewById(R.id.passwordCheck);
+        nickName = (EditText) findViewById(R.id.nickName);
+        firstName = (EditText) findViewById(R.id.firstName);
+        lastName = (EditText) findViewById(R.id.lastName);
+        email = (EditText) findViewById(R.id.email);
+        location = (EditText) findViewById(R.id.location);
+        password = (EditText) findViewById(R.id.password);
+        passwordCheck = (EditText) findViewById(R.id.passwordCheck);
 
 
         Button register = (Button) findViewById(R.id.register);
@@ -91,11 +92,6 @@ public class RegisterUser extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                              /*  AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUser.this);
-                                builder.setMessage("Nice, you are now registered!")
-                                        .setNegativeButton("OK", null)
-                                        .create()
-                                        .show();*/
                                 printDebugToast("Nice, you are now registered!");
                                 Globals.getInstance().setUserID(jsonResponse.getString("UserID"));
                                 Intent login = new Intent(RegisterUser.this, HobIT_Main.class);

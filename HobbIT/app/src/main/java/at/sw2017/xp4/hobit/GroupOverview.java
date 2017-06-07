@@ -37,9 +37,8 @@ public class GroupOverview extends AppCompatActivity {
     GroupData group;
 
 
-    private void setAdapterContent(List<String> content)
-    {
-      adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, content);
+    private void setAdapterContent(List<String> content) {
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, content);
     }
 
     List<String> fullHobbyList = new ArrayList<String>();
@@ -50,68 +49,62 @@ public class GroupOverview extends AppCompatActivity {
     List<String> groupList = new ArrayList<String>();
 
     String currentId = "";
-    TextView descriptionView ;
+    TextView descriptionView;
     String[][] spinnerArray;
     ArrayAdapter<String> adapter;
     Spinner spinnerHobby, spinnerLocation, spinnerGroup;
-    EditText groupInput,locationInput;
+    EditText groupInput, locationInput;
     Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_overview);
+
         b = getIntent().getExtras();
 
-        setTitle(b.getString("Group"));
+        if (b != null) {
+            setTitle(b.getString("Group"));
+        }
+
         setOnClickListeners();
 
         getObjectFromEventQueue();
 
     }
 
-    private void getObjectFromEventQueue ()
-    {
+    private void getObjectFromEventQueue() {
         group = (GroupData) EventBus.getDefault().removeStickyEvent(GroupData.class);
 
-        if (group == null)
-        {
+        if (group == null) {
             group = new GroupData("Default Group", 0);
         }
 
         ///@todo place data of group object in the corresponding textfields
     }
 
-
-
     //----------------------------------------------------------------------------------------------
-    void HandleSpinnercontent(String groupFilter, String locationFilter)
-    {
+    void HandleSpinnercontent(String groupFilter, String locationFilter) {
         hobbyList.clear();
         locationList.clear();
         groupList.clear();
 
-        if (groupFilter.equals("") && locationFilter.equals(""))
-        {
-            for (String currentHobby : fullHobbyList)
-            {
+        if (groupFilter.equals("") && locationFilter.equals("")) {
+            for (String currentHobby : fullHobbyList) {
                 hobbyList.add(currentHobby);
             }
 
-            for (String currentLocation : fullLocationList)
-            {
+            for (String currentLocation : fullLocationList) {
                 locationList.add(currentLocation);
             }
 
-            for (String currentGroup : fullGroupList)
-            {
+            for (String currentGroup : fullGroupList) {
                 groupList.add(currentGroup);
             }
 
             UpdateSpinner();
 
-            if(spinnerArray != null)
-            {
+            if (spinnerArray != null) {
                 currentId = spinnerArray[4][0];
                 descriptionView.setText(spinnerArray[3][0]);
             }
@@ -122,9 +115,8 @@ public class GroupOverview extends AppCompatActivity {
         boolean idSet = false;
         int idPosition = 0;
 
-        if (groupFilter.equals(""))
-        {
-            if(spinnerArray != null && spinnerArray[0] != null) {
+        if (groupFilter.equals("")) {
+            if (spinnerArray != null && spinnerArray[0] != null) {
                 for (int iter = 0; iter < spinnerArray[0].length; iter++) {
                     // [1] location
                     if (spinnerArray[1][iter].contains(locationFilter)) {
@@ -137,32 +129,24 @@ public class GroupOverview extends AppCompatActivity {
                 }
             }
 
-        }
-        else if(locationFilter.equals(""))
-        {
-            if(spinnerArray != null && spinnerArray[0] != null) {
-            for(int iter = 0; iter < spinnerArray[0].length; iter++)
-            {
-                // [2] group
-                if (spinnerArray[2][iter].contains(groupFilter))
-                {
-                    AddToSpinner(iter);
-                    if (!idSet)
-                    {
-                        idSet = true;
-                        idPosition = iter;
+        } else if (locationFilter.equals("")) {
+            if (spinnerArray != null && spinnerArray[0] != null) {
+                for (int iter = 0; iter < spinnerArray[0].length; iter++) {
+                    // [2] group
+                    if (spinnerArray[2][iter].contains(groupFilter)) {
+                        AddToSpinner(iter);
+                        if (!idSet) {
+                            idSet = true;
+                            idPosition = iter;
+                        }
                     }
                 }
             }
-            }
-        }
-            else
-        {
-            for(int iter = 0; iter < spinnerArray[0].length; iter++) {
+        } else {
+            for (int iter = 0; iter < spinnerArray[0].length; iter++) {
                 if (spinnerArray[1][iter].contains(locationFilter) && spinnerArray[2][iter].contains(groupFilter)) {
                     AddToSpinner(iter);
-                    if (!idSet)
-                    {
+                    if (!idSet) {
                         idSet = true;
                         idPosition = iter;
                     }
@@ -170,33 +154,27 @@ public class GroupOverview extends AppCompatActivity {
             }
         }
 
-        try{
+        try {
 
             UpdateSpinner();
 
             currentId = spinnerArray[4][idPosition];
             descriptionView.setText(spinnerArray[3][idPosition]);
 
-            if (groupList.isEmpty())
-            {
+            if (groupList.isEmpty()) {
                 currentId = "";
                 descriptionView.setText("");
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
 
         }
-
 
 
     }
 
     //----------------------------------------------------------------------------------------------
-    void UpdateSpinner()
-    {
-        if(adapter != null)
-        {
+    void UpdateSpinner() {
+        if (adapter != null) {
 
             setAdapterContent(hobbyList);
             spinnerHobby.setAdapter(adapter);
@@ -211,18 +189,14 @@ public class GroupOverview extends AppCompatActivity {
     }
 
     //----------------------------------------------------------------------------------------------
-    void AddToSpinner(int iter)
-    {
-        if (!hobbyList.contains(spinnerArray[0][iter]))
-        {
+    void AddToSpinner(int iter) {
+        if (!hobbyList.contains(spinnerArray[0][iter])) {
             hobbyList.add(spinnerArray[0][iter]);
         }
-        if (!locationList.contains(spinnerArray[1][iter]))
-        {
+        if (!locationList.contains(spinnerArray[1][iter])) {
             locationList.add(spinnerArray[1][iter]);
         }
-        if (!groupList.contains(spinnerArray[2][iter]))
-        {
+        if (!groupList.contains(spinnerArray[2][iter])) {
             groupList.add(spinnerArray[2][iter]);
         }
     }
@@ -230,7 +204,7 @@ public class GroupOverview extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     private void setOnClickListeners() {
 
-        groupInput    = (EditText) findViewById(R.id.txtGroupText);
+        groupInput = (EditText) findViewById(R.id.txtGroupText);
         locationInput = (EditText) findViewById(R.id.txtview_location_input);
 
         groupInput.addTextChangedListener(new TextWatcher() {
@@ -283,23 +257,18 @@ public class GroupOverview extends AppCompatActivity {
 
                     boolean success = jsonResponse.getBoolean("success");
 
-                    if (success)
-                    {
+                    if (success) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
                         builder.setMessage("You have successfully joined the group- No one cares")
                                 .setNegativeButton("Ok", null)
                                 .create()
                                 .show();
-                    }
-                    else
-                    {
-                        printDebugToast(currentId);
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
-                            builder.setMessage("You are already member of this group :-)")
-                                    .setNegativeButton("Ok", null)
-                                    .create()
-                                    .show();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
+                        builder.setMessage("You are already member of this group :-)")
+                                .setNegativeButton("Ok", null)
+                                .create()
+                                .show();
 
                     }
 
@@ -327,54 +296,44 @@ public class GroupOverview extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                   // printDebugToast("hallo");
 
                     JSONObject jsonResponse = new JSONObject(response);
-                    final JSONArray allHobbies         = jsonResponse.getJSONArray("hobby");
-                    final JSONArray allLocations       = jsonResponse.getJSONArray("location");
-                    final JSONArray allGroups          = jsonResponse.getJSONArray("group");
-                    final JSONArray allDescritpions    = jsonResponse.getJSONArray("description");
-                    final JSONArray allIds             = jsonResponse.getJSONArray("id");
+                    final JSONArray allHobbies = jsonResponse.getJSONArray("hobby");
+                    final JSONArray allLocations = jsonResponse.getJSONArray("location");
+                    final JSONArray allGroups = jsonResponse.getJSONArray("group");
+                    final JSONArray allDescritpions = jsonResponse.getJSONArray("description");
+                    final JSONArray allIds = jsonResponse.getJSONArray("id");
 
                     //---------------------------------------------------------------------------------- CODE
                     //----------------------------------------------------------------------------------
 
-                    for (int i = 0; i < allHobbies.length(); i++)
-                    {
-                        if(!fullHobbyList.contains(allHobbies.get(i)))
-                        {
-                            fullHobbyList.add( allHobbies.getString(i) );
+                    for (int i = 0; i < allHobbies.length(); i++) {
+                        if (!fullHobbyList.contains(allHobbies.get(i))) {
+                            fullHobbyList.add(allHobbies.getString(i));
                         }
                     }
 
-                    for (int i = 0; i < allLocations.length(); i++)
-                    {
-                        if(!fullLocationList.contains(allLocations.get(i)))
-                        {
-                            fullLocationList.add( allLocations.getString(i) );
+                    for (int i = 0; i < allLocations.length(); i++) {
+                        if (!fullLocationList.contains(allLocations.get(i))) {
+                            fullLocationList.add(allLocations.getString(i));
                         }
                     }
 
-                    for (int i = 0; i < allGroups.length(); i++)
-                    {
-                        if(!fullGroupList.contains(allGroups.get(i)))
-                        {
-                            fullGroupList.add( allGroups.getString(i) );
+                    for (int i = 0; i < allGroups.length(); i++) {
+                        if (!fullGroupList.contains(allGroups.get(i))) {
+                            fullGroupList.add(allGroups.getString(i));
                         }
                     }
 
                     spinnerArray = new String[5][allHobbies.length()];
 
-                    for (int i = 0; i < allLocations.length(); i++)
-                    {
+                    for (int i = 0; i < allLocations.length(); i++) {
                         spinnerArray[0][i] = allHobbies.getString(i);
                         spinnerArray[1][i] = allLocations.getString(i);
                         spinnerArray[2][i] = allGroups.getString(i);
                         spinnerArray[3][i] = allDescritpions.getString(i);
                         spinnerArray[4][i] = String.valueOf(allIds.getInt(i));
                     }
-
-
 
 
                     descriptionView = (TextView) findViewById(R.id.txtview_description_input);
@@ -399,10 +358,8 @@ public class GroupOverview extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             String item = spinnerGroup.getSelectedItem().toString();
 
-                            for (int iter = 0; iter < spinnerArray[0].length; iter++)
-                            {
-                                if (item.equals(spinnerArray[2][iter]))
-                                {
+                            for (int iter = 0; iter < spinnerArray[0].length; iter++) {
+                                if (item.equals(spinnerArray[2][iter])) {
                                     currentId = spinnerArray[4][iter];
                                     descriptionView.setText(spinnerArray[3][iter]);
                                     return;
@@ -421,21 +378,17 @@ public class GroupOverview extends AppCompatActivity {
                     descriptionView.setText(spinnerArray[3][0]);
 
                     // wir haben was von einer anderen Intent bekommen
-                    if (b != null)
-                    {
+                    if (b != null) {
                         //    groupInput.setText(b.getString("Group") + " ", TextView.BufferType.EDITABLE);
                         groupInput.setText(b.getString("Group"), TextView.BufferType.EDITABLE);
                         HandleSpinnercontent(b.getString("Group"), "");
 
                     }
 
-                  //  printDebugToast("Juuunge fetish!");
-
                     //----------------------------------------------------------------------------------
                     //----------------------------------------------------------------------------------
 
                 } catch (JSONException e) {
-                  //  printDebugToast("ALLES SCHEIẞE");
                     e.printStackTrace();
                 }
 
@@ -467,34 +420,24 @@ public class GroupOverview extends AppCompatActivity {
 
                 String testId = Globals.getInstance().getUserID();
 
-                if (currentId.isEmpty())
-                {
+                if (currentId.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GroupOverview.this);
                     builder.setMessage("No Group was selected :) punk - testId: empty")
                             .setNegativeButton("Retry", null)
                             .create()
                             .show();
-                }
-                else {
-                  joinGroupRequest joinRequest = new joinGroupRequest(testId, currentId, joinResponseListener, joinErrorListener);
+                } else {
+                    joinGroupRequest joinRequest = new joinGroupRequest(testId, currentId, joinResponseListener, joinErrorListener);
 
-                  queue.add(joinRequest);
-              }}
+                    queue.add(joinRequest);
+                }
+            }
 
         });
 
         //##########################################################################################
 
 
-
-
     }
 
-    public void printDebugToast (CharSequence text )
-    {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast save_toast = Toast.makeText(context, text, duration);
-        save_toast.show();
-    }
 }

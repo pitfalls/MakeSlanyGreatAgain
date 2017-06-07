@@ -39,10 +39,10 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
 
-        editTextNickname = (EditText)findViewById(R.id.editTextProfileNickname);
-        editTextForename = (EditText)findViewById(R.id.editTextProfileForename);
-        editTextSurename = (EditText)findViewById(R.id.editTextProfileSurename);
-        editTextLocation = (EditText)findViewById(R.id.editTextProfileLocation);
+        editTextNickname = (EditText) findViewById(R.id.editTextProfileNickname);
+        editTextForename = (EditText) findViewById(R.id.editTextProfileForename);
+        editTextSurename = (EditText) findViewById(R.id.editTextProfileSurename);
+        editTextLocation = (EditText) findViewById(R.id.editTextProfileLocation);
 
         final Button interestsButton = (Button) findViewById(R.id.buttonEditInterests);
         interestsButton.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +67,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
-    public void editInterrestsFormOpen()
-    {
+    public void editInterrestsFormOpen() {
         Button btnEditInterests = (Button) findViewById(R.id.buttonEditInterests);
         btnEditInterests.setOnClickListener(new View.OnClickListener() {
             @Override

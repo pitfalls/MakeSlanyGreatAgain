@@ -48,16 +48,11 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
         search.setOnQueryTextListener(this);
         search.setOnCloseListener(this);
 
-        //display the list
-        //displayList();
-        //expand all Groups
-        //expandAll();
         setupDatabaseConnection();
     }
 
 
-    public void setupDatabaseConnection()
-    {
+    public void setupDatabaseConnection() {
         Response.Listener<String> listener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -71,23 +66,18 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
                         final JSONArray allNames = jsonResponse.getJSONArray("group");
                         final JSONArray allIds = jsonResponse.getJSONArray("id");
 
-
-
                         groupDataList = new String[3][allIds.length()];
 
-                        for (int i = 0; i < groupDataList[0].length; i++)
-                        {
+                        for (int i = 0; i < groupDataList[0].length; i++) {
 
                             String currentHobby = allHobbies.getString(i);
-                            if(!allUserHobbies.contains(currentHobby))
-                            {
+                            if (!allUserHobbies.contains(currentHobby)) {
                                 allUserHobbies.add(currentHobby);
                             }
 
                             groupDataList[0][i] = allIds.getString(i);
                             groupDataList[1][i] = allNames.getString(i);
                             groupDataList[2][i] = currentHobby;
-
 
                         }
 
@@ -103,7 +93,6 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
                                 .create()
                                 .show();
                     }
-
 
 
                 } catch (JSONException e) {
@@ -129,16 +118,10 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
 
     }
 
-    //@Override
-   /*public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }*/
-
     //method to expand all groups
     private void expandAll() {
         int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             myList.expandGroup(i);
         }
     }
@@ -152,26 +135,24 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
         //get reference to the ExpandableListView
         myList = (ExpandableListView) findViewById(R.id.expandableList);
         //create the adapter by passing your ArrayList data
-        listAdapter = new HobbyGroupListAdapter(HobbyGroupListActivity.this, hobbyList );
+        listAdapter = new HobbyGroupListAdapter(HobbyGroupListActivity.this, hobbyList);
         //attach the adapter to the list
         myList.setAdapter(listAdapter);
-
     }
 
-    private void loadDataFromDatabase()
-    {
+    private void loadDataFromDatabase() {
         ArrayList<GroupData> groupList;
         GroupData group;
         HobbyData hobby;
 
-        for(String currentHobby : allUserHobbies){
+        for (String currentHobby : allUserHobbies) {
             groupList = new ArrayList<>();
 
-            for(int iter = 0; iter < groupDataList[0].length; iter++){
+            for (int iter = 0; iter < groupDataList[0].length; iter++) {
 
-                if(groupDataList[2][iter].equals(currentHobby)){
+                if (groupDataList[2][iter].equals(currentHobby)) {
 
-                    group = new GroupData(groupDataList[1][iter],Integer.parseInt( groupDataList[0][iter]));
+                    group = new GroupData(groupDataList[1][iter], Integer.parseInt(groupDataList[0][iter]));
                     groupList.add(group);
                 }
             }
@@ -181,33 +162,26 @@ public class HobbyGroupListActivity extends Activity implements SearchView.OnQue
         }
     }
 
-    // Never used, but you cant delete it because its from an interface!
+
     @Override
     public boolean onClose() {
-       /* listAdapter.filterData("");
-        expandAll();*/
+        // Never used, but you cant delete it because its from an interface!
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String query) {
-       if(query != null && !query.isEmpty() && listAdapter != null)
-       {
-           listAdapter.filterData(query);
-           expandAll();
-       }
+        if (query != null && !query.isEmpty() && listAdapter != null) {
+            listAdapter.filterData(query);
+            expandAll();
+        }
 
         return false;
     }
 
-    // Never used, but you cant delete it because its from an interface!
     @Override
     public boolean onQueryTextSubmit(String query) {
-        /*if(query != null && !query.isEmpty() && listAdapter != null)
-        {
-            listAdapter.filterData(query);
-            expandAll();
-        }*/
+        // Never used, but you cant delete it because its from an interface!
         return false;
     }
 

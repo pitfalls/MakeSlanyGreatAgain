@@ -20,8 +20,7 @@ public class HobbiT_Main_Startscreen extends AppCompatActivity {
         return ourInstance;
     }
 
-    public HobbiT_Main_Startscreen()
-    {
+    public HobbiT_Main_Startscreen() {
     }
 
     @Override
@@ -33,10 +32,8 @@ public class HobbiT_Main_Startscreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //if(!(ourInstance).isFinishing()) {
-                    Intent login2 = new Intent(HobbiT_Main_Startscreen.this, FacebookLogin.class);
-                    startActivityForResult(login2, 1);
-               // }
+                Intent login2 = new Intent(HobbiT_Main_Startscreen.this, FacebookLogin.class);
+                startActivityForResult(login2, 1);
             }
         }, 5000);
     }

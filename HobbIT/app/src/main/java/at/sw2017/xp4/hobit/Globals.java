@@ -16,7 +16,7 @@ public class Globals {
     }
 
     public void setGlobal_array(ArrayList<String> global_array) {
-            this.global_array = global_array;
+        this.global_array = global_array;
     }
 
     private ArrayList<String> global_array = new ArrayList<String>();
@@ -29,18 +29,23 @@ public class Globals {
         UserID = userID;
     }
 
-    public static String getTempID() { return TempID;}
+    public static String getTempID() {
+        return TempID;
+    }
 
-    public static void setTempID(String tempID) { TempID = tempID;}
+    public static void setTempID(String tempID) {
+        TempID = tempID;
+    }
 
-    public static synchronized Globals getInstance(){
-        if(instance==null){
+    public static synchronized Globals getInstance() {
+        if (instance == null) {
             instance = new Globals();
         }
         return instance;
     }
 
-    private Globals() {}
+    private Globals() {
+    }
 
 
 }

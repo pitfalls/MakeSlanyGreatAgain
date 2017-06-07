@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import at.sw2017.xp4.hobit.GroupData;
 
 /**
- * Created by Milos on 17.5.2017.
+ * Created by Herr Milos on 17.5.2017.
  */
 
 public class HobbyData {
@@ -13,7 +13,7 @@ public class HobbyData {
     private String name;
     private ArrayList<GroupData> groupList = new ArrayList<>();
 
-    public HobbyData (String name, ArrayList<GroupData> groupList) {
+    public HobbyData(String name, ArrayList<GroupData> groupList) {
         super();
         this.name = name;
         this.groupList = groupList;
