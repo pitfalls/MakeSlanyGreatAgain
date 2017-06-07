@@ -182,9 +182,7 @@ public class HobIT_Main extends AppCompatActivity
         //getSupportActionBar().
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_login) {
+         if (id == R.id.action_login) {
             Intent login = new Intent(this, FacebookLogin.class);
             startActivityForResult(login, 1);
             return true;

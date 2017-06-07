@@ -9,9 +9,8 @@
 
     <TextView
         android:id="@+id/txtview_description_input"
-        android:layout_width="344dp"
-        android:layout_height="106dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="349dp"
+        android:layout_height="139dp"
         android:layout_marginEnd="42dp"
         android:layout_marginStart="42dp"
         android:layout_marginTop="12dp"
@@ -28,14 +27,16 @@
         android:textColor="@android:color/background_dark"
         android:textColorLink="@android:color/background_light"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtview_nom"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtview_description_title"
-        app:layout_constraintVertical_bias="0.0"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtview_description_title"
@@ -78,40 +79,6 @@
         tools:layout_constraintTop_creator="1" />
 
     <TextView
-        android:id="@+id/txtview_number_nom"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        android:layout_marginTop="7dp"
-        android:text="number"
-        android:textColor="@android:color/background_dark"
-        android:textColorLink="@android:color/background_light"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_join"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtview_description_input"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
-
-    <TextView
-        android:id="@+id/txtview_nom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="Current Participants"
-        android:textColor="@android:color/background_dark"
-        android:textColorLink="@android:color/background_light"
-        android:textSize="24sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/txtview_number_nom"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1" />
-
-    <TextView
         android:id="@+id/txtview_hobby_title"
         android:layout_width="95dp"
         android:layout_height="32dp"
@@ -140,7 +107,6 @@
         android:layout_marginStart="40dp"
         android:text="Join"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/txtview_nom"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
