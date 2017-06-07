@@ -63,8 +63,7 @@ public class GroupOverview extends AppCompatActivity {
         setContentView(R.layout.activity_group_overview);
         b = getIntent().getExtras();
 
-
-        setTitle("<GroupName>");
+        setTitle("");
         setOnClickListeners();
 
         getObjectFromEventQueue();

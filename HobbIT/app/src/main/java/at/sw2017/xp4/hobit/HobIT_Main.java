@@ -43,7 +43,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import at.sw2017.xp4.hobit.requests.GetCurrentGroupRequest;
 import at.sw2017.xp4.hobit.requests.GetHobbysRequest;
+import at.sw2017.xp4.hobit.requests.GetUserGroupsRequest;
 
 //TODO: Change login to logout if logged in
 
@@ -53,6 +55,12 @@ public class HobIT_Main extends AppCompatActivity
     private NavigationView sideBarNavigationView;
 
     public ArrayList<String> User_Hobbys;
+
+    public String Name = "";
+    public String Description = "";
+    public String Hobby = "";
+    public String Location = "";
+
 
     public void toArrayList(JSONArray array) {
         if (array == null)
@@ -74,13 +82,12 @@ public class HobIT_Main extends AppCompatActivity
                 try
                 {
                     JSONObject jsonResponse = new JSONObject(response);
-                    final JSONArray allHobbies = jsonResponse.getJSONArray("hobby");
+                    final JSONArray allHobbies = jsonResponse.getJSONArray("Names");
                     toArrayList(allHobbies);
                     Globals.getInstance().setGlobal_array(User_Hobbys);
                 }
                 catch (JSONException e)
                 {
-                  //  printDebugToast("Probleme");
                     e.printStackTrace();
                 }
             }
@@ -98,9 +105,9 @@ public class HobIT_Main extends AppCompatActivity
         };
 
 
-        GetHobbysRequest getHobbysRequest = new GetHobbysRequest(GroupResponseListener, errorListener);
+        GetUserGroupsRequest getUserGroupsRequest = new GetUserGroupsRequest(GroupResponseListener, errorListener);
         final RequestQueue queue = Volley.newRequestQueue(HobIT_Main.this);
-        queue.add(getHobbysRequest);
+        queue.add(getUserGroupsRequest);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, User_Hobbys);
@@ -112,20 +119,14 @@ public class HobIT_Main extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // ListView Clicked item index
-                int itemPosition = position;
 
-                // ListView Clicked item value
-                String itemValue = (String) ListViews.getItemAtPosition(position);
+            String itemValue = (String) ListViews.getItemAtPosition(position);
 
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  List Item : " + itemValue, Toast.LENGTH_LONG)
-                        .show();
-
-                Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
-                startActivity(newIntent);
-
+            Bundle bundle = new Bundle();
+            bundle.putString("Group", itemValue);
+            Intent newIntent = new Intent(HobIT_Main.this, GroupOverview.class);
+            newIntent.putExtras(bundle);
+            startActivity(newIntent);
             }
         });
     }
